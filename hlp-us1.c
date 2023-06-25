@@ -55,8 +55,10 @@ void dsp_hlp_env(void)
 
 /**
  * dsp_hlp_setev - Help information for the builtin setenv
+ *
  * Return: no return
  */
+
 void dsp_hlp_setenv(void)
 {
 
