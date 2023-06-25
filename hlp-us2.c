@@ -38,7 +38,7 @@ void dsp_hlp_exit(void)
 }
 
 /**
- * display_unsetev - Help information for the builtin unsetenv
+ * display_unsetenv - Help information for the builtin unsetenv
  * Return: Void
  */
 void display_unsetenv(void)
