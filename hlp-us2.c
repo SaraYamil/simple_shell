@@ -1,10 +1,10 @@
 #include "main.h"
 
 /**
- * dsp_hlp_general - Entry point for help information for help builint
+ * disp_help_general - Entry point for help info
  * Return: Void
  */
-void dsp_hlp_general(void)
+void disp_help_general(void)
 {
 	char *hel = "^-^ bash, version 1.0(1)-release\n";
 
@@ -23,10 +23,10 @@ void dsp_hlp_general(void)
 	write(STDOUT_FILENO, hel, _strlen(hel));
 }
 /**
- * dsp_hlp_exit - Help information fot the builint exit
+ * disp_help_exit - Help information fot the builint exit
  * Return: Void
  */
-void dsp_hlp_exit(void)
+void disp_help_exit(void)
 {
 	char *hel = "exit: exit [n]\n Exit shell.\n";
 
@@ -38,12 +38,12 @@ void dsp_hlp_exit(void)
 }
 
 /**
- * display_unsetev - Help information for the builtin unsetenv
+ * display_unsetenv - Help information
  * Return: Void
  */
 void display_unsetenv(void)
 {
-	char *hel = "unsetenv: unsetenv (const char *name)\n\t";
+	char *hel = "unsetev: unsetev (const char *name)\n\t";
 
 	write(STDOUT_FILENO, hel, _strlen(hel));
 	hel = "Remove an entry completely from the environment\n";
@@ -51,46 +51,46 @@ void display_unsetenv(void)
 }
 
 /**
- * get_sigint - Handle the crtl + c call in prompt
- * @signal: Signal handler
+ * get_sigint - Handle the crtl + c call
+ * @sig: Signal hand
  */
-void get_sigint(int signal)
+void get_sigint(int sig)
 {
-	(void)signal;
+	(void)sig;
 	write(STDOUT_FILENO, "\n^-^ ", 5);
 }
 
 /**
- * get_line - assigns the line variable for get_line
- * @lineptr: Pointer to the line variable
- * @num: Pointer to the size of line variable
+ * get_ln - assigns the line variable
+ * @lnptr: Pointer to the line var
+ * @num: Pointer to the size of line var
  * @buf: String that is being assigned to line
- * @size_buf: Size of the buffer
+ * @size_b: Size of the buffer
  * Return: void
  */
-void get_line(char **lineptr, size_t *num, char *buf, size_t size_buf)
+void get_ln(char **lnptr, size_t *num, char *buf, size_t size_b)
 {
 
-	if (*lineptr == NULL)
+	if (*lnptr == NULL)
 	{
-		if (size_buf > BUFSIZE)
-			*num = size_buf;
+		if (size_b > BUFSIZE)
+			*num = size_b;
 
 		else
 			*num = BUFSIZE;
-		*lineptr = buf;
+		*lnptr = buf;
 	}
-	else if (*num < size_buf)
+	else if (*num < size_b)
 	{
-		if (size_buf > BUFSIZE)
-			*num = size_buf;
+		if (size_b > BUFSIZE)
+			*num = size_b;
 		else
 			*num = BUFSIZE;
 		*lineptr = buf;
 	}
 	else
 	{
-		_strcpy(*lineptr, buf);
+		_strcpy(*lnptr, buf);
 		free(buf);
 	}
 }

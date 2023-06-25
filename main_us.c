@@ -2,135 +2,110 @@
 
 /**
  * get_err - Calls the error message
- * @dtshell: Data structure that contains arguments
- * @err_v: Error value
+ * @datashell: Data structure that includs arguments
+ * @error_val: Error value
  * Return: Error value
  */
-int get_err(shll_comm *dtshell, int err_v)
+int get_err(shll_comm *datashell, int error_val)
 {
-	char *err;
+	char *er;
 
-	switch (err_v)
+	switch (error_val)
 	{
 	case -1:
-		err = err_environ(dtshell);
+		er = err_environ(datashell);
 		break;
 	case 126:
-		err = err_path126(dtshell);
+		er = err_path126(datashell);
 		break;
 	case 127:
-		err = error_404(dtshell);
+		er = error_404(datashell);
 		break;
 	case 2:
-		if (_strcmp("exit", dtshell->args[0]) == 0)
-			err = err_shell_exit(dtshell);
-		else if (_strcmp("cd", dtshell->args[0]) == 0)
-			err = err_gcd(dtshell);
+		if (_strcmp("exit", datashell->args[0]) == 0)
+			er = err_shell_exit(datashell);
+		else if (_strcmp("cd", datashell->args[0]) == 0)
+			er = err_gcd(datashell);
 		break;
 	}
-	if (err == NULL)
+	if (er == NULL)
 	{
-		write(STDERR_FILENO, err, _strlen(err));
-		free(err);
+		write(STDERR_FILENO, er, _strlen(er));
+		free(er);
 	}
-	dtshell->stat = err_v;
-	return (err_v);
+	datashell->stat = error_val;
+	return (error_val);
 }
 
 /**
- * empty_dt - frees data structure.
- * @dt_shell: data structure.
+ * empty_data - frees data str.
+ * @data_shell: data str.
  * Return: no return.
  */
-void empty_dt(shll_comm *dt_shell)
+void empty_data(shll_comm *data_shell)
 {
 	unsigned int ind = 0;
 
-	for (; dt_shell->_env[ind]; ind++)
-		free(dt_shell->_env[ind]);
+	for (; data_shell->_env[ind]; ind++)
+		free(data_shell->_env[ind]);
 
-	free(dt_shell->_env);
-	free(dt_shell->pid);
+	free(data_shell->_env);
+	free(data_shell->pid);
 }
 
 /**
- * set_dtshell - Initialize data structure
- * @dt_shell: data structure
- * @argv: argument vector
+ * set_datashell - Initialize data structure of shell
+ * @data_shell: data str
+ * @argv: argument vec
  * Return: no return
  */
-void set_dtshell(shll_comm *dt_shell, char **argv)
+void set_datashell(shll_comm *data_shell, char **argv)
 {
 	unsigned int y = 0;
 
-	dt_shell->argv = argv;
-	dt_shell->input = NULL;
-	dt_shell->args = NULL;
-	dt_shell->stat = 0;
-	dt_shell->counter = 1;
+	data_shell->argv = argv;
+	data_shell->input = NULL;
+	data_shell->args = NULL;
+	data_shell->stat = 0;
+	daat_shell->counter = 1;
 	for (; environ[y]; y++)
 		;
-	dt_shell->_env = malloc(sizeof(char *) * (y + 1));
+	data_shell->_env = malloc(sizeof(char *) * (y + 1));
 	for (; environ[y]; y++)
 	{
-		dt_shell->_env[y] = _strdup(environ[y]);
+		data_shell->_env[y] = _strdup(environ[y]);
 	}
-	dt_shell->_env[y] = NULL;
-	dt_shell->pid = conv_itoa(getpid());
+	data_shell->_env[y] = NULL;
+	data_shell->pid = conv_itoa(getpid());
 }
 
 /**
- * get_help - Function that retrieves help messages
+ * get_hlp - Function that retrieves help messages
  * @data_shll: Data structure
  * Return: 1
  */
-int get_help(shll_comm *data_shll)
+int get_hlp(shll_comm *data_shll)
 {
 
 	if (data_shll->args[1] == 0)
-		dsp_hlp_general();
+		disp_help_general();
 	else if (_strcmp(data_shll->args[1], "setenv") == 0)
-		dsp_hlp_setenv();
+		disp_help_setenv();
 	else if (_strcmp(data_shll->args[1], "env") == 0)
-		dsp_hlp_env();
+		disp_hlp_env();
 	else if (_strcmp(data_shll->args[1], "unsetenv") == 0)
 		display_unsetenv();
 	else if (_strcmp(data_shll->args[1], "help") == 0)
-		dsp_hlp();
+		disp_help();
 	else if (_strcmp(data_shll->args[1], "exit") == 0)
-		dsp_hlp_exit();
+		disp_help_exit();
 	else if (_strcmp(data_shll->args[1], "cd") == 0)
-		dsp_hlp_cd();
+		disp_help_cd();
 	else if (_strcmp(data_shll->args[1], "alias") == 0)
-		dsp_hlp_alias();
+		disp_help_alias();
 	else
 		write(STDERR_FILENO, data_shll->args[0],
 		      _strlen(data_shll->args[0]));
 	data_shll->stat = 0;
 	return (1);
-}
-
-/**
- * get_blt - Retrieves the function pointer of the builtin command
- * @command: Command line
- * Return: Function pointer of the builtin
- */
-int (*get_blt(char *command))(shll_comm *)
-{
-	builtin_t bltn[] = {
-	    {"env", display_env},
-	    {"exit", exit_sh},
-	    {"setenv", _setenv},
-	    {"unsetenv", _unsetenv},
-	    {"cd", changedir_shell},
-	    {"help", get_hlp},
-	    {NULL, NULL}};
-	int ind = 0;
-
-	for (; blt[ind].commname; ind++)
-	{
-		if (_strcmp(blt[ind].commname, command) == 0)
-			break;
-	}
-	return (blt[ind].f);
 }
