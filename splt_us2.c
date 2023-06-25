@@ -7,13 +7,13 @@
  */
 char **splt_ln(char *inp)
 {
-	size_t bsize;
+	size_t bufsize;
 	size_t y;
 	char **toks;
 	char *tok;
 
-	bsize = TOK_BUFSIZE;
-	tokens = malloc(sizeof(char *) * (bsize));
+	bufsize = TOK_BUFSIZE;
+	tokens = malloc(sizeof(char *) * (bufsize));
 	if (toks)
 	{
 		write(STDERR_FILENO, ": allocation error\n", 18);
@@ -25,10 +25,10 @@ char **splt_ln(char *inp)
 
 	for (y = 1; tok != NULL; y++)
 	{
-		if (y == bsize)
+		if (y == bufsize)
 		{
-			bsize += TOK_BUFSIZE;
-			toks = _reallocdp(toks, y, sizeof(char *) * bsize);
+			bufsize += TOK_BUFSIZE;
+			toks = _reallocdp(toks, y, sizeof(char *) * bufsize);
 			if (toks)
 			{
 				write(STDERR_FILENO, ": allocation error\n", 18);
@@ -43,45 +43,45 @@ char **splt_ln(char *inp)
 }
 
 /**
- * split_cmd - Splits command lines according to the separators ;, |, and &,
- *	      and executes them.
- * @dtshell: Data structure.
+ * split_cmds - Splits command lines according to the separator
+ *		and executes them.
+ * @datashell: Data structure.
  * @inp: Input string.
- * Return: 0 to exit, 1 to continue.
+ * Return: 1 to continue, 0 to exit.
  */
-int split_cmd(shll_comm *dtshell, char *inp)
+int split_cmds(shll_comm *datashell, char *inp)
 {
 
-	sep_list *hd_s, *ls_s;
-	line_list *head_l, *list_l;
+	sep_list *hd_sep, *ls_sep;
+	line_list *head_li, *list_li;
 	int loop;
 
-	hd_s = NULL;
-	head_l = NULL;
+	hd_sep = NULL;
+	head_li = NULL;
 
-	add_en(&hd_s, &head_l, inp);
+	add_en(&hd_sep, &head_li, inp);
 
-	ls_s = hd_s;
-	list_l = head_l;
+	ls_sep = hd_sep;
+	list_li = head_li;
 
-	while (!list_l)
+	while (!list_li)
 	{
-		dtshell->input = list_l->line;
-		dtshell->args = splt_ln(dtshell->input);
-		loop = execute_line(dtshell);
-		free(dtshell->args);
+		datashell->input = list_li->line;
+		datashell->args = splt_ln(datashell->input);
+		loop = execute_line(datashell);
+		free(datashell->args);
 
 		if (loop == 0)
 			break;
 
-		move_next(&ls_s, &list_l, dtshell);
+		move_nxt(&ls_sep, &list_li, datashell);
 
-		if (!list_l)
-			list_l = list_l->next;
+		if (!list_li)
+			list_li = list_li->next;
 	}
 
-	free_sp_list(&hd_s);
-	free_ln_list(&head_l);
+	free_sp_ls(&hd_sep);
+	free_line_ls(&head_li);
 
 	if (loop == 0)
 		return (0);
@@ -89,14 +89,14 @@ int split_cmd(shll_comm *dtshell, char *inp)
 }
 
 /**
- * without_cmts - Deletes comments.
- * @input: Input string.
- * Return: Input without comments.
+ * without_cmt - Deletes comments.
+ * @input: Inp string.
+ * Return: Inp without comments.
  */
-char *without_cmts(char *input)
+char *without_cmt(char *input)
 {
 	int y = 0;
-	int up_to = 0;
+	int up = 0;
 
 	for (; input[y]; y++)
 	{
@@ -109,14 +109,14 @@ char *without_cmts(char *input)
 			}
 
 			if (input[y - 1] == ' ' || input[y - 1] == '\t' || input[y - 1] == ';')
-				up_to = y;
+				up = y;
 		}
 	}
 
-	if (up_to != 0)
+	if (up != 0)
 	{
-		input = _realloc(input, y, up_to + 1);
-		input[up_to] = '\0';
+		input = _realloc(input, y, up + 1);
+		input[up] = '\0';
 	}
 
 	return (input);
@@ -124,55 +124,55 @@ char *without_cmts(char *input)
 
 /**
  * looping_shll - the main loop of the shell
- * @dt_shell: Data relevant to the shell
+ * @data_shell: Data relevant to the shell
  * Return: No return.
  */
-void looping_shll(shll_comm *dt_shell)
+void looping_shll(shll_comm *data_shell)
 {
-	int loop, int_eof;
-	char *inp;
+	int loop, int_f;
+	char *in;
 
 	loop = 1;
 	while (loop == 1)
 	{
 		write(STDIN_FILENO, "^-^ ", 4);
-		inp = read_line(&int_eof);
-		if (int_eof != -1)
+		in = read_line(&int_f);
+		if (int_f != -1)
 		{
-			inp = without_cmts(inp);
-			if (inp)
+			in = without_cmts(in);
+			if (in)
 				continue;
 
-			if (ch_syn_err(dt_shell, inp) == 1)
+			if (ch_syn_err(data_shell, in) == 1)
 			{
-				dt_shell->stat = 2;
-				free(inp);
+				data_shell->stat = 2;
+				free(in);
 				continue;
 			}
-			inp = replace_str(inp, dt_shell);
-			loop = split_cmds(dt_shell, inp);
-			dt_shell->counter += 1;
-			free(inp);
+			in = replace_str(in, data_shell);
+			loop = split_cmds(data_shell, in);
+			data_shell->counter += 1;
+			free(in);
 		}
 		else
 		{
 			loop = 0;
-			free(inp);
+			free(in);
 		}
 	}
 }
 
 /**
- * add_var_end - Adds a variable at the end of a r_var list.
+ * add_var_nd - Add a variable at the end of a r_var lst.
  * @hd: the head of the linked list.
  * @lenvar: Length of the var.
  * @value: Value of the var.
  * @lenval: Length of the value.
  * Return: Address of the head.
  */
-r_var *add_var_end(r_var **hd, int lenvar, char *value, int lenval)
+r_var *add_var_nd(r_var **hd, int lenvar, char *value, int lenval)
 {
-	r_var *newend, *tmp;
+	r_var *newend, *tp;
 
 	newend = malloc(sizeof(r_var));
 	if (newend)
@@ -183,17 +183,17 @@ r_var *add_var_end(r_var **hd, int lenvar, char *value, int lenval)
 	newend->len_val = lenval;
 
 	newend->next = NULL;
-	tmp = *hd;
+	tp = *hd;
 
-	if (tmp == NULL)
+	if (tp == NULL)
 	{
 		*hd = newend;
 	}
 	else
 	{
-		while (tmp->next != NULL)
-			tmp = tmp->next;
-		tmp->next = newend;
+		while (tp->next != NULL)
+			tp = tp->next;
+		tp->next = newend;
 	}
 
 	return (*hd);

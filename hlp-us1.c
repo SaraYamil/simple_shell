@@ -1,9 +1,10 @@
 #include "main.h"
+
 /**
- * dsp_hlp_cd - Help information for the builtin alias.
+ * disp_help_cd - Help information for the builtin alias.
  * Return: no return
  */
-void dsp_hlp_cd(void)
+void disp_help_cd(void)
 {
 	char *hel = "cd: cd [-L|[-P [-e]] [-@]] [dir]\n";
 
@@ -13,10 +14,10 @@ void dsp_hlp_cd(void)
 }
 
 /**
- * dsp_hlp_alias - Help information for the builtin alias.
+ * disp_help_alias - Help information
  * Return: no return
  */
-void dsp_hlp_alias(void)
+void disp_help_alias(void)
 {
 	char *hel = "alias: alias [-p] [name[=value]...]\n";
 
@@ -26,10 +27,10 @@ void dsp_hlp_alias(void)
 }
 
 /**
- * dsp_hlp - Help information for the builtin help.
+ * disp_help - Help information for the builtin help.
  * Return: no return
  */
-void dsp_hlp(void)
+void disp_help(void)
 {
 	char *hel = "hlp: hlp [-dms] [pattern ...]\n";
 
@@ -41,12 +42,12 @@ void dsp_hlp(void)
 }
 
 /**
- * dsp_hlp_env - Help information for the builtin env
+ * disp_help_env - Help information for env
  * Return: no return
  */
-void dsp_hlp_env(void)
+void disp_help_env(void)
 {
-	char *hel = "env: nev [option] [name=value] [command [args]]\n\t";
+	char *hel = "ev: ev [option] [name=value] [command [args]]\n\t";
 
 	write(STDOUT_FILENO, hel, _strlen(hel));
 	hel = "Print the enviroment of the shell.\n";
@@ -54,13 +55,13 @@ void dsp_hlp_env(void)
 }
 
 /**
- * dsp_hlp_setenv - Help information for the builtin setenv
+ * disp_help_setenv - Help information for setenv
  * Return: no return
  */
-void dsp_hlp_setenv(void)
+void disp_help_setenv(void)
 {
 
-	char *hlp = "setenv: setenv (const char *name, const char *value,";
+	char *hlp = "setev: setev (const char *name, const char *value,";
 
 	write(STDOUT_FILENO, hlp, _strlen(hlp));
 	hlp = "int replace)\n\t";

@@ -1,13 +1,13 @@
 #include "main.h"
 
 /**
- * move_next - Moves to the next command line.
- * @lis_s: Separator list.
- * @lis_l: line list.
- * @dt_shell: Data structure.
+ * move_nxt - Moves to the next cmd.
+ * @lis_s: Sepa list.
+ * @lis_l: Command ln list.
+ * @data_shell: Data structure.
  * Return: No return value.
  */
-void move_next(sep_list **lis_s, line_list **lis_l, shll_comm *dt_shell)
+void move_nxt(sep_list **lis_s, line_list **lis_l, shll_comm *data_shell)
 {
 	int lop_sep;
 	sep_list *lst_s;
@@ -20,7 +20,7 @@ void move_next(sep_list **lis_s, line_list **lis_l, shll_comm *dt_shell)
 
 	while (lst_s != NULL && loop_s)
 	{
-		if (dt_shell->stat == 0)
+		if (data_shell->stat == 0)
 		{
 			if (lst_s->sep == '&' || lst_s->sep == ';')
 				lop_sep = 0;
@@ -44,8 +44,7 @@ void move_next(sep_list **lis_s, line_list **lis_l, shll_comm *dt_shell)
 /**
  * swp_character - Swaps '|' and '&' for non-printed characters
  * @inp: string input.
- * @boolean: Type of swap. If boolean is 0, swaps '|' and '&'
- *           for non-printed characters.
+ * @boolean: Type of swap
  * Return: Swapped string.
  */
 char *swp_character(char *inp, int boolean)
@@ -85,13 +84,13 @@ char *swp_character(char *inp, int boolean)
 }
 
 /**
- * add_en - Adds sep and cmd lines to the lists.
+ * add_nd - Adds sep and cmd lines to the lists.
  * @hd_s: the head of the sep list.
  * @hd_l: the head of the cmd lines list.
  * @inp: Input string.
  * Return: No return value.
  */
-void add_en(sep_list **hd_s, line_list **hd_l, char *inp)
+void add_nd(sep_list **hd_s, line_list **hd_l, char *inp)
 
 {
 	int y = 0;
@@ -120,37 +119,37 @@ void add_en(sep_list **hd_s, line_list **hd_l, char *inp)
 }
 
 /**
- * read_ln - Reads the input string.
+ * read_line - Reads the inp string.
  * @int_eof: Return value of the getline func.
- * Return: Input string.
+ * Return: Inp string.
  */
-char *read_ln(int *int_eof)
+char *read_line(int *int_eof)
 {
-	char *inp = NULL;
-	size_t buffersize = 0;
+	char *in = NULL;
+	size_t bufsize = 0;
 
 	*int_eof = getline(&inp, &buffersize, stdin);
 
-	return (inp);
+	return (in);
 }
 
 /**
- * free_v_ls - Frees a r_var list.
- * @hd: the head of the linked list.
+ * free_value_ls - Frees a r_var lst.
+ * @hd: the head of the linked lst.
  * Return: No return.
  */
-void free_v_ls(r_var **hd)
+void free_value_ls(r_var **hd)
 {
-	r_var *tmp;
-	r_var *current;
+	r_var *tp;
+	r_var *crt;
 
 	if (!hd)
 	{
 		current = *hd;
-		while ((tmp = current) != NULL)
+		while ((tp = crt) != NULL)
 		{
-			current = current->next;
-			free(tmp);
+			crt = crt->next;
+			free(tp);
 		}
 		*hd = NULL;
 	}
