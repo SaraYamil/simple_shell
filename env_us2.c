@@ -1,136 +1,139 @@
 #include "main.h"
 
 /**
- * replace_str - kijuihyugytf vyfyvvyc gvtyfty vyctyc vyufug.
- * @inp: ujnjj k,k,kg.
- * @data_shell: nnj,k,k jnjnne.
+ * replace_str - Calls functions to replace string into vars.
+ * @inp: Input string.
+ * @data_shell: Data structure.
  *
- * Return: hhyuhnjhi jnjnk.
+ * Return: Replaced string.
  */
 char *replace_str(char *inp, shll_comm *data_shell)
 {
-	int oln, nln;
-	r_var *hd, *i;
-	char *stt, *nw_inp;
+	int olen, nlen;
+	r_var *hd, *index;
+	char *stat, *new_inp;
 
-	stt = conv_itoa(data_shell->stt);
+	stat = conv_itoa(data_shell->stat);
 	hd = NULL;
 
-	oln = verify_vars(&hd, inp, stt, data_shell);
+	olen = verify_vars(&hd, inp, stat, data_shell);
 
 	if (hd == NULL)
 	{
-		free(stt);
+		free(stat);
 		return (inp);
 	}
 
-	i = hd;
-	nln = 0;
+	index = hd;
+	nlen = 0;
 
-	while (i != NULL)
+	while (index != NULL)
 	{
-		nln += (i->len_val - i->len_var);
-		i = i->next;
+		nlen += (index->len_val - index->len_var);
+		index = index->next;
 	}
 
-	nln += oln;
+	nlen += olen;
 
-	nw_inp = malloc(sizeof(char) * (nln + 1));
-	nw_inp[nln] = '\0';
+	new_inp = malloc(sizeof(char) * (nlen + 1));
+	new_inp[nlen] = '\0';
 
-	nw_inp = rpl_inp(&hd, inp, nw_inp, nln);
+	new_inp = rpl_inp(&hd, inp, new_inp, nlen);
 
 	free(inp);
-	free(stt);
+	free(stat);
 	free_value_ls(&hd);
 
-	return (nw_inp);
+	return (new_inp);
 }
 
 /**
- * _unsetenv - nnnnjuihnj kihnj:ljn  kjnkjnjnjnmb bknkknjk  nkbjnjjkne.
- * @datash: HHHN HBJJNJNJN JNKJNJNKN JNKNKNUHUB JJJNJN JHYUGTYCFV N.
+ * _unsetenv - Deletes an environment variable with the specified name.
+ * @datash: Data structure containing the environment variable name.
  *
- * Return: MASO9AKCH BB.
+ * Return: 1 on success.
  */
 int _unsetenv(shll_comm *datash)
 {
-	int in, jn, kn;
+	int i, j, k;
 	char **real_env;
-	char *varnv, *nmnv;
+	char *varenv, *nmenv;
 
 	if (datash->args[1] == NULL)
 	{
 		get_err(datash, -1);
 		return (1);
 	}
-	kn = -1;
-	for (in = 0; datash->_env[in]; in++)
+	k = -1;
+	for (i = 0; datash->_env[i]; i++)
 	{
-		varnv = _strdup(datash->_env[in]);
-		nmnv = _strtok(varnv, "=");
+		varenv = _strdup(datash->_env[i]);
+		nmenv = _strtok(varenv, "=");
 		if (_strcmp(nmenv, datash->args[1]) == 0)
 		{
-			kn = in;
+			k = i;
 		}
-		free(varnv);
+		free(varenv);
 	}
-	if (kn == -1)
+	if (k == -1)
 	{
 		get_err(datash, -1);
 		return (1);
 	}
-	real_env = malloc(sizeof(char *) * (in));
-	for (in = jn = 0; datash->_env[in]; in++)
+	real_env = malloc(sizeof(char *) * (i));
+	for (i = j = 0; datash->_env[i]; i++)
 	{
-		if (in != kn)
+		if (i != k)
 		{
-			real_env[jn] = datash->_env[in];
-			jn++;
+			real_env[j] = datash->_env[i];
+			j++;
 		}
 	}
-	real_env[jn] = NULL;
-	free(datash->_env[kn]);
+	real_env[j] = NULL;
+	free(datash->_env[k]);
 	free(datash->_env);
 	datash->_env = real_env;
 	return (1);
 }
 
 /**
- * set_env - ynjnj  jnjnjn jnjnkjnk jjnne.
- * @environ_name: bhbljnjknj jn jbilnl jn jbjnjn j.
- * @val: gvbjkkjb hbjkb;jhb hjbbjhb  hbjhj.
- * @data_sh: ghyulln uiiljkilj uojoijolijio ink,lkjioj jkniiljkn.
- * Return: maso9kech.
+ * set_env - Sets an environment variable.
+ * @environ_name: Name of the environment variable.
+ * @val: Value of the environment variable.
+ * @data_sh: Data structure containing the environment variables.
+ *
+ * Return: No return.
  */
 void set_env(char *environ_name, char *val, shll_comm *data_sh)
 {
-	int in;
-	char *varnv, *nmnv;
+	int i;
+	char *varenv, *nmenv;
 
-	for (in = 0; data_sh->_env[in]; in++)
+	for (i = 0; data_sh->_env[i]; i++)
 	{
-		varnv = _strdup(data_sh->_env[in]);
-		nmnv = _strtok(varenv, "=");
-		if (_strcmp(nmnv, environ_name) == 0)
+		varenv = _strdup(data_sh->_env[i]);
+		nmenv = _strtok(varenv, "=");
+		if (_strcmp(nmenv, environ_name) == 0)
 		{
-			free(data_sh->_env[in]);
-			data_sh->_env[in] = cp_info(nmnv, val);
-			free(varnv);
+			free(data_sh->_env[i]);
+			data_sh->_env[i] = cp_info(nmenv, val);
+			free(varenv);
 			return;
 		}
-		free(varnv);
+		free(varenv);
 	}
 
-	data_sh->_env = _reallocdp(data_sh->_env, in, sizeof(char *) * (in + 2));
-	data_sh->_env[in] = cp_info(environ_name, val);
-	data_sh->_env[in + 1] = NULL;
+	data_sh->_env = _reallocdp(data_sh->_env, i, sizeof(char *) * (i + 2));
+	data_sh->_env[i] = cp_info(environ_name, val);
+	data_sh->_env[i + 1] = NULL;
 }
 
 /**
- * _setenv - cojdnjndjfnuifnfhbbbiijknnes
- * @data_sh: dHJHBJJBJJK NJNKJNH JKNJJNJHNKJN JNJNJN
- * Return: NJKJHYUJcKNJNJB
+ * _setenv - compares env variables names
+ *           with the name passed.
+ * @data_sh: data relevant (env name and env value)
+ *
+ * Return: 1 on success.
  */
 int _setenv(shll_comm *data_sh)
 {
@@ -147,25 +150,25 @@ int _setenv(shll_comm *data_sh)
 }
 
 /**
- * cp_info - hddjdndbj dhdbjhndnbjhbdb nd jbjhdjd jbhddn jhdbhbhjd hdhhd jvdj.
- * @alias_name: hdbjbkdhjdlijl,jxinkldhDXjknlihhfnjdhuihx.
- * @val: bhxbdbhbdxbdyuyxdhbx yhxdhbhdxu xduhbubxds.
+ * cp_info - Copies information to create a new environment variable or alias.
+ * @alias_name: Name of the environment variable or alias.
+ * @val: Value of the environment variable or alias.
  *
- * Return: ,xninjnehwuihxeknwhxwkenxnxkjexhe.
+ * Return: New environment variable or alias.
  */
 char *cp_info(char *alias_name, char *val)
 {
-	char *nw;
-	int ln_name, ln_value, ln;
+	char *new;
+	int len_name, len_value, len;
 
-	ln_name = _strlen(alias_name);
-	ln_value = _strlen(val);
-	ln = ln_name + ln_value + 2;
-	nw = malloc(sizeof(char) * (ln));
-	_strcpy(nw, alias_name);
-	_strcat(nw, "=");
-	_strcat(nw, val);
-	_strcat(nw, "\0");
+	len_name = _strlen(alias_name);
+	len_value = _strlen(val);
+	len = len_name + len_value + 2;
+	new = malloc(sizeof(char) * (len));
+	_strcpy(new, alias_name);
+	_strcat(new, "=");
+	_strcat(new, val);
+	_strcat(new, "\0");
 
-	return (nw);
+	return (new);
 }

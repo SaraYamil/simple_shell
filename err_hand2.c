@@ -1,108 +1,108 @@
 #include "main.h"
 
 /**
- * error_404 - hdbh hdbhd  jh hsbhdn hbdhbhd hhbdbhd bhbd hd h bdhhd hd b
- * @data_sh: gbsjh jhbhsbh sb ghvsh b svsh s g hs hs  yhsh ss
+ * error_404 - generates a generic error message for "command not found".
+ * @data_sh: data relevant to the shell (counter, arguments).
  *
- * Return: jnx nsjns sjbs jjs
+ * Return: The error message.
  */
 char *error_404(shll_comm *data_sh)
 {
-	char *error, *vstor;
-	int lngth;
+	char *err, *vstr;
+	int length;
 
-	vstor = conv_itoa(data_sh->counter);
-	lngth = _strlen(data_sh->argv[0]) + _strlen(vstr);
-	lngth += _strlen(data_sh->args[0]) + 16;
-	error = malloc(sizeof(char) * (lngth + 1));
-	if (error == 0)
+	vstr = conv_itoa(data_sh->counter);
+	length = _strlen(data_sh->argv[0]) + _strlen(vstr);
+	length += _strlen(data_sh->args[0]) + 16;
+	err = malloc(sizeof(char) * (length + 1));
+	if (err == 0)
 	{
-		free(error);
-		free(vstor);
+		free(err);
+		free(vstr);
 		return (NULL);
 	}
-	_strcpy(error, data_sh->argv[0]);
-	_strcat(error, ": ");
-	_strcat(error, vstor);
-	_strcat(error, ": ");
-	_strcat(error, data_sh->args[0]);
-	_strcat(error, ": not found\n");
-	_strcat(error, "\0");
-	free(vstor);
+	_strcpy(err, data_sh->argv[0]);
+	_strcat(err, ": ");
+	_strcat(err, vstr);
+	_strcat(err, ": ");
+	_strcat(err, data_sh->args[0]);
+	_strcat(err, ": not found\n");
+	_strcat(err, "\0");
+	free(vstr);
 
-	return (error);
+	return (err);
 }
 
 /**
- * err_shell_exit - gehysjnksj sjjs j sj jsj sj sj sjj sj bs
+ * err_shell_exit - generates a generic error message for
  *                  "exit" command in get_exit.
- * @data_sh: hbhsb hbs sb sh h sh sh hs hhhhhhhh jjjjjjjjjsss
+ * @data_sh: data relevant to the shell (counter, arguments).
  *
- * Return:  hygshbsjhbbs hve.
+ * Return: The error message.
  */
 char *err_shell_exit(shll_comm *data_sh)
 {
-	char *error, *vstor;
-	int lngth;
+	char *err, *vstr;
+	int length;
 
-	vstor = conv_itoa(data_sh->counter);
-	lngth = _strlen(data_sh->argv[0]) + _strlen(vstor);
-	lngth += _strlen(data_sh->args[0]) + _strlen(data_sh->args[1]) + 23;
-	error = malloc(sizeof(char) * (lngth + 1));
-	if (error == 0)
+	vstr = conv_itoa(data_sh->counter);
+	length = _strlen(data_sh->argv[0]) + _strlen(vstr);
+	length += _strlen(data_sh->args[0]) + _strlen(data_sh->args[1]) + 23;
+	err = malloc(sizeof(char) * (length + 1));
+	if (err == 0)
 	{
-		free(vstor);
+		free(vstr);
 		return (NULL);
 	}
-	_strcpy(error, data_sh->argv[0]);
-	_strcat(error, ": ");
-	_strcat(error, vstor);
-	_strcat(error, ": ");
-	_strcat(error, data_sh->args[0]);
-	_strcat(error, ": Illegal number: ");
-	_strcat(error, data_sh->args[1]);
-	_strcat(error, "\n\0");
-	free(vstor);
+	_strcpy(err, data_sh->argv[0]);
+	_strcat(err, ": ");
+	_strcat(err, vstr);
+	_strcat(err, ": ");
+	_strcat(err, data_sh->args[0]);
+	_strcat(err, ": Illegal number: ");
+	_strcat(err, data_sh->args[1]);
+	_strcat(err, "\n\0");
+	free(vstr);
 
-	return (error);
+	return (err);
 }
 
 /**
- * err_gcd - gdbhbdh dhbhd  dhb d hd bhbd dh bdjh dn d hbhd dhbduj jdd.
- * @data_sh: ghjdbhjdbjh d bujbd b djvdj bd jhd j d.
+ * err_gcd - generates an error message for the 'cd' command in get_cd.
+ * @data_sh: data relevant to the shell (directory).
  *
- * Return: njnjnjnz jznjnzj .
+ * Return: The error message.
  */
 char *err_gcd(shll_comm *data_sh)
 {
-	char *error, *vstor, *errormsg;
-	int ln, lnid;
+	char *err, *vstr, *errmsg;
+	int len, lenid;
 
-	vstor = conv_itoa(data_sh->counter);
+	vstr = conv_itoa(data_sh->counter);
 	if (data_sh->args[1][0] == '-')
 	{
-		errormsg = ": Illegal option ";
-		lnid = 2;
+		errmsg = ": Illegal option ";
+		lenid = 2;
 	}
 	else
 	{
-		errormsg = ": can't cd to ";
-		lnid = _strlen(data_sh->args[1]);
+		errmsg = ": can't cd to ";
+		lenid = _strlen(data_sh->args[1]);
 	}
 
-	ln = _strlen(data_sh->argv[0]) + _strlen(data_sh->args[0]);
-	ln += _strlen(vstor) + _strlen(errormsg) + lnid + 5;
-	error = malloc(sizeof(char) * (ln + 1));
+	len = _strlen(data_sh->argv[0]) + _strlen(data_sh->args[0]);
+	len += _strlen(vstr) + _strlen(errmsg) + lenid + 5;
+	err = malloc(sizeof(char) * (len + 1));
 
-	if (error == 0)
+	if (err == 0)
 	{
-		free(vstor);
+		free(vstr);
 		return (NULL);
 	}
 
-	error = conc_err_msg(data_sh, errormsg, error, vstor);
+	err = conc_err_msg(data_sh, errmsg, err, vstr);
 
-	free(vstor);
+	free(vstr);
 
-	return (error);
+	return (err);
 }

@@ -77,7 +77,10 @@ typedef struct shell_dt
  * @val: Value of the variable
  * @len_val: Length of the value
  * @next: Pointer to the next node in the linked list
+ *
  * Description: This data structure represents a single linked
+ *              list node
+ *              used to store variables in the shell.
  */
 typedef struct rvar_ls
 {
@@ -88,11 +91,13 @@ typedef struct rvar_ls
 } r_var;
 
 /**
- * struct builtin_s - fonction builtin
- * @commname: variables li bhal had l3ibat (e.g., cd, exit, env)
- * @f: Pointer ki3wan fonction bach t3yate 3la li bghat w safe
+ * struct builtin_s - Builtin command structure
+ * @commname: The name of the command builtin (e.g., cd, exit, env)
+ * @f: Pointer to the function associated with the command
  *
  * Description: This structure represents a builtin command in the shell.
+ * It contains the name of the command and a pointer to the function that
+ * implements the command functionality.
  */
 typedef struct builtin_s
 {
@@ -127,7 +132,7 @@ char **_reallocdp(char **ptr, unsigned int old_size, unsigned int new_size);
 int _strcmp(char *s1, char *s2);
 char *_strchr(char *s, char c);
 
-/* Error handling functions eror fils  */
+/* Error handling functions prototypes */
 int dupl_chars(char *input, int i);
 int sep_oper_error(char *input, int i, char last);
 int first_character(char *input, int *i);
@@ -136,10 +141,10 @@ int ch_syn_err(shll_comm *data_sh, char *input);
 char *without_cmt(char *in);
 void looping_shll(shll_comm *datash);
 
-/* read_line function readlin */
+/* read_line function protytype */
 char *read_line(int *i_eof);
 
-/* Environmant variables env li f fils w safe */
+/* Environmant variables function protytypes */
 int verify_vars(r_var **h, char *in, char *st, shll_comm *data);
 char *rpl_inp(r_var **head, char *input, char *new_input, int nlen);
 char *get_environ(const char *name, char **_env);
@@ -152,18 +157,18 @@ int compare_envname(const char *name_env, const char *name_ptr);
 void verify_env(r_var **h, char *in, shll_comm *data);
 char *replace_str(char *input, shll_comm *datash);
 
-/* Split functions li f split fils */
+/* Split functions protytypes */
 char *swp_character(char *input, int bool);
 void move_nxt(sep_list **list_s, line_list **list_l, shll_comm *datash);
 int split_cmds(shll_comm *datash, char *input);
 void add_nd(sep_list **head_s, line_list **head_l, char *input);
 char **splt_ln(char *input);
 
-/* get_line functions git line */
+/* get_line functions protytypes */
 ssize_t _getline(char **lineptr, size_t *n, FILE *stream);
 void get_ln(char **lineptr, size_t *n, char *buffer, size_t j);
 
-/* Execute functions excur=t fils */
+/* Execute functions protytypes */
 int execute_line(shll_comm *datash);
 int check_error_command(char *dir, shll_comm *datash);
 int command_exec(shll_comm *datash);
@@ -178,15 +183,15 @@ void changedir_prev(shll_comm *datash);
 void changedir_to_home(shll_comm *datash);
 int changedir_shell(shll_comm *datash);
 
-/* main functions void */
+/* main functions protytypes*/
 void empty_data(shll_comm *datash);
 void set_datashell(shll_comm *datash, char **av);
 
-/* built fonnctions l f bltn fils */
+/* built-in functions prototypes */
 int (*get_bltn(char *cmd))(shll_comm *datash);
 int exit_sh(shll_comm *datash);
 
-/* Err handl  fonctions li f handl file */
+/* Error handling functions prototypes */
 int get_err(shll_comm *datash, int eval);
 void get_sigint(int sig);
 char *error_get_alias(char **args);
@@ -199,7 +204,7 @@ char *err_gcd(shll_comm *datash);
 char *error_404(shll_comm *datash);
 char *err_shell_exit(shll_comm *datash);
 
-/* Help fonction li f helo file */
+/* Help functions prototypes */
 void disp_help_env(void);
 void disp_help_setenv(void);
 void display_unsetenv(void);

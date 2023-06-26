@@ -1,35 +1,37 @@
 #include "main.h"
 
 /**
- * _memcpy - Copies a block of memory from the src
- *           potointer to the destination point
- * @new_pointer: [tee destination pointer.
- * @pointer: source hees pointer.
- * @s: size of the new pointer wrtpo.
- * Return: None ett.
+ * _memcpy - Copies a block of memory from the source
+ *           pointer to the destination pointer.
+ * @new_pointer: The destination pointer.
+ * @pointer: The source pointer.
+ * @s: The size of the new pointer.
+ *
+ * Return: None.
  */
 void _memcpy(void *new_pointer, const void *pointer, unsigned int s)
 {
-	char *char_p = (char *)pointer;
-	char *char_nptr = (char *)new_pointer;
-	unsigned int y = 0;
+	char *char_ptr = (char *)pointer;
+	char *char_newptr = (char *)new_pointer;
+	unsigned int i;
 
-	for (; y < s; y++)
-		char_nptr[y] = char_p[y];
+	for (i = 0; i < s; i++)
+		char_newptr[i] = char_ptr[i];
 }
 
 /**
- * _realloc - Reallocates a memory block wrr
- * @pointer: Pointer to the memory prev [ee
- * @old_s: old size in bytes wrr.
- * @new_s: New size in bytes wer
- * Return: Pointer to the reallocated qsa.
+ * _realloc - Reallocates a memory block with a new size.
+ * @pointer: Pointer to the memory previously allocated.
+ * @old_s: Size, in bytes, of the allocated space for ptr.
+ * @new_s: New size, in bytes, of the reallocated memory block.
+ *
+ * Return: Pointer to the reallocated memory block (ptr).
  */
 void *_realloc(void *pointer, unsigned int old_s, unsigned int new_s)
 {
-	void *nptr;
+	void *newptr;
 
-	if (pointer)
+	if (pointer == NULL)
 		return (malloc(new_s));
 
 	if (new_s == 0)
@@ -41,45 +43,46 @@ void *_realloc(void *pointer, unsigned int old_s, unsigned int new_s)
 	if (new_s == old_s)
 		return (pointer);
 
-	nptr = malloc(new_s);
-	if (nptr)
+	newptr = malloc(new_s);
+	if (newptr == NULL)
 		return (NULL);
 
 	if (new_s < old_s)
-		_memcpy(nptr, pointer, new_s);
+		_memcpy(newptr, pointer, new_s);
 	else
-		_memcpy(nptr, pointer, old_s);
+		_memcpy(newptr, pointer, old_s);
 
 	free(pointer);
-	return (nptr);
+	return (newptr);
 }
 
 /**
- * _reallocdp - Real a memory block of a double point wepe.
- * @pointer: Double pointer to the memory prev allocated pwe.
- * @old_s: old size in bytes cxza.
- * @new_s: New size in bytes qaz
- * Return: Pointer to the reallocated memory bcp
+ * _reallocdp - Reallocates a memory block of a double pointer.
+ * @pointer: Double pointer to the memory previously allocated.
+ * @old_s: Size, in bytes, of the allocated space for pointer.
+ * @new_s: New size, in bytes, of the reallocated memory block.
+ *
+ * Return: Pointer to the reallocated memory block (pointer).
  */
 char **_reallocdp(char **pointer, unsigned int old_s, unsigned int new_s)
 {
-	char **nptr;
-	unsigned int y = 0;
+	char **newptr;
+	unsigned int i;
 
-	if (pointer)
+	if (pointer == NULL)
 		return (malloc(sizeof(char *) * new_s));
 
 	if (new_s == old_s)
 		return (pointer);
 
-	nptr = malloc(sizeof(char *) * new_s);
-	if (nptr)
+	newptr = malloc(sizeof(char *) * new_s);
+	if (newptr == NULL)
 		return (NULL);
 
-	for (; y < old_s; y++)
-		nptr[y] = pointer[y];
+	for (i = 0; i < old_s; i++)
+		newptr[i] = pointer[i];
 
 	free(pointer);
 
-	return (nptr);
+	return (newptr);
 }

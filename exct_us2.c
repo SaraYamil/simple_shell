@@ -1,9 +1,11 @@
 #include "main.h"
 
 /**
- * exit_sh - bhdbjhdbhdbj llR
- * @datashell: ,kdikdk dkkdnjk dnd j djk dj tus and args)
- * Return: maso9akch ww.
+ * exit_sh - Exits the shell
+ * @datashell: Data structure containing relevant data
+ *             (status and args)
+ *
+ * Return: 0 on success.
  */
 int exit_sh(shll_comm *datashell)
 {
@@ -28,9 +30,10 @@ int exit_sh(shll_comm *datashell)
 }
 
 /**
- * execute_line - jsbsusb sjhbjbsuuushbhsbands.
- * @datash: snjsjnknsjknjksnsks).
- * Return: shbjhbsjbhshbsk
+ * execute_line - Finds built-ins and commands.
+ * @datash: Data relevant (args).
+ *
+ * Return: 1 on success.
  */
 int execute_line(shll_comm *datash)
 {
@@ -48,9 +51,10 @@ int execute_line(shll_comm *datash)
 }
 
 /**
- * err_environ - jsnnjsns  sjhsb jhshyhsyusu ybshbhsbbbbsated operations.
- * @data_sh: ks,kl,snjysgugv svu sgvsvkvs, svvsb sujisiknts).
- * Return: siujsbbsbsb hbb sjh .
+ * err_environ - generates an error message for env-related operations.
+ * @data_sh: data relevant to the shell (counter, arguments).
+ *
+ * Return: Error message string.
  */
 char *err_environ(shll_comm *data_sh)
 {
@@ -82,11 +86,11 @@ char *err_environ(shll_comm *data_sh)
 }
 
 /**
- * err_path126 - jsujnjsnjnjsjnsjnjksnkskbksk sk sbbs ksbkks
+ * err_path126 - generates an error message for path-related
  *                operations with permission denied.
- * @data_sh: kjsjbsnbhbsbkshlihnlsnjhbsnsb sbhhsjns juments).
+ * @data_sh: data relevant to the shell (counter, arguments).
  *
- * Return: jksnjnjsjskhsbjhbhsjnsjjsnj
+ * Return: The error message string.
  */
 char *err_path126(shll_comm *data_sh)
 {
@@ -115,13 +119,13 @@ char *err_path126(shll_comm *data_sh)
 }
 
 /**
- * conc_err_msg - csnjnsjns n sjkbjkbsk ns bs ns jh sj js  jn sj shb.
- * @data_sh: sbhbshvyukgsh sv vs s gjcusb sb sghvuvs sgvusuvs).
- * @disp_msg: nsjh sbhsbh sb sjhbhbsn.
- * @err: jsnjsjnjsjsksksls fer.
- * @vstr: hsuhnsjnjsnjsux
+ * conc_err_msg - concatenates an error message for the 'cd' command.
+ * @data_sh: data relevant to the shell (directory, arguments).
+ * @disp_msg: message to be displayed.
+ * @err: output message buffer.
+ * @vstr: counter lines.
  *
- * Return: bsbdbhd hbdhb dhd hbdjh bd hge.
+ * Return: The concatenated error message.
  */
 char *conc_err_msg(shll_comm *data_sh, char *disp_msg, char *err, char *vstr)
 {

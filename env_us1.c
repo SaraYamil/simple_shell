@@ -1,89 +1,91 @@
 #include "main.h"
 
 /**
- * verify_env - hhhhhh hh  hh hyuhh njnjhjle ishh   jnjjnjjbrr variabhh.
- * @hd: hhh& bhg bhghg hggh hnjkk
- * @inp: jnjn jjnjnng.
- * @shell_data: Datb st,;:::fh.
- * Return: maso9kach hhhhhhhhh
+ * verify_env - Checks if the typed variable is an environment variable.
+ * @hd: Head of the linked list.
+ * @inp: Input string.
+ * @shell_data: Data structure.
+ *
+ * Return: No return.
  */
 void verify_env(r_var **hd, char *inp, shll_comm *shell_data)
 {
-	int ln, chrc, in, lft_value;
+	int line, charc, i, left_value;
 	char **_env;
 
 	_env = shell_data->_env;
-	for (ln = 0; _env[ln]; ln++)
+	for (line = 0; _env[line]; line++)
 	{
-		for (in = 1, chrc = 0; _env[ln][chrc]; chrc++)
+		for (i = 1, charc = 0; _env[line][charc]; charc++)
 		{
-			if (_env[ln][chrc] == '=')
+			if (_env[line][charc] == '=')
 			{
-				lft_value = _strlen(_env[ln] + chrc + 1);
-				add_var_nd(hd, in, _env[ln] + chrc + 1, lft_value);
+				left_value = _strlen(_env[line] + charc + 1);
+				add_var_nd(hd, i, _env[line] + charc + 1, left_value);
 				return;
 			}
 
-			if (inp[in] == _env[ln][chrc])
-				in++;
+			if (inp[i] == _env[line][charc])
+				i++;
 			else
 				break;
 		}
 	}
 
-	for (in = 0; inp[in]; in++)
+	for (i = 0; inp[i]; i++)
 	{
-		if (inp[in] == ' ' || inp[in] == '\t' || inp[in] == ';' || inp[in] == '\n')
+		if (inp[i] == ' ' || inp[i] == '\t' || inp[i] == ';' || inp[i] == '\n')
 			break;
 	}
 
-	add_var_nd(hd, in, NULL, 0);
+	add_var_nd(hd, i, NULL, 0);
 }
 
 /**
- * rpl_inp - Replaces variaJLLL HHHHH HBHNBgg  hbbg.
- * @hd: Hjhhnj jnjn hygtcftrxx h
- * @inp: variab string
- * @new_inp: New inputhgg,kkk,ghujikdrft.
- * @numlen: input length
- * Return: maso9kch a zin hhhhhhhhhhh
+ * rpl_inp - Replaces variables in the input string.
+ * @hd: Head of the linked list.
+ * @inp: Input string.
+ * @new_inp: New input string (replaced).
+ * @numlen: New length.
+ *
+ * Return: Replaced string.
  */
 char *rpl_inp(r_var **hd, char *inp, char *new_inp, int numlen)
 {
-	r_var *i;
-	int in, l, m;
+	r_var *index;
+	int i, l, m;
 
-	i = *hd;
-	for (l = in = 0; in < numlen; in++)
+	index = *hd;
+	for (l = i = 0; i < numlen; i++)
 	{
 		if (inp[l] == '$')
 		{
-			if (!(i->len_var) && !(i->len_val))
+			if (!(index->len_var) && !(index->len_val))
 			{
-				new_inp[in] = inp[l];
+				new_inp[i] = inp[l];
 				l++;
 			}
-			else if (i->len_var && !(i->len_val))
+			else if (index->len_var && !(index->len_val))
 			{
-				for (m = 0; m < i->len_var; m++)
+				for (m = 0; m < index->len_var; m++)
 					l++;
-				in--;
+				i--;
 			}
 			else
 			{
-				for (m = 0; m < i->len_val; m++)
+				for (m = 0; m < index->len_val; m++)
 				{
-					new_inp[in] = i->val[m];
-					in++;
+					new_inp[i] = index->val[m];
+					i++;
 				}
-				l += (i->len_var);
-				in--;
+				l += (index->len_var);
+				i--;
 			}
-			i = i->next;
+			index = index->next;
 		}
 		else
 		{
-			new_inp[in] = inp[l];
+			new_inp[i] = inp[l];
 			l++;
 		}
 	}
@@ -92,63 +94,67 @@ char *rpl_inp(r_var **hd, char *inp, char *new_inp, int numlen)
 }
 
 /**
- * verify_vars - Check if the tydbgvdgvgdvdggvdgvgdgv $?
- * @header: Head of;knd,djnudndjist.
+ * verify_vars - Check if the typed variable is $$ or $?
+ * @header: Head of the linked list.
  * @inp: Input string.
- * @str: Last stdjnjdsjndnnjshell.
- * @datashell: sata stru shbde.
- * Return: Numberdhbbbdhdbhbdjj processed.
+ * @str: Last status of the shell.
+ * @datashell: Data structure.
+ *
+ * Return: Number of characters processed.
  */
 int verify_vars(r_var **header, char *inp, char *str, shll_comm *datashell)
 {
-	int in, lftst, lftpd;
+	int i, leftst, leftpd;
 
-	lftst = _strlen(str);
-	lftpd = _strlen(datashell->pid);
+	leftst = _strlen(str);
+	leftpd = _strlen(datashell->pid);
 
-	for (in = 0; inp[in]; in++)
+	for (i = 0; inp[i]; i++)
 	{
-		if (inp[in] == '$')
+		if (inp[i] == '$')
 		{
-			if (inp[in + 1] == '?')
-				add_var_nd(header, 2, str, lftst), in++;
-			else if (inp[in + 1] == '$')
-				add_var_nd(header, 2, datashell->pid, lftpd), in++;
-			else if (inp[in + 1] == '\n')
+			if (inp[i + 1] == '?')
+				add_var_nd(header, 2, str, leftst), i++;
+			else if (inp[i + 1] == '$')
+				add_var_nd(header, 2, datashell->pid, leftpd), i++;
+			else if (inp[i + 1] == '\n')
 				add_var_nd(header, 0, NULL, 0);
-			else if (inp[in + 1] == '\0')
+			else if (inp[i + 1] == '\0')
 				add_var_nd(header, 0, NULL, 0);
-			else if (inp[in + 1] == ' ')
+			else if (inp[i + 1] == ' ')
 				add_var_nd(header, 0, NULL, 0);
-			else if (inp[in + 1] == '\t')
+			else if (inp[i + 1] == '\t')
 				add_var_nd(header, 0, NULL, 0);
-			else if (inp[in + 1] == ';')
+			else if (inp[i + 1] == ';')
 				add_var_nd(header, 0, NULL, 0);
 			else
-				verify_env(header, inp + in, datashell);
+				verify_env(header, inp + i, datashell);
 		}
 	}
 
-	return (in);
+	return (i);
 }
 
 /**
- * compare_envname - JJJhhhhhhhhhb hhbhbbh hbhbnjjnj jOJUGF
- * @name_env: inpute ta3 fonction wa  variable.
- * @name_ptr: inpute ta3 comparw safe.
- * Return: maso9kach a zeen kimba dkhol a hbibae
+ * compare_envname - Compares the name of an environment
+ *                   variable with a given name.
+ * @name_env: Name of the environment variable.
+ * @name_ptr: Name to compare against.
+ *
+ * Return: 0 if the names are not equal. A value
+ *         greater than 0 if they are equal.
  */
 int compare_envname(const char *name_env, const char *name_ptr)
 {
-	int i;
+	int index;
 
-	for (i = 0; name_env[i] != '='; i++)
+	for (index = 0; name_env[index] != '='; index++)
 	{
-		if (name_env[i] != name_ptr[i])
+		if (name_env[index] != name_ptr[index])
 		{
 			return (0);
 		}
 	}
 
-	return (i + 1);
+	return (index + 1);
 }

@@ -1,43 +1,43 @@
 #include "main.h"
 
 /**
- * _whch - bhsnjnshnjsnj jsnjn
- * @command: unsjnjsjnkse.
- * @_env: njsnsnjsnjsnjsriable.
+ * _whch - Locates a command.
+ * @command: Command name.
+ * @_env: Environment variable.
  *
- * Return: bjhsjnsjns jkn
+ * Return: Location of the command.
  */
 char *_whch(char *command, char **_env)
 {
-	char *pathname, *ptrpath, *tknpath, *dir;
-	int lengthdir, lengthcmd, in;
+	char *path_name, *ptrpath, *tkn_path, *directory;
+	int length_dir, length_cmd, index;
 	struct stat st;
 
-	pathname = get_environ("PATH", _env);
-	if (pathname)
+	path_name = get_environ("PATH", _env);
+	if (path_name)
 	{
-		ptrpath = _strdup(pathname);
-lengthcmd = _strlen(command);
-		tknpath = _strtok(ptrpath, ":");
-		in = 0;
-		while (tknpath != NULL)
+		ptrpath = _strdup(path_name);
+		length_cmd = _strlen(command);
+		tkn_path = _strtok(ptrpath, ":");
+		index = 0;
+		while (tkn_path != NULL)
 		{
-			if (check_cdir(pathname, &in))
-				if (stt(command, &st) == 0)
+			if (check_cdir(path_name, &index))
+				if (stat(command, &st) == 0)
 					return (command);
-			lengthdir = _strlen(tknpath);
-			dir = malloc(lengthdir + lengthcmd + 2);
-			_strcpy(dir, tknpath);
-			_strcat(dir, "/");
-			_strcat(dir, command);
-			_strcat(dir, "\0");
-			if (stat(dir, &st) == 0)
+			length_dir = _strlen(tkn_path);
+			directory = malloc(length_dir + length_cmd + 2);
+			_strcpy(directory, tkn_path);
+			_strcat(directory, "/");
+			_strcat(directory, command);
+			_strcat(directory, "\0");
+			if (stat(directory, &st) == 0)
 			{
 				free(ptrpath);
-				return (dir);
+				return (directory);
 			}
-			free(dir);
-			tknpath = _strtok(NULL, ":");
+			free(directory);
+			tkn_path = _strtok(NULL, ":");
 		}
 		free(ptrpath);
 		if (stat(command, &st) == 0)
@@ -51,11 +51,11 @@ lengthcmd = _strlen(command);
 }
 
 /**
- * check_cdir - gvftsghbhs hhsbbshbbs  bsbbjnsbjns h s jhbhshhjsy.
- * @filepath: Poinhsjnjksn snjkbjks ,sj b s jksbjbsjk n jk j , knknth.
- * @index: Posghsjnsbhnsk, nn nbjsn n sbjjis xhuhisjnxbhh
+ * check_cdir - Checks if ":" is present in the current directory.
+ * @filepath: Pointer to a character string representing the filepath.
+ * @index: Pointer to an integer representing the index.
  *
- * Return: gsyhjhbbb sbjnsbjnns nbjksjjiks,jsjik,snjsjuhjiokpgvbhjnk,l;jshus.
+ * Return: 1 if the path is searchable in the current directory, 0 otherwise.
  */
 int check_cdir(char *filepath, int *index)
 {
@@ -74,12 +74,12 @@ int check_cdir(char *filepath, int *index)
 }
 
 /**
- * check_error_command - bhbshhsjhjbsjbjshb hhbjhsbhbs sbj ss
- *                      sjnnnsbhjsnjnsjnnsjnjsnjnsjnj jns
+ * check_error_command - Verifies if the user has permissions
+ *                      to access a command or directory.
  * @dir_dest: Destination directory.
- * @datashell: n,skksknknture.
+ * @datashell: Data structure.
  *
- * Return: jjsnjjsjse njsnjbsjbjbsj jsjnsjn.
+ * Return: 1 if there is an error, 0 if not.
  */
 int check_error_command(char *dir_dest, shll_comm *datashell)
 {
@@ -112,38 +112,38 @@ int check_error_command(char *dir_dest, shll_comm *datashell)
 }
 
 /**
- * command_exec - Execshjnshjs shjks nes.
- * @datashell: sujn jsnns jjjjjjjjjjjj sj st).
+ * command_exec - Executes command lines.
+ * @datashell: Data relevant (args and input).
  *
- * Return: hshbhbshbhbs.
+ * Return: 1 on success.
  */
 int command_exec(shll_comm *datashell)
 {
-	pid_t pdm, wpd;
-	int stt, ex;
+	pid_t pidm, wpid;
+	int stte, exc;
 	char *dir;
-	(void)wpd;
+	(void)wpid;
 
-	ex = is_exec(datashell);
-	if (ex == -1)
+	exc = is_exec(datashell);
+	if (exc == -1)
 		return (1);
-	if (ex == 0)
+	if (exc == 0)
 	{
 		dir = _whch(datashell->args[0], datashell->_env);
 		if (check_error_command(dir, datashell) == 1)
 			return (1);
 	}
 
-	pdm = fork();
-	if (pdm == 0)
+	pidm = fork();
+	if (pidm == 0)
 	{
-		if (ex == 0)
+		if (exc == 0)
 			dir = _whch(datashell->args[0], datashell->_env);
 		else
 			dir = datashell->args[0];
 		execve(dir + exc, datashell->args, datashell->_env);
 	}
-	else if (pdm < 0)
+	else if (pidm < 0)
 	{
 		perror(datashell->argv[0]);
 		return (1);
@@ -151,54 +151,54 @@ int command_exec(shll_comm *datashell)
 	else
 	{
 		do {
-			wpd = waitpid(pdm, &stt, WUNTRACED);
-		} while (!WIFEXITED(stt) && !WIFSIGNALED(stte));
+			wpid = waitpid(pidm, &stte, WUNTRACED);
+		} while (!WIFEXITED(stte) && !WIFSIGNALED(stte));
 	}
 
-	datashell->stat = stt / 256;
+	datashell->stat = stte / 256;
 
 	return (1);
 }
 
 /**
- * is_exec - synhsbhsb  shbjhs bj bs h js hs vj jsb j sj
- * @datashell: jnsjjsnj sj js.
+ * is_exec - Determines if a command is an executable.
+ * @datashell: Data structure.
  *
- * Return: usuhnshjns nhsbhs hsbs hshbhs bh hbh h h  hhhhhhhhhumber.
+ * Return: 0 if it's not an executable, otherwise a positive number.
  */
 int is_exec(shll_comm *datashell)
 {
 	struct stat status;
-	int in;
-	char *ip;
+	int index;
+	char *inp;
 
-	ip = datashell->args[0];
-	for (in = 0; ip[in]; in++)
+	inp = datashell->args[0];
+	for (index = 0; inp[index]; index++)
 	{
-		if (ip[in] == '.')
+		if (inp[index] == '.')
 		{
-			if (ip[in + 1] == '.')
+			if (inp[index + 1] == '.')
 				return (0);
-			if (ip[in + 1] == '/')
+			if (inp[index + 1] == '/')
 				continue;
 			else
 				break;
 		}
-		else if (ip[in] == '/' && in != 0)
+		else if (inp[index] == '/' && index != 0)
 		{
-			if (ip[in + 1] == '.')
+			if (inp[index + 1] == '.')
 				continue;
-			in++;
+			index++;
 			break;
 		}
 		else
 			break;
 	}
-	if (in == 0)
+	if (index == 0)
 		return (0);
 
-	if (stat(ip + in, &status) == 0)
-		return (in);
+	if (stat(inp + index, &status) == 0)
+		return (index);
 	get_err(datashell, 127);
 
 	return (-1);

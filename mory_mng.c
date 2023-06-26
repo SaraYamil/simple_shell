@@ -1,108 +1,113 @@
 #include "main.h"
 
 /**
- * add_ln_nd_end - jhjlhuo Adds a command line at the end the list
- * @hd: jhh the header of the linked list.
- * @cmd_line: rrreCommand line.
- * Return: Address lhl of the header.
+ * add_ln_nd_end - Adds a command line at the end of a line_list.
+ * @hd: Head of the linked list.
+ * @cmd_line: Command line.
+ *
+ * Return: Address of the head.
  */
 line_list *add_ln_nd_end(line_list **hd, char *cmd_line)
 {
-	line_list *new, *tp;
+	line_list *nw, *tmp;
 
-	new = malloc(sizeof(line_list));
-	if (new)
+	nw = malloc(sizeof(line_list));
+	if (nw == NULL)
 		return (NULL);
 
-	new->line = cmd_line;
-	new->next = NULL;
-	tp = *hd;
+	nw->line = cmd_line;
+	nw->next = NULL;
+	tmp = *hd;
 
-	if (tp)
+	if (tmp == NULL)
 	{
-		*hd = new;
+		*hd = nw;
 	}
 	else
 	{
-		while (tp->next != NULL)
-			tp = tp->next;
-		tp->next = new;
+		while (tmp->next != NULL)
+			tmp = tmp->next;
+		tmp->next = nw;
 	}
 
 	return (*hd);
 }
 
 /**
- * free_line_ls - hrioh Free line_list.
- * @hd: the header of the hui linked list.
- * Return: No return.hur
+ * free_line_ls - Frees a line_list.
+ * @hd: Head of the linked list.
+ *
+ * Return: No return.
  */
 void free_line_ls(line_list **hd)
 {
-	line_list *tp;
-	line_list *crt;
+	line_list *tmp;
+	line_list *current;
 
-	if (!hd)
+	if (hd != NULL)
 	{
-		crt = *hd;
-		while ((tp = crt) != NULL)
+		current = *hd;
+		while ((tmp = current) != NULL)
 		{
-			crt = crt->next;
-			free(tp);
+			current = current->next;
+			free(tmp);
 		}
 		*hd = NULL;
 	}
 }
 
 /**
- * add_node_en - Adds a rww separator found at the end of a list sep.
- * @hd: the head of the linked list efer.
- * @sp: Separator found dser.
- * Return: Addresse adfwe.
+ * add_node_en - Adds a separator found at the end
+ * of a sep_list.
+ * @hd: Head of the linked list.
+ * @sp: Separator found (; | &).
+ *
+ * Return: Address of the head.
  */
 sep_list *add_node_en(sep_list **hd, char sp)
 {
-	sep_list *new_sp, *tp;
+	sep_list *new_n, *tmp;
 
-	new_sp = malloc(sizeof(sep_list));
-	if (new_sp == NULL)
+	new_n = malloc(sizeof(sep_list));
+	if (new_n == NULL)
 		return (NULL);
 
-	new_sp->sep = sp;
-	new_sp->next = NULL;
-	tp = *hd;
+	new_n->sep = sp;
+	new_n->next = NULL;
+	tmp = *hd;
 
-	if (tp)
+	if (tmp == NULL)
 	{
-		*hd = new_sp;
+		*hd = new_n;
 	}
 	else
 	{
-		while (tp->next != NULL)
-			tp = tp->next;
-		tp->next = new_sp;
+		while (tmp->next != NULL)
+			tmp = tmp->next;
+		tmp->next = new_n;
 	}
 
 	return (*hd);
 }
 
 /**
- * free_sp_ls - jhh Free a sep list.
- * @hd: the header of kji the linked list.
- * Return: No returnnih.
+ * free_sp_ls - Frees a sep_list.
+ * @hd: Head of the linked list.
+ *
+ * Return: No return.
  */
 void free_sp_ls(sep_list **hd)
 {
-	sep_list *tp;
-	sep_list *crt;
+	sep_list *tmp;
+	sep_list *current;
 
-	if (!hd)
+	if (hd != NULL)
 	{
-		crt = *hd;
-		while ((tp = crt) != NULL)
+		current = *hd;
+		while ((tmp = current) != NULL)
 		{
-			crt = crt->next;
-			free(tp);
+			current = current->next;
+			free(tmp);
 		}
 		*hd = NULL;
 	}

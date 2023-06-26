@@ -1,10 +1,11 @@
 #include "main.h"
 
 /**
- * main - for testing 
- * @argc: inpute for main
- * @argv: inpute for main
- * Return: maso9kach 
+ * main - Entry point.
+ * @argc: Argument count.
+ * @argv: Argument vector.
+ *
+ * Return: 0 on success.
  */
 int main(int argc, char **argv)
 {

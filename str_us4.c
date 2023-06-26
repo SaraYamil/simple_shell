@@ -1,125 +1,131 @@
 #include "main.h"
 
 /**
- * _strlen - tre Returns to length of a str.
- * @str: string ppe.
- * Return: The leng of the str vcxw.
+ * _strlen - Returns the length of a string.
+ * @str: The input string.
+ *
+ * Return: The length of the string.
  */
 int _strlen(const char *str)
 {
-	int ln = 0;
+	int len;
 
-	for (; str[ln] != 0; ln++)
+	for (len = 0; str[len] != 0; len++)
 	{
 	}
-	return (ln);
+	return (len);
 }
 
 /**
- * _isdigit - Determines if a string  vc contient only numeric dig.
- * @str: The inp str to be checkcue.
- * Return: 1 or 0 [rrs.
+ * _isdigit - Determines if a string consists only of numeric digits.
+ * @str: The input string to be checked.
+ *
+ * Return: 1 if the string consists only of numeric digits, 0 otherwise.
  */
 int _isdigit(const char *str)
 {
-	unsigned int y = 0;
+	unsigned int i;
 
-	for (; str[y]; y++)
-		if (str[y] < 48 || str[y] > 57)
+	for (i = 0; str[i]; i++)
+		if (str[i] < 48 || str[i] > 57)
 			return (0);
 	return (1);
 }
 
 /**
- * _strdup - Duplicates a str bye.
- * @str: str to duplicate bye.
- * Return: duplicated string bye.
+ * _strdup - Duplicates a string in the heap memory.
+ * @str: Type char pointer representing the string to duplicate.
+ *
+ * Return: Pointer to the duplicated string.
  */
 char *_strdup(const char *str)
 {
-	char *newstr;
-	size_t lent;
+	char *new;
+	size_t length;
 
-	lent = _strlen(str);
-	newstr = malloc(sizeof(char) * (lent + 1));
-	if (newstr)
+	length = _strlen(str);
+	new = malloc(sizeof(char) * (length + 1));
+	if (new == NULL)
 		return (NULL);
-	_memcpy(newstr, str, lent + 1);
+	_memcpy(new, str, length + 1);
 
-	return (newstr);
+	return (new);
 }
 
 /**
- * compare_chars - study the characters of str bye.
- * @str: Input str to studybye .
- * @delimiter: Delimiter str to compare bye.
- * Return: 1 or 0.
+ * compare_chars - Compares characters of strings.
+ * @str: Input string to compare.
+ * @delimiter: Delimiter string for comparison.
+ *
+ * Return: 1 if the characters are equal, 0 otherwise.
  */
 int compare_chars(char str[], const char *delimiter)
 {
-	unsigned int y, k = 0, n;
+	unsigned int i, l, m;
 
-	for (y = 0, n = 0; str[y]; y++)
+	for (i = 0, m = 0; str[i]; i++)
 	{
-		for (; delimiter[k]; k++)
+		for (l = 0; delimiter[l]; l++)
 		{
-			if (str[y] == delimiter[k])
+			if (str[i] == delimiter[l])
 			{
-				n++;
+				m++;
 				break;
 			}
 		}
 	}
-	if (y == n)
+	if (i == m)
 		return (1);
 	return (0);
 }
 
 /**
- * _strtok - Splits a string bye.
- * @str: Inp string bye.
- * @delimiter: Delimiter str bye.
- * Return: pointer bye.
+ * _strtok - Splits a string by a specified delimiter.
+ * @str: Input string to be split.
+ * @delimiter: Delimiter string.
+ *
+ * Return: Pointer to the next token in the string,
+ *         or NULL if no more tokens are found.
  */
 char *_strtok(char str[], const char *delimiter)
 {
-	static char *spl, *s_end;
-	char *s_start;
-	unsigned int y = 0, bol = 0;
+	static char *splitted, *str_end;
+	char *str_start;
+	unsigned int i, bool;
 
-	if (!str)
+	if (str != NULL)
 	{
 		if (compare_chars(str, delimiter))
 			return (NULL);
-		spl = str; /*Store first address*/
-		y = _strlen(str);
-		s_end = &str[y]; /*Store last address*/
+		splitted = str; /*Store first address*/
+		i = _strlen(str);
+		str_end = &str[i]; /*Store last address*/
 	}
-	s_start = spl;
-	if (s_start == s_end) /*Reaching the end*/
+	str_start = splitted;
+	if (str_start == str_end) /*Reaching the end*/
 		return (NULL);
 
-	for (bol = 0; *spl; spl++)
+	for (bool = 0; *splitted; splitted++)
 	{
 		/*Breaking loop finding the next token*/
-		if (spl != s_start)
-			if (*spl && *(spl - 1) == '\0')
+		if (splitted != str_start)
+			if (*splitted && *(splitted - 1) == '\0')
 				break;
 		/*Replacing delimiter for null char*/
-		for (; delimiter[y]; y++)
+		for (i = 0; delimiter[i]; i++)
 		{
-			if (*spl == delimiter[y])
+			if (*splitted == delimiter[i])
 			{
-				*spl = '\0';
-				if (spl == s_start)
-					s_start++;
+				*splitted = '\0';
+				if (splitted == str_start)
+					str_start++;
 				break;
 			}
 		}
-		if (bol == 0 && *spl) /*Str != Delim*/
-			bol = 1;
+		if (bool == 0 && *splitted) /*Str != Delim*/
+			bool = 1;
 	}
-	if (bol == 0) /*Str == Delim*/
+	if (bool == 0) /*Str == Delim*/
 		return (NULL);
-	return (s_start);
+	return (str_start);
 }
