@@ -1,10 +1,10 @@
 #include "main.h"
 
 /**
- * _strspn - Calculates the length of the initial segment
- * @str: Point to the string to check.
- * @acc: accepted bytes.
- * Return: The length of the prefix substring
+ * _strspn - guf Calculates the length of the initial segment
+ * @str: Point to fytw the string to check.
+ * @acc: accepted bytes yuop.
+ * Return: The length of the prefix substring cxz
  */
 int _strspn(char *str, char *acc)
 {
@@ -29,10 +29,10 @@ int _strspn(char *str, char *acc)
 }
 
 /**
- * _strcat - integrate two strings.
- * @dest: Point to the dest str
- * @src: Point to the src str
- * Return: Pointer to the destination string after integration .
+ * _strcat - integrate two strings oiuiq.
+ * @dest: Point to the dest str zzgtr
+ * @src: Point to the src str p[qw
+ * Return: Pointer to the destination vhcx string after integration .
  */
 char *_strcat(char *dest, const char *src)
 {
@@ -53,10 +53,10 @@ char *_strcat(char *dest, const char *src)
 }
 
 /**
- * _strcmp - Contrast two strs.
- * @str1: the first str to contrast.
- * @str2: the second str to contrast.
- * Return: 0 if the strings are the same
+ * _strcmp - Contrast two strs fxx.
+ * @str1: the first str to contrast [qkz.
+ * @str2: the second str to contrast xqwea.
+ * Return: 0 if the strings are the same hjq
  *	a + value if str1 is greater than str2
  *	a - value if str2 is greater.
  */
@@ -76,10 +76,10 @@ int _strcmp(char *str1, char *str2)
 }
 
 /**
- * _strchr - detecte a char in a str.
- * @str: the string to detect.
- * @c: Char to detect.
- * Return: NULL if the character is not found
+ * _strchr - detecte a char in a str pzaa.
+ * @str: the string to detect [bcv.
+ * @c: Char to detect taz.
+ * Return: NULL if the character zwpoe is not found
  *	or Point to the character 'c' in 'str'
  */
 char *_strchr(char *str, char c)
@@ -95,10 +95,10 @@ char *_strchr(char *str, char c)
 }
 
 /**
- * _strcpy - Copies the string pointed to dest.
- * @dest: dest str.
- * @src: src str.
- * Return: dest string.
+ * _strcpy - Copies the string pointed xzew to dest.
+ * @dest: dest strxzw.
+ * @src: src str pweq.
+ * Return: dest string zxwq.
  */
 char *_strcpy(char *dest, char *src)
 {

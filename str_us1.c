@@ -2,11 +2,11 @@
 
 /**
  * _memcpy - Copies a block of memory from the src
- *           pointer to the destination point
- * @new_pointer: destination pointer.
- * @pointer: source pointer.
- * @s: size of the new pointer.
- * Return: None.
+ *           potointer to the destination point
+ * @new_pointer: [tee destination pointer.
+ * @pointer: source hees pointer.
+ * @s: size of the new pointer wrtpo.
+ * Return: None ett.
  */
 void _memcpy(void *new_pointer, const void *pointer, unsigned int s)
 {
@@ -19,11 +19,11 @@ void _memcpy(void *new_pointer, const void *pointer, unsigned int s)
 }
 
 /**
- * _realloc - Reallocates a memory block
- * @pointer: Pointer to the memory prev
- * @old_s: old size in bytes.
- * @new_s: New size in bytes
- * Return: Pointer to the reallocated.
+ * _realloc - Reallocates a memory block wrr
+ * @pointer: Pointer to the memory prev [ee
+ * @old_s: old size in bytes wrr.
+ * @new_s: New size in bytes wer
+ * Return: Pointer to the reallocated qsa.
  */
 void *_realloc(void *pointer, unsigned int old_s, unsigned int new_s)
 {
@@ -55,11 +55,11 @@ void *_realloc(void *pointer, unsigned int old_s, unsigned int new_s)
 }
 
 /**
- * _reallocdp - Real a memory block of a double point.
- * @pointer: Double pointer to the memory prev allocated.
- * @old_s: old size in bytes.
- * @new_s: New size in bytes
- * Return: Pointer to the reallocated memory
+ * _reallocdp - Real a memory block of a double point wepe.
+ * @pointer: Double pointer to the memory prev allocated pwe.
+ * @old_s: old size in bytes cxza.
+ * @new_s: New size in bytes qaz
+ * Return: Pointer to the reallocated memory bcp
  */
 char **_reallocdp(char **pointer, unsigned int old_s, unsigned int new_s)
 {

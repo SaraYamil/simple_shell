@@ -1,11 +1,11 @@
 #include "main.h"
 
 /**
- * move_nxt - Moves to the next cmd.
- * @lis_s: Sepa list.
- * @lis_l: Command ln list.
- * @data_shell: Data structure.
- * Return: No return value.
+ * move_nxt - hjhu Moves to the next cmd.
+ * @lis_s: Sepa list juu.
+ * @lis_l: Command ln list hhh.
+ * @data_shell: Data structure hyi.
+ * Return: No return value hu.
  */
 void move_nxt(sep_list **lis_s, line_list **lis_l, shll_comm *data_shell)
 {
@@ -42,10 +42,10 @@ void move_nxt(sep_list **lis_s, line_list **lis_l, shll_comm *data_shell)
 }
 
 /**
- * swp_character - Swaps '|' and '&' for non-printed characters
- * @inp: string input.
- * @boolean: Type of swap
- * Return: Swapped string.
+ * swp_character - ggiiSwaps '|' and '&' for non-printed characters
+ * @inp: string input jiy.
+ * @boolean: Type of swap jhi
+ * Return: Swapped string yeo.
  */
 char *swp_character(char *inp, int boolean)
 {
@@ -84,11 +84,11 @@ char *swp_character(char *inp, int boolean)
 }
 
 /**
- * add_nd - Adds sep and cmd lines to the lists.
- * @hd_s: the head of the sep list.
- * @hd_l: the head of the cmd lines list.
- * @inp: Input string.
- * Return: No return value.
+ * add_nd - Adds sep and cmd opeolines to the lists.
+ * @hd_s: the head of the sep list uhe.
+ * @hd_l: the head of the cmd lines list oihw.
+ * @inp: Input string poue.
+ * Return: No return value oouqw.
  */
 void add_nd(sep_list **hd_s, line_list **hd_l, char *inp)
 
@@ -119,9 +119,9 @@ void add_nd(sep_list **hd_s, line_list **hd_l, char *inp)
 }
 
 /**
- * read_line - Reads the inp string.
- * @int_eof: Return value of the getline func.
- * Return: Inp string.
+ * read_line - Reads the inp string ppjq.
+ * @int_eof: Return value of the getline func ppu.
+ * Return: Inp string oeqs.
  */
 char *read_line(int *int_eof)
 {
@@ -134,9 +134,9 @@ char *read_line(int *int_eof)
 }
 
 /**
- * free_value_ls - Frees a r_var lst.
- * @hd: the head of the linked lst.
- * Return: No return.
+ * free_value_ls - Frees a r_var lst pret.
+ * @hd: the head of the linked lst pe.
+ * Return: No return ptw.
  */
 void free_value_ls(r_var **hd)
 {

@@ -1,9 +1,9 @@
 #include "main.h"
 
 /**
- * _strlen - Returns to length of a str.
- * @str: string.
- * Return: The leng of the str.
+ * _strlen - tre Returns to length of a str.
+ * @str: string ppe.
+ * Return: The leng of the str vcxw.
  */
 int _strlen(const char *str)
 {
@@ -16,9 +16,9 @@ int _strlen(const char *str)
 }
 
 /**
- * _isdigit - Determines if a string contient only numeric dig.
- * @str: The inp str to be check.
- * Return: 1 or 0.
+ * _isdigit - Determines if a string  vc contient only numeric dig.
+ * @str: The inp str to be checkcue.
+ * Return: 1 or 0 [rrs.
  */
 int _isdigit(const char *str)
 {
@@ -31,9 +31,9 @@ int _isdigit(const char *str)
 }
 
 /**
- * _strdup - Duplicates a str.
- * @str: str to duplicate.
- * Return: duplicated string.
+ * _strdup - Duplicates a str bye.
+ * @str: str to duplicate bye.
+ * Return: duplicated string bye.
  */
 char *_strdup(const char *str)
 {
@@ -50,9 +50,9 @@ char *_strdup(const char *str)
 }
 
 /**
- * compare_chars - study the characters of str.
- * @str: Input str to study.
- * @delimiter: Delimiter str to compare.
+ * compare_chars - study the characters of str bye.
+ * @str: Input str to studybye .
+ * @delimiter: Delimiter str to compare bye.
  * Return: 1 or 0.
  */
 int compare_chars(char str[], const char *delimiter)
@@ -76,10 +76,10 @@ int compare_chars(char str[], const char *delimiter)
 }
 
 /**
- * _strtok - Splits a string.
- * @str: Inp string.
- * @delimiter: Delimiter str.
- * Return: pointer.
+ * _strtok - Splits a string bye.
+ * @str: Inp string bye.
+ * @delimiter: Delimiter str bye.
+ * Return: pointer bye.
  */
 char *_strtok(char str[], const char *delimiter)
 {

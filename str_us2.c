@@ -1,9 +1,9 @@
 #include "main.h"
 
 /**
- * conv_itoa - Converts an integer to a str.
- * @number: The int number to conv
- * Return: The string representation of the intm.
+ * conv_itoa - Converts an integer to a str pers.
+ * @number: The int number to conv idfg
+ * Return: The string representation of the intm kgyj.
  */
 char *conv_itoa(int number)
 {
@@ -35,9 +35,9 @@ char *conv_itoa(int number)
 }
 
 /**
- * get_length - Get the length of num.
- * @number: The number which calculate the length.
- * Return: The length of the number to check.
+ * get_length - Get the length of num hfdtr.
+ * @number: The number which calculate the length cdzx.
+ * Return: The length of the number to check aqw.
  */
 int get_length(int number)
 {
@@ -61,9 +61,9 @@ int get_length(int number)
 }
 
 /**
- * _atoi - Conv str to integer.
- * @str: str input.
- * Return: The conv int to check.
+ * _atoi - Conv str to integer zfw.
+ * @str: str input awre.
+ * Return: The conv int to check cxcfz.
  */
 int _atoi(char *str)
 {

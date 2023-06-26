@@ -1,8 +1,8 @@
 #include "main.h"
 
 /**
- * disp_help_general - Entry point for help info
- * Return: Void
+ * disp_help_general - Entry point for help info huuoyi
+ * Return: Void huyy
  */
 void disp_help_general(void)
 {
@@ -23,8 +23,8 @@ void disp_help_general(void)
 	write(STDOUT_FILENO, hel, _strlen(hel));
 }
 /**
- * disp_help_exit - Help information fot the builint exit
- * Return: Void
+ * disp_help_exit - Help information fot the builint exit igkgy
+ * Return: Void ygi
  */
 void disp_help_exit(void)
 {
@@ -38,8 +38,8 @@ void disp_help_exit(void)
 }
 
 /**
- * display_unsetenv - Help information
- * Return: Void
+ * display_unsetenv - Help information uojjkg
+ * Return: Void kgygi
  */
 void display_unsetenv(void)
 {
@@ -51,8 +51,8 @@ void display_unsetenv(void)
 }
 
 /**
- * get_sigint - Handle the crtl + c call
- * @sig: Signal hand
+ * get_sigint - Handle the crtl + c call yuygy
+ * @sig: Signal hand hhkh
  */
 void get_sigint(int sig)
 {
@@ -61,12 +61,12 @@ void get_sigint(int sig)
 }
 
 /**
- * get_ln - assigns the line variable
- * @lnptr: Pointer to the line var
- * @num: Pointer to the size of line var
- * @buf: String that is being assigned to line
- * @size_b: Size of the buffer
- * Return: void
+ * get_ln - assigns the line variable yiyii
+ * @lnptr: Pointer to the line var dee
+ * @num: Pointer to the size of line var wfaa
+ * @buf: String that is being assigned to line qrae
+ * @size_b: Size of the buffer eerr
+ * Return: void rer
  */
 void get_ln(char **lnptr, size_t *num, char *buf, size_t size_b)
 {

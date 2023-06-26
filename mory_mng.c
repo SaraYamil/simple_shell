@@ -1,10 +1,10 @@
 #include "main.h"
 
 /**
- * add_ln_nd_end - Adds a command line at the end the list
- * @hd: the header of the linked list.
- * @cmd_line: Command line.
- * Return: Address of the header.
+ * add_ln_nd_end - jhjlhuo Adds a command line at the end the list
+ * @hd: jhh the header of the linked list.
+ * @cmd_line: rrreCommand line.
+ * Return: Address lhl of the header.
  */
 line_list *add_ln_nd_end(line_list **hd, char *cmd_line)
 {
@@ -33,9 +33,9 @@ line_list *add_ln_nd_end(line_list **hd, char *cmd_line)
 }
 
 /**
- * free_line_ls - Free line_list.
- * @hd: the header of the linked list.
- * Return: No return.
+ * free_line_ls - hrioh Free line_list.
+ * @hd: the header of the hui linked list.
+ * Return: No return.hur
  */
 void free_line_ls(line_list **hd)
 {
@@ -55,10 +55,10 @@ void free_line_ls(line_list **hd)
 }
 
 /**
- * add_node_en - Adds a separator found at the end of a list sep.
- * @hd: the head of the linked list.
- * @sp: Separator found.
- * Return: Address of the head.
+ * add_node_en - Adds a rww separator found at the end of a list sep.
+ * @hd: the head of the linked list efer.
+ * @sp: Separator found dser.
+ * Return: Addresse adfwe.
  */
 sep_list *add_node_en(sep_list **hd, char sp)
 {
@@ -87,9 +87,9 @@ sep_list *add_node_en(sep_list **hd, char sp)
 }
 
 /**
- * free_sp_ls - Free a sep list.
- * @hd: the header of the linked list.
- * Return: No return.
+ * free_sp_ls - jhh Free a sep list.
+ * @hd: the header of kji the linked list.
+ * Return: No returnnih.
  */
 void free_sp_ls(sep_list **hd)
 {

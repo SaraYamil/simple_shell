@@ -1,9 +1,9 @@
 #include "main.h"
 
 /**
- * rev_string - converses the char in a given str.
- * @s: The input string to be conversed.
- * Return: nothing
+ * rev_string - converses the char in a given str bye.
+ * @s: The input string to be conversed bye.
+ * Return: nothing bye
  */
 void rev_string(char *s)
 {

@@ -1,8 +1,8 @@
 #include "main.h"
 
 /**
- * disp_help_cd - Help information for the builtin alias.
- * Return: no return
+ * disp_help_cd - Help information for the builtin jgsgku.
+ * Return: no return jsuiusudd
  */
 void disp_help_cd(void)
 {
@@ -14,8 +14,8 @@ void disp_help_cd(void)
 }
 
 /**
- * disp_help_alias - Help information
- * Return: no return
+ * disp_help_alias - Help information jhkuoshush
+ * Return: no return hjlhhhikw
  */
 void disp_help_alias(void)
 {
@@ -27,8 +27,8 @@ void disp_help_alias(void)
 }
 
 /**
- * disp_help - Help information for the builtin help.
- * Return: no return
+ * disp_help - Help information for the builtin help igiygiyhd.
+ * Return: no return jhlhuhyh
  */
 void disp_help(void)
 {
@@ -42,8 +42,8 @@ void disp_help(void)
 }
 
 /**
- * disp_help_env - Help information for env
- * Return: no return
+ * disp_help_env - Help information for env kjhityitg
+ * Return: no return jiguuiyo
  */
 void disp_help_env(void)
 {
@@ -55,9 +55,8 @@ void disp_help_env(void)
 }
 
 /**
- * dsp_hlp_setev - Help information for the builtin setenv
- *
- * Return: no return
+ * dsp_hlp_setev - Help information for the builtin setenv khgii
+ * Return: no return iuuihu
  */
 
 void dsp_hlp_setenv(void)

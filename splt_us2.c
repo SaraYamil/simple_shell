@@ -1,9 +1,9 @@
 #include "main.h"
 
 /**
- * splt_ln - split string.
- * @inp: Input string.
- * Return: String splitted.
+ * splt_ln - split string husq.
+ * @inp: Input string iopp.
+ * Return: String splitted uopwe.
  */
 char **splt_ln(char *inp)
 {
@@ -44,10 +44,10 @@ char **splt_ln(char *inp)
 
 /**
  * split_cmds - Splits command lines according to the separator
- *		and executes them.
- * @datashell: Data structure.
- * @inp: Input string.
- * Return: 1 to continue, 0 to exit.
+ *		and executes them opio.
+ * @datashell: Data structure oywp.
+ * @inp: Input string preq.
+ * Return: 1 to continue, 0 to exit [htq.
  */
 int split_cmds(shll_comm *datashell, char *inp)
 {
@@ -89,9 +89,9 @@ int split_cmds(shll_comm *datashell, char *inp)
 }
 
 /**
- * without_cmt - Deletes comments.
- * @input: Inp string.
- * Return: Inp without comments.
+ * without_cmt - Deletes comments etw.
+ * @input: Inp string trw.
+ * Return: Inp without comments wqer.
  */
 char *without_cmt(char *input)
 {
@@ -123,9 +123,9 @@ char *without_cmt(char *input)
 }
 
 /**
- * looping_shll - the main loop of the shell
- * @data_shell: Data relevant to the shell
- * Return: No return.
+ * looping_shll - the main loop of the shell were
+ * @data_shell: Data relevant to the shell qeer
+ * Return: No return etw.
  */
 void looping_shll(shll_comm *data_shell)
 {
@@ -163,12 +163,12 @@ void looping_shll(shll_comm *data_shell)
 }
 
 /**
- * add_var_nd - Add a variable at the end of a r_var lst.
- * @hd: the head of the linked list.
- * @lenvar: Length of the var.
- * @value: Value of the var.
- * @lenval: Length of the value.
- * Return: Address of the head.
+ * add_var_nd - Add  yryw a variable at the end of a r_var lst.
+ * @hd: the head of the  wie linked list.
+ * @lenvar: Length of the var erw.
+ * @value: Value of the var ptw.
+ * @lenval: Length of the value [er.
+ * Return: Address of the head erw.
  */
 r_var *add_var_nd(r_var **hd, int lenvar, char *value, int lenval)
 {
