@@ -55,10 +55,12 @@ void disp_help_env(void)
 }
 
 /**
- * disp_help_setenv - Help information for setenv
+ * dsp_hlp_setev - Help information for the builtin setenv
+ *
  * Return: no return
  */
-void disp_help_setenv(void)
+
+void dsp_hlp_setenv(void)
 {
 
 	char *hlp = "setev: setev (const char *name, const char *value,";
