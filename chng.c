@@ -23,21 +23,21 @@ int changedir_shell(shll_comm *data_sh)
 		changedir_to_home(data_sh);
 		return (1);
 	}
-	
+
 	if (_strcmp("-", directory) == 0)
 	{
 		changedir_prev(data_sh);
 		return (1);
 	}
-	
+
 	if (_strcmp(".", directory) == 0 || _strcmp("..", directory) == 0)
 	{
 		chandir_dor(data_sh);
 		return (1);
 	}
-	
+
 	cd_to_dist(data_sh);
-	
+
 	return (1);
 }
 
