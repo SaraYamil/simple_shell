@@ -15,24 +15,24 @@ int geterr(shll_comm *datashell, int error_val)
 	switch (error_val)
 	{
 	case -1:
-		error = err_environ(datashell);
+		error = err_envrn(datashell);
 		break;
 	case 126:
-		error = err_path126(datashell);
+		error = errpth126(datashell);
 		break;
 	case 127:
-		error = error_404(datashell);
+		error = err404(datashell);
 		break;
 	case 2:
-		if (_strcmp("exit", datashell->args[0]) == 0)
-			error = err_shell_exit(datashell);
-		else if (_strcmp("cd", datashell->args[0]) == 0)
-			error = err_gcd(datashell);
+		if (_strccmmpp("exit", datashell->args[0]) == 0)
+			error = errshellex(datashell);
+		else if (_strccmmpp("cd", datashell->args[0]) == 0)
+			error = errgcd(datashell);
 		break;
 	}
 	if (error)
 	{
-		write(STDERR_FILENO, error, _strlen(error));
+		write(STDERR_FILENO, error, _strlength(error));
 		free(error);
 	}
 	datashell->stat = error_val;
@@ -77,10 +77,10 @@ void set_dtshll(shll_comm *data_shell, char **argv)
 	data_shell->_env = malloc(sizeof(char *) * (i + 1));
 	for (i = 0; environ[i]; i++)
 	{
-		data_shell->_env[i] = _strdup(environ[i]);
+		data_shell->_env[i] = _strdupp(environ[i]);
 	}
 	data_shell->_env[i] = NULL;
-	data_shell->pid = conv_itoa(getpid());
+	data_shell->pid = convitoa(getpid());
 }
 
 /**
@@ -94,24 +94,24 @@ int gethelp(shll_comm *data_shll)
 {
 
 	if (data_shll->args[1] == 0)
-		disp_help_general();
-	else if (_strcmp(data_shll->args[1], "setenv") == 0)
-		disp_help_setenv();
-	else if (_strcmp(data_shll->args[1], "env") == 0)
-		disp_help_env();
-	else if (_strcmp(data_shll->args[1], "unsetenv") == 0)
-		display_unsetenv();
-	else if (_strcmp(data_shll->args[1], "help") == 0)
-		disp_help();
-	else if (_strcmp(data_shll->args[1], "exit") == 0)
-		disp_help_exit();
-	else if (_strcmp(data_shll->args[1], "cd") == 0)
+		dsp_helpgnrl();
+	else if (_strccmmpp(data_shll->args[1], "setenv") == 0)
+		dsp_helpstnv();
+	else if (_strccmmpp(data_shll->args[1], "env") == 0)
+		dsp_hlpenv();
+	else if (_strccmmpp(data_shll->args[1], "unsetenv") == 0)
+		dsp_unstnv();
+	else if (_strccmmpp(data_shll->args[1], "help") == 0)
+		dsp_hlp();
+	else if (_strccmmpp(data_shll->args[1], "exit") == 0)
+		dsp_helpex();
+	else if (_strccmmpp(data_shll->args[1], "cd") == 0)
 		disp_help_cd();
-	else if (_strcmp(data_shll->args[1], "alias") == 0)
-		disp_help_alias();
+	else if (_strccmmpp(data_shll->args[1], "alias") == 0)
+		dsp_helpals();
 	else
 		write(STDERR_FILENO, data_shll->args[0],
-		      _strlen(data_shll->args[0]));
+		      _strlength(data_shll->args[0]));
 	data_shll->stat = 0;
 	return (1);
 }
@@ -136,7 +136,7 @@ int (*getbltn(char *command))(shll_comm *)
 
 	for (index = 0; bltn[index].commname; index++)
 	{
-		if (_strcmp(bltn[index].commname, command) == 0)
+		if (_strccmmpp(bltn[index].commname, command) == 0)
 			break;
 	}
 	return (bltn[index].f);
