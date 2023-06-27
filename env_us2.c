@@ -13,10 +13,10 @@ char *replc_str(char *inp, shll_comm *data_shell)
 	r_var *hd, *index;
 	char *stat, *new_inp;
 
-	stat = conv_itoa(data_shell->stat);
+	stat = convitoa(data_shell->stat);
 	hd = NULL;
 
-	olen = verify_vars(&hd, inp, stat, data_shell);
+	olen = verfyvrs(&hd, inp, stat, data_shell);
 
 	if (hd == NULL)
 	{
@@ -38,11 +38,11 @@ char *replc_str(char *inp, shll_comm *data_shell)
 	new_inp = malloc(sizeof(char) * (nlen + 1));
 	new_inp[nlen] = '\0';
 
-	new_inp = rpl_inp(&hd, inp, new_inp, nlen);
+	new_inp = rplinp(&hd, inp, new_inp, nlen);
 
 	free(inp);
 	free(stat);
-	free_value_ls(&hd);
+	free_valls(&hd);
 
 	return (new_inp);
 }
@@ -61,15 +61,15 @@ int _unstnv(shll_comm *datash)
 
 	if (datash->args[1] == NULL)
 	{
-		get_err(datash, -1);
+		geterr(datash, -1);
 		return (1);
 	}
 	k = -1;
 	for (i = 0; datash->_env[i]; i++)
 	{
-		varenv = _strdup(datash->_env[i]);
-		nmenv = _strtok(varenv, "=");
-		if (_strcmp(nmenv, datash->args[1]) == 0)
+		varenv = _strdupp(datash->_env[i]);
+		nmenv = _strtiktok(varenv, "=");
+		if (_strccmmpp(nmenv, datash->args[1]) == 0)
 		{
 			k = i;
 		}
@@ -77,7 +77,7 @@ int _unstnv(shll_comm *datash)
 	}
 	if (k == -1)
 	{
-		get_err(datash, -1);
+		geterr(datash, -1);
 		return (1);
 	}
 	real_env = malloc(sizeof(char *) * (i));
@@ -111,20 +111,20 @@ void stenv(char *environ_name, char *val, shll_comm *data_sh)
 
 	for (i = 0; data_sh->_env[i]; i++)
 	{
-		varenv = _strdup(data_sh->_env[i]);
-		nmenv = _strtok(varenv, "=");
-		if (_strcmp(nmenv, environ_name) == 0)
+		varenv = _strdupp(data_sh->_env[i]);
+		nmenv = _strtiktok(varenv, "=");
+		if (_strccmmpp(nmenv, environ_name) == 0)
 		{
 			free(data_sh->_env[i]);
-			data_sh->_env[i] = cp_info(nmenv, val);
+			data_sh->_env[i] = cpinf(nmenv, val);
 			free(varenv);
 			return;
 		}
 		free(varenv);
 	}
 
-	data_sh->_env = _reallocdp(data_sh->_env, i, sizeof(char *) * (i + 2));
-	data_sh->_env[i] = cp_info(environ_name, val);
+	data_sh->_env = _reallcdp(data_sh->_env, i, sizeof(char *) * (i + 2));
+	data_sh->_env[i] = cpinf(environ_name, val);
 	data_sh->_env[i + 1] = NULL;
 }
 
@@ -140,11 +140,11 @@ int _stnv(shll_comm *data_sh)
 
 	if (data_sh->args[1] == NULL || data_sh->args[2] == NULL)
 	{
-		get_err(data_sh, -1);
+		geterr(data_sh, -1);
 		return (1);
 	}
 
-	set_env(data_sh->args[1], data_sh->args[2], data_sh);
+	setenv(data_sh->args[1], data_sh->args[2], data_sh);
 
 	return (1);
 }
@@ -161,14 +161,14 @@ char *cp_info(char *alias_name, char *val)
 	char *new;
 	int len_name, len_value, len;
 
-	len_name = _strlen(alias_name);
-	len_value = _strlen(val);
+	len_name = _strlength(alias_name);
+	len_value = _strlength(val);
 	len = len_name + len_value + 2;
 	new = malloc(sizeof(char) * (len));
-	_strcpy(new, alias_name);
+	_strcopy(new, alias_name);
 	_strcat(new, "=");
-	_strcat(new, val);
-	_strcat(new, "\0");
+	_strccaat(new, val);
+	_strccaat(new, "\0");
 
 	return (new);
 }
