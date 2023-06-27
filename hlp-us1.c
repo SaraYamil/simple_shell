@@ -1,9 +1,9 @@
 #include "main.h"
 
 /**
- * disp_help_cd - Help information for the builtin alias.
+ * disp_help_cd - display help information.
  *
- * Return: no return
+ * Return: none
  */
 void disp_help_cd(void)
 {
@@ -15,9 +15,9 @@ void disp_help_cd(void)
 }
 
 /**
- * disp_help_alias - Help information for the builtin alias.
+ * disp_help_alias - display Help information.
  *
- * Return: no return
+ * Return: void
  */
 void disp_help_alias(void)
 {
@@ -29,9 +29,9 @@ void disp_help_alias(void)
 }
 
 /**
- * disp_help - Help information for the builtin help.
+ * disp_help - display Help information.
  *
- * Return: no return
+ * Return: void
  */
 void disp_help(void)
 {
@@ -45,9 +45,9 @@ void disp_help(void)
 }
 
 /**
- * disp_help_env - Help information for the builtin env
+ * disp_help_env - display Help information env
  *
- * Return: no return
+ * Return: void
  */
 void disp_help_env(void)
 {
@@ -59,7 +59,7 @@ void disp_help_env(void)
 }
 
 /**
- * disp_help_setenv - Help information for the builtin setenv
+ * disp_help_setenv - display Help information buil setenv
  *
  * Return: no return
  */

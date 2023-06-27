@@ -99,7 +99,7 @@ int _unsetenv(shll_comm *datash)
 /**
  * set_env - kkkkkkkk kkkkkkkkkkk kkkkk k.
  * @environ_name: Njjjjj j jj j j jjjjjjjjjjjjjjje.
- * @val: bbbbbbbbbbb bbbbbbbbbbb bbbbbbbb 
+ * @val: bbbbbbbbbbb bbbbbbbbbbb bbbbbbbb
  * @data_sh: BBBBBBBBBBBVBBBBBB cccccccccccc hhhhhhhhhhhhhh hhhs.
  *
  * Return: jhdhbdhbj.

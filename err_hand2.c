@@ -1,20 +1,19 @@
 #include "main.h"
 
 /**
- * error_404 - generates a generic error message for "command not found".
- * @data_sh: data relevant to the shell (counter, arguments).
- *
- * Return: The error message.
+ * error_404 - hjgenerates an error message
+ * @data_sh: data relevant
+ * Return: error message.
  */
 char *error_404(shll_comm *data_sh)
 {
 	char *err, *vstr;
-	int length;
+	int ln;
 
 	vstr = conv_itoa(data_sh->counter);
-	length = _strlen(data_sh->argv[0]) + _strlen(vstr);
-	length += _strlen(data_sh->args[0]) + 16;
-	err = malloc(sizeof(char) * (length + 1));
+	ln = _strlen(data_sh->argv[0]) + _strlen(vstr);
+	ln += _strlen(data_sh->args[0]) + 16;
+	err = malloc(sizeof(char) * (ln + 1));
 	if (err == 0)
 	{
 		free(err);
@@ -34,21 +33,20 @@ char *error_404(shll_comm *data_sh)
 }
 
 /**
- * err_shell_exit - generates a generic error message for
- *                  "exit" command in get_exit.
- * @data_sh: data relevant to the shell (counter, arguments).
+ * err_shell_exit - hso[generates a generic error message
+ * @data_sh: data shell.
  *
- * Return: The error message.
+ * Return: error message.
  */
 char *err_shell_exit(shll_comm *data_sh)
 {
 	char *err, *vstr;
-	int length;
+	int ln;
 
 	vstr = conv_itoa(data_sh->counter);
-	length = _strlen(data_sh->argv[0]) + _strlen(vstr);
-	length += _strlen(data_sh->args[0]) + _strlen(data_sh->args[1]) + 23;
-	err = malloc(sizeof(char) * (length + 1));
+	ln = _strlen(data_sh->argv[0]) + _strlen(vstr);
+	ln += _strlen(data_sh->args[0]) + _strlen(data_sh->args[1]) + 23;
+	err = malloc(sizeof(char) * (ln + 1));
 	if (err == 0)
 	{
 		free(vstr);
@@ -68,31 +66,31 @@ char *err_shell_exit(shll_comm *data_sh)
 }
 
 /**
- * err_gcd - generates an error message for the 'cd' command in get_cd.
- * @data_sh: data relevant to the shell (directory).
+ * err_gcd - fghg generates an error message.
+ * @data_sh: data shell.
  *
- * Return: The error message.
+ * Return: error mess.
  */
 char *err_gcd(shll_comm *data_sh)
 {
 	char *err, *vstr, *errmsg;
-	int len, lenid;
+	int ln, ld;
 
 	vstr = conv_itoa(data_sh->counter);
 	if (data_sh->args[1][0] == '-')
 	{
 		errmsg = ": Illegal option ";
-		lenid = 2;
+		ld = 2;
 	}
 	else
 	{
 		errmsg = ": can't cd to ";
-		lenid = _strlen(data_sh->args[1]);
+		ld = _strlen(data_sh->args[1]);
 	}
 
-	len = _strlen(data_sh->argv[0]) + _strlen(data_sh->args[0]);
-	len += _strlen(vstr) + _strlen(errmsg) + lenid + 5;
-	err = malloc(sizeof(char) * (len + 1));
+	ln = _strlen(data_sh->argv[0]) + _strlen(data_sh->args[0]);
+	ln += _strlen(vstr) + _strlen(errmsg) + ld + 5;
+	err = malloc(sizeof(char) * (ln + 1));
 
 	if (err == 0)
 	{

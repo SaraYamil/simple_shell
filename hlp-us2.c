@@ -1,9 +1,15 @@
 #include "main.h"
 
 /**
+<<<<<<< HEAD
  * disp_help_general - ggggggggggg gggggggggg gg gggggggggggg gggggggg ggggg
  *
  * Return: Vggg
+=======
+ * disp_help_general - display help builtin
+ *
+ * Return: nothing
+>>>>>>> c9c3c29390012187b08c11d8f0032f67679d93f9
  */
 void disp_help_general(void)
 {
@@ -24,9 +30,15 @@ void disp_help_general(void)
 	write(STDOUT_FILENO, hep, _strlen(hep));
 }
 /**
+<<<<<<< HEAD
  * disp_help_exit - hhhhhhhhhhhhhhhhh hhhhhhhhhhh vavhbjt
  *
  * Return: Vddd
+=======
+ * disp_help_exit - display help builtin
+ *
+ * Return: nothing
+>>>>>>> c9c3c29390012187b08c11d8f0032f67679d93f9
  */
 void disp_help_exit(void)
 {
@@ -40,9 +52,15 @@ void disp_help_exit(void)
 }
 
 /**
+<<<<<<< HEAD
  * display_unsetenv - ccccccccc cccbbbbb bbbbbbbbbb bbbbbbbbbbn
  *
  * Return: Vxxx
+=======
+ * display_unsetenv - display help builtin for the builtin unsetenv
+ *
+ * Return: nothing
+>>>>>>> c9c3c29390012187b08c11d8f0032f67679d93f9
  */
 void display_unsetenv(void)
 {
@@ -54,8 +72,13 @@ void display_unsetenv(void)
 }
 
 /**
+<<<<<<< HEAD
  * get_sigint - xxxxxxxxxxx xxxxxxxx xxxxxxxxxxx x
  * @sig: xxxxxxxxxndler
+=======
+ * get_sigint - getukgu
+ * @sig: iygiyki
+>>>>>>> c9c3c29390012187b08c11d8f0032f67679d93f9
  */
 void get_sigint(int sig)
 {
@@ -64,6 +87,7 @@ void get_sigint(int sig)
 }
 
 /**
+<<<<<<< HEAD
  * get_ln - zzzzzzzzz zzzzzz z zzzzzzzzzzzzze
  * @lnptr: Pzzzzzzzzzz zzzzzzzzzariable
  * @num: Poinzzzzzzzzz zzzzz of zzzzzzzzzzble
@@ -71,6 +95,15 @@ void get_sigint(int sig)
  * @size_b: gggggg ggggg bbbbr
  *
  * Return: vvvv
+=======
+ * get_ln - ewtet
+ * @lnptr: erggvdsg
+ * @num: ertgetee
+ * @buf: 5yyyyy4
+ * @size_b: 4yyheddd
+ *
+ * Return: nothing
+>>>>>>> c9c3c29390012187b08c11d8f0032f67679d93f9
  */
 void get_ln(char **lnptr, size_t *num, char *buf, size_t size_b)
 {
