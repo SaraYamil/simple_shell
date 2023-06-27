@@ -1,32 +1,32 @@
 #include "main.h"
 
 /**
- * _whch - Locates a command.
- * @command: Command name.
- * @_env: Environment variable.
+ * _whch - searsh a command.
+ * @command: name of Commandds.
+ * @_env: Envt var.
  *
- * Return: Location of the command.
+ * Return: place of cmmd.
  */
 char *_whch(char *command, char **_env)
 {
 	char *path_name, *ptrpath, *tkn_path, *directory;
-	int length_dir, length_cmd, index;
+	int ln_dir, ln_cmd, ind;
 	struct stat st;
 
 	path_name = get_environ("PATH", _env);
 	if (path_name)
 	{
 		ptrpath = _strdup(path_name);
-		length_cmd = _strlen(command);
+		ln_cmd = _strlen(command);
 		tkn_path = _strtok(ptrpath, ":");
-		index = 0;
+		ind = 0;
 		while (tkn_path != NULL)
 		{
-			if (check_cdir(path_name, &index))
+			if (check_cdir(path_name, &ind))
 				if (stat(command, &st) == 0)
 					return (command);
-			length_dir = _strlen(tkn_path);
-			directory = malloc(length_dir + length_cmd + 2);
+			ln_dir = _strlen(tkn_path);
+			directory = malloc(ln_dir + ln_cmd + 2);
 			_strcpy(directory, tkn_path);
 			_strcat(directory, "/");
 			_strcat(directory, command);
@@ -51,12 +51,13 @@ char *_whch(char *command, char **_env)
 }
 
 /**
- * check_cdir - Checks if ":" is present in the current directory.
- * @filepath: Pointer to a character string representing the filepath.
- * @index: Pointer to an integer representing the index.
+ * check_cdir - uhChecks directory.
+ * @filepath: Path pointer .
+ * @index: index to check.
  *
- * Return: 1 if the path is searchable in the current directory, 0 otherwise.
+ * Return: 1 or 0
  */
+
 int check_cdir(char *filepath, int *index)
 {
 	if (filepath[*index] == ':')
@@ -74,12 +75,11 @@ int check_cdir(char *filepath, int *index)
 }
 
 /**
- * check_error_command - Verifies if the user has permissions
- *                      to access a command or directory.
- * @dir_dest: Destination directory.
- * @datashell: Data structure.
+ * check_error_command - Verifies permissions.
+ * @dir_dest: Dest dir.
+ * @datashell: Data struct.
  *
- * Return: 1 if there is an error, 0 if not.
+ * Return: 1 or 0.
  */
 int check_error_command(char *dir_dest, shll_comm *datashell)
 {
@@ -112,36 +112,36 @@ int check_error_command(char *dir_dest, shll_comm *datashell)
 }
 
 /**
- * command_exec - Executes command lines.
- * @datashell: Data relevant (args and input).
+ * command_exec - kiExecutes command.
+ * @datashell: Data relevant.
  *
- * Return: 1 on success.
+ * Return: 1 or 0.
  */
 int command_exec(shll_comm *datashell)
 {
 	pid_t pidm, wpid;
-	int stte, exc;
-	char *dir;
+	int stt, ex;
+	char *dire;
 	(void)wpid;
 
-	exc = is_exec(datashell);
-	if (exc == -1)
+	ex = is_exec(datashell);
+	if (ex == -1)
 		return (1);
-	if (exc == 0)
+	if (ex == 0)
 	{
-		dir = _whch(datashell->args[0], datashell->_env);
-		if (check_error_command(dir, datashell) == 1)
+		dire = _whch(datashell->args[0], datashell->_env);
+		if (check_error_command(dire, datashell) == 1)
 			return (1);
 	}
 
 	pidm = fork();
 	if (pidm == 0)
 	{
-		if (exc == 0)
-			dir = _whch(datashell->args[0], datashell->_env);
+		if (ex == 0)
+			dire = _whch(datashell->args[0], datashell->_env);
 		else
-			dir = datashell->args[0];
-		execve(dir + exc, datashell->args, datashell->_env);
+			dire = datashell->args[0];
+		execve(dire + ex, datashell->args, datashell->_env);
 	}
 	else if (pidm < 0)
 	{
@@ -151,11 +151,11 @@ int command_exec(shll_comm *datashell)
 	else
 	{
 		do {
-			wpid = waitpid(pidm, &stte, WUNTRACED);
-		} while (!WIFEXITED(stte) && !WIFSIGNALED(stte));
+			wpid = waitpid(pidm, &stt, WUNTRACED);
+		} while (!WIFEXITED(stt) && !WIFSIGNALED(stt));
 	}
 
-	datashell->stat = stte / 256;
+	datashell->stat = stt / 256;
 
 	return (1);
 }
@@ -169,36 +169,36 @@ int command_exec(shll_comm *datashell)
 int is_exec(shll_comm *datashell)
 {
 	struct stat status;
-	int index;
+	int ind;
 	char *inp;
 
 	inp = datashell->args[0];
-	for (index = 0; inp[index]; index++)
+	for (ind = 0; inp[ind]; ind++)
 	{
-		if (inp[index] == '.')
+		if (inp[ind] == '.')
 		{
-			if (inp[index + 1] == '.')
+			if (inp[ind + 1] == '.')
 				return (0);
-			if (inp[index + 1] == '/')
+			if (inp[ind + 1] == '/')
 				continue;
 			else
 				break;
 		}
-		else if (inp[index] == '/' && index != 0)
+		else if (inp[ind] == '/' && ind != 0)
 		{
-			if (inp[index + 1] == '.')
+			if (inp[ind + 1] == '.')
 				continue;
-			index++;
+			ind++;
 			break;
 		}
 		else
 			break;
 	}
-	if (index == 0)
+	if (ind == 0)
 		return (0);
 
-	if (stat(inp + index, &status) == 0)
-		return (index);
+	if (stat(inp + ind, &status) == 0)
+		return (ind);
 	get_err(datashell, 127);
 
 	return (-1);
