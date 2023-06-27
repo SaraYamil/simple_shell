@@ -20,8 +20,8 @@ void vrifyenv(r_var **hd, char *inp, shll_comm *shell_data)
 		{
 			if (_env[line][charc] == '=')
 			{
-				left_value = _strlen(_env[line] + charc + 1);
-				add_var_nd(hd, i, _env[line] + charc + 1, left_value);
+				left_value = _strlength(_env[line] + charc + 1);
+				add_varnd(hd, i, _env[line] + charc + 1, left_value);
 				return;
 			}
 
@@ -38,7 +38,7 @@ void vrifyenv(r_var **hd, char *inp, shll_comm *shell_data)
 			break;
 	}
 
-	add_var_nd(hd, i, NULL, 0);
+	add_varnd(hd, i, NULL, 0);
 }
 
 /**
@@ -106,29 +106,29 @@ int verfyvrs(r_var **header, char *inp, char *str, shll_comm *datashell)
 {
 	int i, leftst, leftpd;
 
-	leftst = _strlen(str);
-	leftpd = _strlen(datashell->pid);
+	leftst = _strlength(str);
+	leftpd = _strlength(datashell->pid);
 
 	for (i = 0; inp[i]; i++)
 	{
 		if (inp[i] == '$')
 		{
 			if (inp[i + 1] == '?')
-				add_var_nd(header, 2, str, leftst), i++;
+				add_varnd(header, 2, str, leftst), i++;
 			else if (inp[i + 1] == '$')
-				add_var_nd(header, 2, datashell->pid, leftpd), i++;
+				add_varnd(header, 2, datashell->pid, leftpd), i++;
 			else if (inp[i + 1] == '\n')
-				add_var_nd(header, 0, NULL, 0);
+				add_varnd(header, 0, NULL, 0);
 			else if (inp[i + 1] == '\0')
-				add_var_nd(header, 0, NULL, 0);
+				add_varnd(header, 0, NULL, 0);
 			else if (inp[i + 1] == ' ')
-				add_var_nd(header, 0, NULL, 0);
+				add_varnd(header, 0, NULL, 0);
 			else if (inp[i + 1] == '\t')
-				add_var_nd(header, 0, NULL, 0);
+				add_varnd(header, 0, NULL, 0);
 			else if (inp[i + 1] == ';')
-				add_var_nd(header, 0, NULL, 0);
+				add_varnd(header, 0, NULL, 0);
 			else
-				verify_env(header, inp + i, datashell);
+				vrifyenv(header, inp + i, datashell);
 		}
 	}
 
