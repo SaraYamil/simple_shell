@@ -165,7 +165,7 @@ void addnd(sep_list **head_s, line_list **head_l, char *input);
 char **spltln(char *input);
 
 /* get_line functions protytypes */
-ssize_t _getln(char **lineptr, size_t *n, FILE *stream);
+ssize_t _getln(char **lnptr, size_t *num, FILE *filestream);
 void getln(char **lineptr, size_t *n, char *buffer, size_t j);
 
 /* Execute functions protytypes */
