@@ -22,7 +22,7 @@ char *getenvrn(const char *envname, char **_env)
 	for (i = 0; _env[i]; i++)
 	{
 		/* If name and env are equal */
-	i	mov = compare_envname(_env[i], envname);
+	i	mov = cmpr_envnm(_env[i], envname);
 		if (mov)
 		{
 			ptr_env = _env[i];
@@ -97,12 +97,12 @@ ssize_t _getln(char **lnptr, size_t *num, FILE *filestream)
 			break;
 		}
 		if (inp >= BUFSIZE)
-			buffer = _realloc(buffer, inp, inp + 1);
+			buffer = _realmaloc(buffer, inp, inp + 1);
 		buffer[inp] = t;
 		inp++;
 	}
 	buffer[inp] = '\0';
-	get_ln(lnptr, num, buffer, inp);
+	getln(lnptr, num, buffer, inp);
 	retval = inp;
 	if (index != 0)
 		inp = 0;
