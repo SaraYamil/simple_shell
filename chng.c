@@ -2,7 +2,7 @@
 
 /**
  * changedir_shell - Changes the current directory.
- * @data_sh: Pointer to the data
+ * @data_sh: Pointer to the dzta
  *
  * Return: 1 on success.
  */
