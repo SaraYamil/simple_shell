@@ -168,12 +168,11 @@ void changedir_prev(shll_comm *data_sh)
 }
 
 /**
- * changedir_to_home - hoi switch to the home dir.
- * @data_sh: hhhhData shell.
+ * changedir_to_home - Changes to the home directory.
+ * @data_sh: Data relevant to the environment.
  *
- * Return: None value.
+ * Return: No return value.
  */
-
 void changedir_to_home(shll_comm *data_sh)
 {
 	char *print_pwd, *home;
