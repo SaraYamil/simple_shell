@@ -1,12 +1,12 @@
 #include "main.h"
 
 /**
- * _strlen - Returns the length of a string.
+ * _strlength - Returns the length of a string.
  * @str: The input string.
  *
  * Return: The length of the string.
  */
-int _strlen(const char *str)
+int _strlength(const char *str)
 {
 	int len;
 
@@ -17,12 +17,12 @@ int _strlen(const char *str)
 }
 
 /**
- * _isdigit - Determines if a string consists only of numeric digits.
+ * _isdigital - Determines if a string consists only of numeric digits.
  * @str: The input string to be checked.
  *
  * Return: 1 if the string consists only of numeric digits, 0 otherwise.
  */
-int _isdigit(const char *str)
+int _isdigital(const char *str)
 {
 	unsigned int i;
 
@@ -33,12 +33,12 @@ int _isdigit(const char *str)
 }
 
 /**
- * _strdup - Duplicates a string in the heap memory.
+ * _strdupp - Duplicates a string in the heap memory.
  * @str: Type char pointer representing the string to duplicate.
  *
  * Return: Pointer to the duplicated string.
  */
-char *_strdup(const char *str)
+char *_strdupp(const char *str)
 {
 	char *new;
 	size_t length;
@@ -53,13 +53,13 @@ char *_strdup(const char *str)
 }
 
 /**
- * compare_chars - Compares characters of strings.
+ * compr_chrs - Compares characters of strings.
  * @str: Input string to compare.
  * @delimiter: Delimiter string for comparison.
  *
  * Return: 1 if the characters are equal, 0 otherwise.
  */
-int compare_chars(char str[], const char *delimiter)
+int compr_chrs(char str[], const char *delimiter)
 {
 	unsigned int i, l, m;
 
@@ -80,14 +80,14 @@ int compare_chars(char str[], const char *delimiter)
 }
 
 /**
- * _strtok - Splits a string by a specified delimiter.
+ * _strtiktok - Splits a string by a specified delimiter.
  * @str: Input string to be split.
  * @delimiter: Delimiter string.
  *
  * Return: Pointer to the next token in the string,
  *         or NULL if no more tokens are found.
  */
-char *_strtok(char str[], const char *delimiter)
+char *_strtiktok(char str[], const char *delimiter)
 {
 	static char *splitted, *str_end;
 	char *str_start;
