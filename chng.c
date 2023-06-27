@@ -30,7 +30,7 @@ int chngdirshell(shll_comm *data_sh)
 		return (1);
 	}
 
-	if (_strccmmpp(".", directory) == 0 || _strcmp("..", directory) == 0)
+	if (_strccmmpp(".", directory) == 0 || _strccmmp("..", directory) == 0)
 	{
 		chndirdor(data_sh);
 		return (1);
