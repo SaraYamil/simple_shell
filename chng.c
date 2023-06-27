@@ -166,38 +166,40 @@ void changedir_prev(shll_comm *data_sh)
 
 	chdir(w_pwd);
 }
+
 /**
- * changedir_to_home - Changes to the home directory.
- * @data_sh: Data relevant to the environment.
+ * changedir_to_home - hoi switch to the home dir.
+ * @data_sh: hhhhData shell.
  *
- * Return: No return value.
+ * Return: None value.
  */
 void changedir_to_home(shll_comm *data_sh)
 {
-	char *print_pwd, *home;
+	char *pr_pwd, *home;
 	char pwd[PATH_MAX];
 
 	getcwd(pwd, sizeof(pwd));
-	print_pwd = _strdup(pwd);
+	pr_pwd = _strdup(pwd);
 
 	home = get_environ("HOME", data_sh->_env);
 
 	if (home == NULL)
 	{
-		set_env("OLDPWD", print_pwd, data_sh);
-		free(print_pwd);
+		set_env("OLDPWD", pr_pwd, data_sh);
+		free(pr_pwd);
 		return;
 	}
 
 	if (chdir(home) == -1)
 	{
 		get_err(data_sh, 2);
-		free(print_pwd);
+		free(pr_pwd);
 		return;
 	}
 
-	set_env("OLDPWD", print_pwd, data_sh);
+	set_env("OLDPWD", pr_pwd, data_sh);
 	set_env("PWD", home, data_sh);
-	free(print_pwd);
+	free(pr_pwd);
 	data_sh->stat = 0;
+}
 }
