@@ -1,174 +1,160 @@
 #include "main.h"
 
 /**
- * *replc_str - Calls functions to replace string into vars.
+ * verify_env - Checks if the typed variable is an environment variable.
+ * @hd: Head of the linked list.
  * @inp: Input string.
- * @data_shell: Data structure.
+ * @shell_data: Data structure.
+ *
+ * Return: No return.
+ */
+void verify_env(r_var **hd, char *inp, shll_comm *shell_data)
+{
+	int line, charc, i, left_value;
+	char **_env;
+
+	_env = shell_data->_env;
+	for (line = 0; _env[line]; line++)
+	{
+		for (i = 1, charc = 0; _env[line][charc]; charc++)
+		{
+			if (_env[line][charc] == '=')
+			{
+				left_value = _strlen(_env[line] + charc + 1);
+				add_var_nd(hd, i, _env[line] + charc + 1, left_value);
+				return;
+			}
+
+			if (inp[i] == _env[line][charc])
+				i++;
+			else
+				break;
+		}
+	}
+
+	for (i = 0; inp[i]; i++)
+	{
+		if (inp[i] == ' ' || inp[i] == '\t' || inp[i] == ';' || inp[i] == '\n')
+			break;
+	}
+
+	add_var_nd(hd, i, NULL, 0);
+}
+
+/**
+ * rpl_inp - Replaces variables in the input string.
+ * @hd: Head of the linked list.
+ * @inp: Input string.
+ * @new_inp: New input string (replaced).
+ * @numlen: New length.
  *
  * Return: Replaced string.
  */
-char *replc_str(char *inp, shll_comm *data_shell)
+char *rpl_inp(r_var **hd, char *inp, char *new_inp, int numlen)
 {
-	int olen, nlen;
-	r_var *hd, *index;
-	char *stat, *new_inp;
+	r_var *index;
+	int i, l, m;
 
-	stat = convitoa(data_shell->stat);
-	hd = NULL;
-
-	olen = verfyvrs(&hd, inp, stat, data_shell);
-
-	if (hd == NULL)
+	index = *hd;
+	for (l = i = 0; i < numlen; i++)
 	{
-		free(stat);
-		return (inp);
+		if (inp[l] == '$')
+		{
+			if (!(index->len_var) && !(index->len_val))
+			{
+				new_inp[i] = inp[l];
+				l++;
+			}
+			else if (index->len_var && !(index->len_val))
+			{
+				for (m = 0; m < index->len_var; m++)
+					l++;
+				i--;
+			}
+			else
+			{
+				for (m = 0; m < index->len_val; m++)
+				{
+					new_inp[i] = index->val[m];
+					i++;
+				}
+				l += (index->len_var);
+				i--;
+			}
+			index = index->next;
+		}
+		else
+		{
+			new_inp[i] = inp[l];
+			l++;
+		}
 	}
-
-	index = hd;
-	nlen = 0;
-
-	while (index != NULL)
-	{
-		nlen += (index->len_val - index->len_var);
-		index = index->next;
-	}
-
-	nlen += olen;
-
-	new_inp = malloc(sizeof(char) * (nlen + 1));
-	new_inp[nlen] = '\0';
-
-	new_inp = rplinp(&hd, inp, new_inp, nlen);
-
-	free(inp);
-	free(stat);
-	free_valls(&hd);
 
 	return (new_inp);
 }
 
 /**
- * _unstnv - Deletes an environment variable with the specified name.
- * @datash: Data structure containing the environment variable name.
+ * verify_vars - Check if the typed variable is $$ or $?
+ * @header: Head of the linked list.
+ * @inp: Input string.
+ * @str: Last status of the shell.
+ * @datashell: Data structure.
  *
- * Return: 1 on success.
+ * Return: Number of characters processed.
  */
-int _unstnv(shll_comm *datash)
+int verify_vars(r_var **header, char *inp, char *str, shll_comm *datashell)
 {
-	int i, j, k;
-	char **real_env;
-	char *varenv, *nmenv;
+	int i, leftst, leftpd;
 
-	if (datash->args[1] == NULL)
+	leftst = _strlen(str);
+	leftpd = _strlen(datashell->pid);
+
+	for (i = 0; inp[i]; i++)
 	{
-		geterr(datash, -1);
-		return (1);
-	}
-	k = -1;
-	for (i = 0; datash->_env[i]; i++)
-	{
-		varenv = _strdupp(datash->_env[i]);
-		nmenv = _strtiktok(varenv, "=");
-		if (_strccmmpp(nmenv, datash->args[1]) == 0)
+		if (inp[i] == '$')
 		{
-			k = i;
-		}
-		free(varenv);
-	}
-	if (k == -1)
-	{
-		geterr(datash, -1);
-		return (1);
-	}
-	real_env = malloc(sizeof(char *) * (i));
-	for (i = j = 0; datash->_env[i]; i++)
-	{
-		if (i != k)
-		{
-			real_env[j] = datash->_env[i];
-			j++;
+			if (inp[i + 1] == '?')
+				add_var_nd(header, 2, str, leftst), i++;
+			else if (inp[i + 1] == '$')
+				add_var_nd(header, 2, datashell->pid, leftpd), i++;
+			else if (inp[i + 1] == '\n')
+				add_var_nd(header, 0, NULL, 0);
+			else if (inp[i + 1] == '\0')
+				add_var_nd(header, 0, NULL, 0);
+			else if (inp[i + 1] == ' ')
+				add_var_nd(header, 0, NULL, 0);
+			else if (inp[i + 1] == '\t')
+				add_var_nd(header, 0, NULL, 0);
+			else if (inp[i + 1] == ';')
+				add_var_nd(header, 0, NULL, 0);
+			else
+				verify_env(header, inp + i, datashell);
 		}
 	}
-	real_env[j] = NULL;
-	free(datash->_env[k]);
-	free(datash->_env);
-	datash->_env = real_env;
-	return (1);
+
+	return (i);
 }
 
 /**
- * stenv - Sets an environment variable.
- * @environ_name: Name of the environment variable.
- * @val: Value of the environment variable.
- * @data_sh: Data structure containing the environment variables.
+ * compare_envname - Compares the name of an environment
+ *                   variable with a given name.
+ * @name_env: Name of the environment variable.
+ * @name_ptr: Name to compare against.
  *
- * Return: No return.
+ * Return: 0 if the names are not equal. A value
+ *         greater than 0 if they are equal.
  */
-void stenv(char *environ_name, char *val, shll_comm *data_sh)
+int compare_envname(const char *name_env, const char *name_ptr)
 {
-	int i;
-	char *varenv, *nmenv;
+	int index;
 
-	for (i = 0; data_sh->_env[i]; i++)
+	for (index = 0; name_env[index] != '='; index++)
 	{
-		varenv = _strdupp(data_sh->_env[i]);
-		nmenv = _strtiktok(varenv, "=");
-		if (_strccmmpp(nmenv, environ_name) == 0)
+		if (name_env[index] != name_ptr[index])
 		{
-			free(data_sh->_env[i]);
-			data_sh->_env[i] = cpinf(nmenv, val);
-			free(varenv);
-			return;
+			return (0);
 		}
-		free(varenv);
 	}
 
-	data_sh->_env = _reallcdp(data_sh->_env, i, sizeof(char *) * (i + 2));
-	data_sh->_env[i] = cpinf(environ_name, val);
-	data_sh->_env[i + 1] = NULL;
-}
-
-/**
- * _stnv - compares env variables names
- *           with the name passed.
- * @data_sh: data relevant (env name and env value)
- *
- * Return: 1 on success.
- */
-int _stnv(shll_comm *data_sh)
-{
-
-	if (data_sh->args[1] == NULL || data_sh->args[2] == NULL)
-	{
-		geterr(data_sh, -1);
-		return (1);
-	}
-
-	setenv(data_sh->args[1], data_sh->args[2], data_sh);
-
-	return (1);
-}
-
-/**
- * cp_info - Copies information to create a new environment variable or alias.
- * @alias_name: Name of the environment variable or alias.
- * @val: Value of the environment variable or alias.
- *
- * Return: New environment variable or alias.
- */
-char *cp_info(char *alias_name, char *val)
-{
-	char *new;
-	int len_name, len_value, len;
-
-	len_name = _strlength(alias_name);
-	len_value = _strlength(val);
-	len = len_name + len_value + 2;
-	new = malloc(sizeof(char) * (len));
-	_strcopy(new, alias_name);
-	_strccaat(new, "=");
-	_strccaat(new, val);
-	_strccaat(new, "\0");
-
-	return (new);
+	return (index + 1);
 }
