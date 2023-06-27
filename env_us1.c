@@ -93,45 +93,45 @@ char *rpl_inp(r_var **hd, char *inp, char *new_inp, int numlen)
 	return (new_inp);
 }
 /**
- * verify_vars - Check if the typed variable is $$ or $?
- * @header: Head of the linked list.
- * @inp: Input string.
- * @str: Last status of the shell.
- * @datashell: Data structure.
+ * verify_vars - verify if typvariable is $$ or $?
+ * @header: hhhhhsd.
+ * @inp: Inp str.
+ * @str: string.
+ * @datashell: Data shell.
  *
- * Return: Number of characters processed.
+ * Return: nym of chractere.
  */
 int verify_vars(r_var **header, char *inp, char *str, shll_comm *datashell)
 {
-	int i, leftst, leftpd;
+	int y, left, leftpwd;
 
-	leftst = _strlen(str);
-	leftpd = _strlen(datashell->pid);
+	left = _strlen(str);
+	leftpwd = _strlen(datashell->pid);
 
-	for (i = 0; inp[i]; i++)
+	for (y = 0; inp[y]; y++)
 	{
-		if (inp[i] == '$')
+		if (inp[y] == '$')
 		{
-			if (inp[i + 1] == '?')
-				add_var_nd(header, 2, str, leftst), i++;
-			else if (inp[i + 1] == '$')
-				add_var_nd(header, 2, datashell->pid, leftpd), i++;
-			else if (inp[i + 1] == '\n')
+			if (inp[y + 1] == '?')
+				add_var_nd(header, 2, str, left), y++;
+			else if (inp[y + 1] == '$')
+				add_var_nd(header, 2, datashell->pid, leftpwd), i++;
+			else if (inp[y + 1] == '\n')
 				add_var_nd(header, 0, NULL, 0);
-			else if (inp[i + 1] == '\0')
+			else if (inp[y + 1] == '\0')
 				add_var_nd(header, 0, NULL, 0);
-			else if (inp[i + 1] == ' ')
+			else if (inp[y + 1] == ' ')
 				add_var_nd(header, 0, NULL, 0);
-			else if (inp[i + 1] == '\t')
+			else if (inp[y + 1] == '\t')
 				add_var_nd(header, 0, NULL, 0);
-			else if (inp[i + 1] == ';')
+			else if (inp[y + 1] == ';')
 				add_var_nd(header, 0, NULL, 0);
 			else
-				verify_env(header, inp + i, datashell);
+				verify_env(header, inp + y, datashell);
 		}
 	}
 
-	return (i);
+	return (y);
 }
 
 /**
