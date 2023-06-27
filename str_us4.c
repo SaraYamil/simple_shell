@@ -43,11 +43,11 @@ char *_strdupp(const char *str)
 	char *new;
 	size_t length;
 
-	length = _strlen(str);
+	length = _strlength(str);
 	new = malloc(sizeof(char) * (length + 1));
 	if (new == NULL)
 		return (NULL);
-	_memcpy(new, str, length + 1);
+	_mmcpy(new, str, length + 1);
 
 	return (new);
 }
@@ -95,10 +95,10 @@ char *_strtiktok(char str[], const char *delimiter)
 
 	if (str != NULL)
 	{
-		if (compare_chars(str, delimiter))
+		if (compr_chrs(str, delimiter))
 			return (NULL);
 		splitted = str; /*Store first address*/
-		i = _strlen(str);
+		i = _strlength(str);
 		str_end = &str[i]; /*Store last address*/
 	}
 	str_start = splitted;
