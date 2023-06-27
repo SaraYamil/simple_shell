@@ -166,10 +166,10 @@ void changedir_prev(shll_comm *data_sh)
 	chdir(w_pwd);
 }
 /**
- * changedir_to_home - Changes to the home directory.
- * @data_sh: Data relevant to the environment.
+ * changedir_to_home - switch to the home dir.
+ * @data_sh: Data relevant to the env.
  *
- * Return: No return value.
+ * Return: void value.
  */
 void changedir_to_home(shll_comm *data_sh)
 {
