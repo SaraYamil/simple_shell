@@ -136,11 +136,11 @@ void cd_to_dist(shll_comm *data_sh)
  */
 void changedir_prev(shll_comm *data_sh)
 {
-	char path[PATH_MAX];
+	char pwd[PATH_MAX];
 	char *w_pwd, *w_oldpwd, *chd_pwd, *chd_oldpwd;
 
-	getcwd(path, sizeof(path));
-	chd_pwd = _strdup(path);
+	getcwd(pwd, sizeof(pwd));
+	chd_pwd = _strdup(pwd);
 
 	w_oldpwd = get_environ("OLDPWD", data_sh->_env);
 
@@ -152,11 +152,11 @@ void changedir_prev(shll_comm *data_sh)
 	set_env("OLDPWD", chd_pwd, data_sh);
 
 	if (chdir(chd_oldpwd) == -1)
-		set_env("PATH", chd_pwd, data_sh);
+		set_env("PWD", chd_pwd, data_sh);
 	else
-		set_env("PATH", chd_oldpwd, data_sh);
+		set_env("PWD", chd_oldpwd, data_sh);
 
-	w_pwd = get_environ("PATH", data_sh->_env);
+	w_pwd = get_environ("PWD", data_sh->_env);
 
 	write(STDOUT_FILENO, w_pwd, _strlen(w_pwd));
 	write(STDOUT_FILENO, "\n", 1);
@@ -179,10 +179,10 @@ void changedir_prev(shll_comm *data_sh)
 void changedir_to_home(shll_comm *data_sh)
 {
 	char *p_pwd, *home;
-	char path[PATH_MAX];
+	char pwd[PATH_MAX];
 
-	getcwd(path, sizeof(path));
-	p_pwd = _strdup(path);
+	getcwd(pwd, sizeof(pwd));
+	p_pwd = _strdup(pwd);
 
 	home = get_environ("HOME", data_sh->_env);
 
@@ -201,7 +201,7 @@ void changedir_to_home(shll_comm *data_sh)
 	}
 
 	set_env("OLDPWD", p_pwd, data_sh);
-	set_env("PATH", home, data_sh);
+	set_env("PWD", home, data_sh);
 	free(p_pwd);
 	data_sh->stat = 0;
 }
