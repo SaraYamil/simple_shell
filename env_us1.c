@@ -42,51 +42,51 @@ void verify_env(r_var **hd, char *inp, shll_comm *shell_data)
 }
 
 /**
- * rpl_inp - Replaces variables in the input string.
- * @hd: Head of the linked list.
- * @inp: Input string.
- * @new_inp: New input string (replaced).
- * @numlen: New length.
+ * rpl_inp - lsjhuiosh.
+ * @hd: jhygfdf.
+ * @inp: Inp str.
+ * @new_inp: New input.
+ * @numlen: New length uohod.
  *
- * Return: Replaced string.
+ * Return: sdfd Replaced string.
  */
 char *rpl_inp(r_var **hd, char *inp, char *new_inp, int numlen)
 {
 	r_var *index;
-	int i, l, m;
+	int y, k, n;
 
 	index = *hd;
-	for (l = i = 0; i < numlen; i++)
+	for (k = y = 0; y < numlen; y++)
 	{
-		if (inp[l] == '$')
+		if (inp[k] == '$')
 		{
 			if (!(index->len_var) && !(index->len_val))
 			{
-				new_inp[i] = inp[l];
-				l++;
+				new_inp[y] = inp[k];
+				k++;
 			}
 			else if (index->len_var && !(index->len_val))
 			{
-				for (m = 0; m < index->len_var; m++)
-					l++;
-				i--;
+				for (n = 0; n < index->len_var; n++)
+					k++;
+				y--;
 			}
 			else
 			{
-				for (m = 0; m < index->len_val; m++)
+				for (n = 0; n < index->len_val; n++)
 				{
-					new_inp[i] = index->val[m];
-					i++;
+					new_inp[y] = index->val[n];
+					y++;
 				}
-				l += (index->len_var);
-				i--;
+				k += (index->len_var);
+				y--;
 			}
 			index = index->next;
 		}
 		else
 		{
-			new_inp[i] = inp[l];
-			l++;
+			new_inp[y] = inp[k];
+			k++;
 		}
 	}
 
@@ -94,67 +94,65 @@ char *rpl_inp(r_var **hd, char *inp, char *new_inp, int numlen)
 }
 
 /**
- * verify_vars - Check if the typed variable is $$ or $?
- * @header: Head of the linked list.
- * @inp: Input string.
- * @str: Last status of the shell.
- * @datashell: Data structure.
+ * verify_vars - verify if typvariable is $$ or $?
+ * @header: hhhhhsd.
+ * @inp: Inp str.
+ * @str: string.
+ * @datashell: Data shell.
  *
- * Return: Number of characters processed.
+ * Return: nym of chractere.
  */
 int verify_vars(r_var **header, char *inp, char *str, shll_comm *datashell)
 {
-	int i, leftst, leftpd;
+	int y, left, leftpwd;
 
-	leftst = _strlen(str);
-	leftpd = _strlen(datashell->pid);
+	left = _strlen(str);
+	leftpwd = _strlen(datashell->pid);
 
-	for (i = 0; inp[i]; i++)
+	for (y = 0; inp[y]; y++)
 	{
-		if (inp[i] == '$')
+		if (inp[y] == '$')
 		{
-			if (inp[i + 1] == '?')
-				add_var_nd(header, 2, str, leftst), i++;
-			else if (inp[i + 1] == '$')
-				add_var_nd(header, 2, datashell->pid, leftpd), i++;
-			else if (inp[i + 1] == '\n')
+			if (inp[y + 1] == '?')
+				add_var_nd(header, 2, str, left), y++;
+			else if (inp[y + 1] == '$')
+				add_var_nd(header, 2, datashell->pid, leftpwd), i++;
+			else if (inp[y + 1] == '\n')
 				add_var_nd(header, 0, NULL, 0);
-			else if (inp[i + 1] == '\0')
+			else if (inp[y + 1] == '\0')
 				add_var_nd(header, 0, NULL, 0);
-			else if (inp[i + 1] == ' ')
+			else if (inp[y + 1] == ' ')
 				add_var_nd(header, 0, NULL, 0);
-			else if (inp[i + 1] == '\t')
+			else if (inp[y + 1] == '\t')
 				add_var_nd(header, 0, NULL, 0);
-			else if (inp[i + 1] == ';')
+			else if (inp[y + 1] == ';')
 				add_var_nd(header, 0, NULL, 0);
 			else
-				verify_env(header, inp + i, datashell);
+				verify_env(header, inp + y, datashell);
 		}
 	}
 
-	return (i);
+	return (y);
 }
 
 /**
- * compare_envname - Compares the name of an environment
- *                   variable with a given name.
- * @name_env: Name of the environment variable.
- * @name_ptr: Name to compare against.
+ * compare_envname - wtfCompares the name of an environment
+ * @name_env: feName of the env.
+ * @name_ptr: feName to comp.
  *
- * Return: 0 if the names are not equal. A value
- *         greater than 0 if they are equal.
+ * Return: 0 or graether.
  */
 int compare_envname(const char *name_env, const char *name_ptr)
 {
-	int index;
+	int ind;
 
-	for (index = 0; name_env[index] != '='; index++)
+	for (ind = 0; name_env[ind] != '='; ind++)
 	{
-		if (name_env[index] != name_ptr[index])
+		if (name_env[ind] != name_ptr[ind])
 		{
 			return (0);
 		}
 	}
 
-	return (index + 1);
+	return (ind + 1);
 }
