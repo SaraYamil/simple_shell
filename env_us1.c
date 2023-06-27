@@ -1,14 +1,14 @@
 #include "main.h"
 
 /**
- * vrifyenv - Checks if the typed variable is an environment variable.
+ * verify_env - Checks if the typed variable is an environment variable.
  * @hd: Head of the linked list.
  * @inp: Input string.
  * @shell_data: Data structure.
  *
  * Return: No return.
  */
-void vrifyenv(r_var **hd, char *inp, shll_comm *shell_data)
+void verify_env(r_var **hd, char *inp, shll_comm *shell_data)
 {
 	int line, charc, i, left_value;
 	char **_env;
@@ -20,8 +20,8 @@ void vrifyenv(r_var **hd, char *inp, shll_comm *shell_data)
 		{
 			if (_env[line][charc] == '=')
 			{
-				left_value = _strlength(_env[line] + charc + 1);
-				add_varnd(hd, i, _env[line] + charc + 1, left_value);
+				left_value = _strlen(_env[line] + charc + 1);
+				add_var_nd(hd, i, _env[line] + charc + 1, left_value);
 				return;
 			}
 
@@ -38,11 +38,11 @@ void vrifyenv(r_var **hd, char *inp, shll_comm *shell_data)
 			break;
 	}
 
-	add_varnd(hd, i, NULL, 0);
+	add_var_nd(hd, i, NULL, 0);
 }
 
 /**
- * rplinp - Replaces variables in the input string.
+ * rpl_inp - Replaces variables in the input string.
  * @hd: Head of the linked list.
  * @inp: Input string.
  * @new_inp: New input string (replaced).
@@ -50,7 +50,7 @@ void vrifyenv(r_var **hd, char *inp, shll_comm *shell_data)
  *
  * Return: Replaced string.
  */
-char *rplinp(r_var **hd, char *inp, char *new_inp, int numlen)
+char *rpl_inp(r_var **hd, char *inp, char *new_inp, int numlen)
 {
 	r_var *index;
 	int i, l, m;
@@ -94,7 +94,7 @@ char *rplinp(r_var **hd, char *inp, char *new_inp, int numlen)
 }
 
 /**
- * verfyvrs - Check if the typed variable is $$ or $?
+ * verify_vars - Check if the typed variable is $$ or $?
  * @header: Head of the linked list.
  * @inp: Input string.
  * @str: Last status of the shell.
@@ -102,33 +102,33 @@ char *rplinp(r_var **hd, char *inp, char *new_inp, int numlen)
  *
  * Return: Number of characters processed.
  */
-int verfyvrs(r_var **header, char *inp, char *str, shll_comm *datashell)
+int verify_vars(r_var **header, char *inp, char *str, shll_comm *datashell)
 {
 	int i, leftst, leftpd;
 
-	leftst = _strlength(str);
-	leftpd = _strlength(datashell->pid);
+	leftst = _strlen(str);
+	leftpd = _strlen(datashell->pid);
 
 	for (i = 0; inp[i]; i++)
 	{
 		if (inp[i] == '$')
 		{
 			if (inp[i + 1] == '?')
-				add_varnd(header, 2, str, leftst), i++;
+				add_var_nd(header, 2, str, leftst), i++;
 			else if (inp[i + 1] == '$')
-				add_varnd(header, 2, datashell->pid, leftpd), i++;
+				add_var_nd(header, 2, datashell->pid, leftpd), i++;
 			else if (inp[i + 1] == '\n')
-				add_varnd(header, 0, NULL, 0);
+				add_var_nd(header, 0, NULL, 0);
 			else if (inp[i + 1] == '\0')
-				add_varnd(header, 0, NULL, 0);
+				add_var_nd(header, 0, NULL, 0);
 			else if (inp[i + 1] == ' ')
-				add_varnd(header, 0, NULL, 0);
+				add_var_nd(header, 0, NULL, 0);
 			else if (inp[i + 1] == '\t')
-				add_varnd(header, 0, NULL, 0);
+				add_var_nd(header, 0, NULL, 0);
 			else if (inp[i + 1] == ';')
-				add_varnd(header, 0, NULL, 0);
+				add_var_nd(header, 0, NULL, 0);
 			else
-				vrifyenv(header, inp + i, datashell);
+				verify_env(header, inp + i, datashell);
 		}
 	}
 
@@ -136,7 +136,7 @@ int verfyvrs(r_var **header, char *inp, char *str, shll_comm *datashell)
 }
 
 /**
- * cmpr_envnm - Compares the name of an environment
+ * compare_envname - Compares the name of an environment
  *                   variable with a given name.
  * @name_env: Name of the environment variable.
  * @name_ptr: Name to compare against.
@@ -144,7 +144,7 @@ int verfyvrs(r_var **header, char *inp, char *str, shll_comm *datashell)
  * Return: 0 if the names are not equal. A value
  *         greater than 0 if they are equal.
  */
-int cmpr_envnm(const char *name_env, const char *name_ptr)
+int compare_envname(const char *name_env, const char *name_ptr)
 {
 	int index;
 
