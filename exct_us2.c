@@ -14,13 +14,13 @@ int ext_sh(shll_comm *datashell)
 
 	if (datashell->args[1] != NULL)
 	{
-		ustat = _atoi(datashell->args[1]);
-		is_dgt = _isdigit(datashell->args[1]);
-		strlen = _strlen(datashell->args[1]);
+		ustat = _ati(datashell->args[1]);
+		is_dgt = _isdigital(datashell->args[1]);
+		strlen = _strlength(datashell->args[1]);
 		big_n = ustat > (unsigned int)INT_MAX;
 		if (!is_dgt || strlen > 10 || big_n)
 		{
-			get_err(datashell, 2);
+			geterr(datashell, 2);
 			datashell->stat = 2;
 			return (1);
 		}
@@ -45,9 +45,9 @@ int excut_ln(shll_comm *datash)
 	builtin = get_bltn(datash->args[0]);
 
 	if (builtin != NULL)
-		return (builtin(datash));
+		return (getbltn(datash));
 
-	return (command_exec(datash));
+	return (cmmnd_ex(datash));
 }
 
 /**
@@ -61,10 +61,10 @@ char *err_envrn(shll_comm *data_sh)
 	int length;
 	char *err, *txt, *vstr;
 
-	vstr = conv_itoa(data_sh->counter);
+	vstr = convitoa(data_sh->counter);
 	txt = ": Unable to add/remove from environment\n";
-	length = _strlen(data_sh->argv[0]) + _strlen(vstr);
-	length += _strlen(data_sh->args[0]) + _strlen(txt) + 4;
+	length = _strlength(data_sh->argv[0]) + _strlength(vstr);
+	length += _strlength(data_sh->args[0]) + _strlength(txt) + 4;
 	err = malloc(sizeof(char) * (length + 1));
 	if (err == 0)
 	{
@@ -73,13 +73,13 @@ char *err_envrn(shll_comm *data_sh)
 		return (NULL);
 	}
 
-	_strcpy(err, data_sh->argv[0]);
-	_strcat(err, ": ");
-	_strcat(err, vstr);
-	_strcat(err, ": ");
-	_strcat(err, data_sh->args[0]);
-	_strcat(err, txt);
-	_strcat(err, "\0");
+	_strcopy(err, data_sh->argv[0]);
+	_strccaat(err, ": ");
+	_strccaat(err, vstr);
+	_strccaat(err, ": ");
+	_strccaat(err, data_sh->args[0]);
+	_strccaat(err, txt);
+	_strccaat(err, "\0");
 	free(vstr);
 
 	return (err);
@@ -97,9 +97,9 @@ char *errpth126(shll_comm *data_sh)
 	int length;
 	char *vstr, *err;
 
-	vstr = conv_itoa(data_sh->counter);
-	length = _strlen(data_sh->argv[0]) + _strlen(vstr);
-	length += _strlen(data_sh->args[0]) + 24;
+	vstr = convitoa(data_sh->counter);
+	length = _strlength(data_sh->argv[0]) + _strlength(vstr);
+	length += _strlength(data_sh->args[0]) + 24;
 	err = malloc(sizeof(char) * (length + 1));
 	if (err == 0)
 	{
@@ -107,13 +107,13 @@ char *errpth126(shll_comm *data_sh)
 		free(vstr);
 		return (NULL);
 	}
-	_strcpy(err, data_sh->argv[0]);
-	_strcat(err, ": ");
-	_strcat(err, vstr);
-	_strcat(err, ": ");
-	_strcat(err, data_sh->args[0]);
-	_strcat(err, ": Permission denied\n");
-	_strcat(err, "\0");
+	_strcopy(err, data_sh->argv[0]);
+	_strccaat(err, ": ");
+	_strccaat(err, vstr);
+	_strccaat(err, ": ");
+	_strccaat(err, data_sh->args[0]);
+	_strccaat(err, ": Permission denied\n");
+	_strccaat(err, "\0");
 	free(vstr);
 	return (err);
 }
@@ -131,19 +131,19 @@ char *concermsg(shll_comm *data_sh, char *disp_msg, char *err, char *vstr)
 {
 	char *illegal_flag;
 
-	_strcpy(err, data_sh->argv[0]);
-	_strcat(err, ": ");
-	_strcat(err, vstr);
-	_strcat(err, ": ");
-	_strcat(err, data_sh->args[0]);
-	_strcat(err, disp_msg);
+	_strcopy(err, data_sh->argv[0]);
+	_strccaat(err, ": ");
+	_strccaat(err, vstr);
+	_strccaat(err, ": ");
+	_strccaat(err, data_sh->args[0]);
+	_strccaat(err, disp_msg);
 	if (data_sh->args[1][0] == '-')
 	{
 		illegal_flag = malloc(3);
 		illegal_flag[0] = '-';
 		illegal_flag[1] = data_sh->args[1][1];
 		illegal_flag[2] = '\0';
-		_strcat(err, illegal_flag);
+		_strccaat(err, illegal_flag);
 		free(illegal_flag);
 	}
 	else
@@ -151,7 +151,7 @@ char *concermsg(shll_comm *data_sh, char *disp_msg, char *err, char *vstr)
 		_strcat(err, data_sh->args[1]);
 	}
 
-	_strcat(err, "\n");
-	_strcat(err, "\0");
+	_strccaat(err, "\n");
+	_strccaat(err, "\0");
 	return (err);
 }
