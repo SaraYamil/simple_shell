@@ -143,7 +143,7 @@ void loopshll(shll_comm *data_shell)
 		inp = read_ln(&int_eof);
 		if (int_eof != -1)
 		{
-			inp = without_cmt(inp);
+			inp = withotcmt(inp);
 			if (inp == NULL)
 				continue;
 
