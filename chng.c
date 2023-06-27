@@ -1,24 +1,24 @@
 #include "main.h"
 
 /**
- * changedir_shell - Changes the current directory.
- * @data_sh: Pointer to the dzta
+ * changedir_shell -switch the curr directory.
+ * @data_sh: data shell
  *
- * Return: 1 on success.
+ * Return: 1 or 0.
  */
 int changedir_shell(shll_comm *data_sh)
 {
-	int inhome, inhome2, isdashboard;
+	int inh1, inh2, isd;
 	char *directory = data_sh->args[1];
 
 	if (directory != NULL)
 	{
-		inhome = _strcmp("$HOME", directory);
-		inhome2 = _strcmp("~", directory);
-		isdashboard = _strcmp("--", directory);
+		inh1 = _strcmp("$HOME", directory);
+		inh2 = _strcmp("~", directory);
+		isd = _strcmp("--", directory);
 	}
 
-	if (directory == NULL || !inhome || !inhome2 || !isdashboard)
+	if (directory == NULL || !inh1 || !inh2 || !isd)
 	{
 		changedir_to_home(data_sh);
 		return (1);
@@ -42,46 +42,45 @@ int changedir_shell(shll_comm *data_sh)
 }
 
 /**
- * chandir_dor - Changes to the parent directory.
- * @data_sh: Pointer to the data structure containing the
- *           environment variables.
+ * chandir_dor - switch to the parent dir.
+ * @data_sh: Point data structure
  *
- * Return: No return value.
+ * Return: void value.
  */
 void chandir_dor(shll_comm *data_sh)
 {
 	char pwd[PATH_MAX];
-	char *directory, *cp_printwd, *cp_strtok_pwd;
+	char *directory, *chp_printwd, *chp_strtok_pwd;
 
 	getcwd(pwd, sizeof(pwd));
-	cp_printwd = _strdup(pwd);
-	set_env("OLDPWD", cp_printwd, data_sh);
+	chp_printwd = _strdup(pwd);
+	set_env("OLDPWD", chp_printwd, data_sh);
 	directory = data_sh->args[1];
 	if (_strcmp(".", directory) == 0)
 	{
-		set_env("PWD", cp_printwd, data_sh);
-		free(cp_printwd);
+		set_env("PWD", chp_printwd, data_sh);
+		free(chp_printwd);
 		return;
 	}
-	if (_strcmp("/", cp_printwd) == 0)
+	if (_strcmp("/", chp_printwd) == 0)
 	{
-		free(cp_printwd);
+		free(chp_printwd);
 		return;
 	}
-	cp_strtok_pwd = cp_printwd;
-	rev_string(cp_strtok_pwd);
-	cp_strtok_pwd = _strtok(cp_strtok_pwd, "/");
-	if (cp_strtok_pwd != NULL)
+	chp_strtok_pwd = chp_printwd;
+	rev_string(chp_strtok_pwd);
+	chp_strtok_pwd = _strtok(chp_strtok_pwd, "/");
+	if (chp_strtok_pwd != NULL)
 	{
-		cp_strtok_pwd = _strtok(NULL, "\0");
+		chp_strtok_pwd = _strtok(NULL, "\0");
 
-		if (cp_strtok_pwd != NULL)
-			rev_string(cp_strtok_pwd);
+		if (chp_strtok_pwd != NULL)
+			rev_string(chp_strtok_pwd);
 	}
-	if (cp_strtok_pwd != NULL)
+	if (chp_strtok_pwd != NULL)
 	{
-		chdir(cp_strtok_pwd);
-		set_env("PWD", cp_strtok_pwd, data_sh);
+		chdir(chp_strtok_pwd);
+		set_env("PWD", chp_strtok_pwd, data_sh);
 	}
 	else
 	{
@@ -89,20 +88,19 @@ void chandir_dor(shll_comm *data_sh)
 		set_env("PWD", "/", data_sh);
 	}
 	data_sh->stat = 0;
-	free(cp_printwd);
+	free(chp_printwd);
 }
 
 /**
- * cd_to_dist - Changes to a directory specified by the user.
- * @data_sh: Pointer to the data structure containing
- *           the directories.
+ * cd_to_dist -switch to a dir.
+ * @data_sh: Pointer to the data struct
  *
- * Return: No return value.
+ * Return: none value.
  */
 void cd_to_dist(shll_comm *data_sh)
 {
 	char printwd[PATH_MAX];
-	char *directory, *cp_pwd, *cp_dir;
+	char *directory, *ch_pwd, *ch_dir;
 
 	getcwd(printwd, sizeof(printwd));
 
@@ -113,14 +111,14 @@ void cd_to_dist(shll_comm *data_sh)
 		return;
 	}
 
-	cp_pwd = _strdup(printwd);
-	set_env("OLDPWD", cp_pwd, data_sh);
+	chp_pwd = _strdup(printwd);
+	set_env("OLDPWD", ch_pwd, data_sh);
 
-	cp_dir = _strdup(directory);
-	set_env("PWD", cp_dir, data_sh);
+	ch_dir = _strdup(directory);
+	set_env("PWD", ch_dir, data_sh);
 
-	free(cp_pwd);
-	free(cp_dir);
+	free(ch_pwd);
+	free(ch_dir);
 
 	data_sh->stat = 0;
 
@@ -128,80 +126,79 @@ void cd_to_dist(shll_comm *data_sh)
 }
 
 /**
- * changedir_prev - Changes to the previous directory.
- * @data_sh: Data relevant to the environment and
- *           directories.
+ * changedir_prev - lhi switch to the pre directory jjl.
+ * @data_sh:  fdrr Data shell
  *
- * Return: No return value.
+ * Return: fer none value.
  */
 void changedir_prev(shll_comm *data_sh)
 {
 	char pwd[PATH_MAX];
-	char *p_pwd, *p_oldpwd, *cp_pwd, *cp_oldpwd;
+	char *w_pwd, *w_oldpwd, *ch_pwd, *ch_oldpwd;
 
 	getcwd(pwd, sizeof(pwd));
-	cp_pwd = _strdup(pwd);
+	ch_pwd = _strdup(pwd);
 
-	p_oldpwd = get_environ("OLDPWD", data_sh->_env);
+	w_oldpwd = get_environ("OLDPWD", data_sh->_env);
 
-	if (p_oldpwd == NULL)
-		cp_oldpwd = cp_pwd;
+	if (w_oldpwd == NULL)
+		ch_oldpwd = ch_pwd;
 	else
-		cp_oldpwd = _strdup(p_oldpwd);
+		ch_oldpwd = _strdup(w_oldpwd);
 
-	set_env("OLDPWD", cp_pwd, data_sh);
+	set_env("OLDPWD", ch_pwd, data_sh);
 
-	if (chdir(cp_oldpwd) == -1)
-		set_env("PWD", cp_pwd, data_sh);
+	if (chdir(ch_oldpwd) == -1)
+		set_env("PWD", ch_pwd, data_sh);
 	else
-		set_env("PWD", cp_oldpwd, data_sh);
+		set_env("PWD", ch_oldpwd, data_sh);
 
-	p_pwd = get_environ("PWD", data_sh->_env);
+	w_pwd = get_environ("PWD", data_sh->_env);
 
-	write(STDOUT_FILENO, p_pwd, _strlen(p_pwd));
+	write(STDOUT_FILENO, w_pwd, _strlen(w_pwd));
 	write(STDOUT_FILENO, "\n", 1);
 
-	free(cp_pwd);
-	if (p_oldpwd)
-		free(cp_oldpwd);
+	free(ch_pwd);
+	if (w_oldpwd)
+		free(ch_oldpwd);
 
 	data_sh->stat = 0;
 
-	chdir(p_pwd);
+	chdir(w_pwd);
 }
 
 /**
- * changedir_to_home - Changes to the home directory.
- * @data_sh: Data relevant to the environment.
+ * changedir_to_home - hoi switch to the home dir.
+ * @data_sh: hhhhData shell.
  *
- * Return: No return value.
+ * Return: None value.
  */
 void changedir_to_home(shll_comm *data_sh)
 {
-	char *print_pwd, *home;
+	char *p_pwd, *home;
 	char pwd[PATH_MAX];
 
 	getcwd(pwd, sizeof(pwd));
-	print_pwd = _strdup(pwd);
+	p_pwd = _strdup(pwd);
 
 	home = get_environ("HOME", data_sh->_env);
 
 	if (home == NULL)
 	{
-		set_env("OLDPWD", print_pwd, data_sh);
-		free(print_pwd);
+		set_env("OLDPWD", p_pwd, data_sh);
+		free(p_pwd);
 		return;
 	}
 
 	if (chdir(home) == -1)
 	{
 		get_err(data_sh, 2);
-		free(print_pwd);
+		free(p_pwd);
 		return;
 	}
 
-	set_env("OLDPWD", print_pwd, data_sh);
+	set_env("OLDPWD", p_pwd, data_sh);
 	set_env("PWD", home, data_sh);
-	free(print_pwd);
+	free(p_pwd);
 	data_sh->stat = 0;
 }
