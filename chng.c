@@ -91,16 +91,15 @@ void chandir_dor(shll_comm *data_sh)
 }
 
 /**
- * cd_to_dist - Changes to a directory specified by the user.
- * @data_sh: Pointer to the data structure containing
- *           the directories.
+ * cd_to_dist - switch to a dir.
+ * @data_sh: Pointer to the data struct
  *
- * Return: No return value.
+ * Return: none value.
  */
 void cd_to_dist(shll_comm *data_sh)
 {
 	char printwd[PATH_MAX];
-	char *directory, *cp_pwd, *cp_dir;
+	char *directory, *ch_pwd, *ch_dir;
 
 	getcwd(printwd, sizeof(printwd));
 
@@ -111,14 +110,14 @@ void cd_to_dist(shll_comm *data_sh)
 		return;
 	}
 
-	cp_pwd = _strdup(printwd);
-	set_env("OLDPWD", cp_pwd, data_sh);
+	ch_pwd = _strdup(printwd);
+	set_env("OLDPWD", ch_pwd, data_sh);
 
-	cp_dir = _strdup(directory);
-	set_env("PWD", cp_dir, data_sh);
+	ch_dir = _strdup(directory);
+	set_env("PWD", ch_dir, data_sh);
 
-	free(cp_pwd);
-	free(cp_dir);
+	free(ch_pwd);
+	free(ch_dir);
 
 	data_sh->stat = 0;
 
