@@ -125,48 +125,46 @@ void cd_to_dist(shll_comm *data_sh)
 }
 
 /**
- * changedir_prev - Changes to the previous directory.
- * @data_sh: Data relevant to the environment and
- *           directories.
+ * changedir_prev - switch to the pre directory jjl.
+ * @data_sh: Data shell
  *
- * Return: No return value.
+ * Return: none value.
  */
 void changedir_prev(shll_comm *data_sh)
 {
 	char pwd[PATH_MAX];
-	char *p_pwd, *p_oldpwd, *cp_pwd, *cp_oldpwd;
+	char *w_pwd, *w_oldpwd, *ch_pwd, *ch_oldpwd;
 
 	getcwd(pwd, sizeof(pwd));
-	cp_pwd = _strdup(pwd);
+	ch_pwd = _strdup(pwd);
 
-	p_oldpwd = get_environ("OLDPWD", data_sh->_env);
+	w_oldpwd = get_environ("OLDPWD", data_sh->_env);
 
-	if (p_oldpwd == NULL)
-		cp_oldpwd = cp_pwd;
+	if (w_oldpwd == NULL)
+		ch_oldpwd = ch_pwd;
 	else
-		cp_oldpwd = _strdup(p_oldpwd);
+		ch_oldpwd = _strdup(w_oldpwd);
 
-	set_env("OLDPWD", cp_pwd, data_sh);
+	set_env("OLDPWD", ch_pwd, data_sh);
 
-	if (chdir(cp_oldpwd) == -1)
-		set_env("PWD", cp_pwd, data_sh);
+	if (chdir(ch_oldpwd) == -1)
+		set_env("PWD", ch_pwd, data_sh);
 	else
-		set_env("PWD", cp_oldpwd, data_sh);
+		set_env("PWD", ch_oldpwd, data_sh);
 
-	p_pwd = get_environ("PWD", data_sh->_env);
+	w_pwd = get_environ("PWD", data_sh->_env);
 
-	write(STDOUT_FILENO, p_pwd, _strlen(p_pwd));
+	write(STDOUT_FILENO, w_pwd, _strlen(w_pwd));
 	write(STDOUT_FILENO, "\n", 1);
 
-	free(cp_pwd);
-	if (p_oldpwd)
-		free(cp_oldpwd);
+	free(ch_pwd);
+	if (w_oldpwd)
+		free(ch_oldpwd);
 
 	data_sh->stat = 0;
 
-	chdir(p_pwd);
+	chdir(w_pwd);
 }
-
 /**
  * changedir_to_home - Changes to the home directory.
  * @data_sh: Data relevant to the environment.
