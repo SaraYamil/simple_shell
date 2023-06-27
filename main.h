@@ -116,7 +116,7 @@ void free_valls(r_var **head);
 /* String functions protytypes */
 char *_strccaat(char *dest, const char *src);
 char *_strcopy(char *dest, char *src);
-void _memcpy(void *newptr, const void *ptr, unsigned int size);
+void _mmcpy(void *newptr, const void *ptr, unsigned int size);
 void *_realmaloc(void *ptr, unsigned int old_size, unsigned int new_size);
 int _strsppn(char *s, char *accept);
 char *_strdupp(const char *s);
