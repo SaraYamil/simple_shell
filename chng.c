@@ -173,6 +173,7 @@ void changedir_prev(shll_comm *data_sh)
  *
  * Return: None value.
  */
+
 void changedir_to_home(shll_comm *data_sh)
 {
 	char *print_pwd, *home;
@@ -202,4 +203,5 @@ void changedir_to_home(shll_comm *data_sh)
 	free(print_pwd);
 	data_sh->stat = 0;
 }
+
 }
