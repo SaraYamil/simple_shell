@@ -1,12 +1,12 @@
 #include "main.h"
 
 /**
- * spltln - Tokenizes the input string.
+ * splt_ln - Tokenizes the input string.
  * @inp: Input string.
  *
  * Return: String splitted.
  */
-char **spltln(char *inp)
+char **splt_ln(char *inp)
 {
 	size_t bsize;
 	size_t i;
@@ -21,7 +21,7 @@ char **spltln(char *inp)
 		exit(EXIT_FAILURE);
 	}
 
-	token = _strtiktok(inp, TOK_DELIM);
+	token = _strtok(inp, TOK_DELIM);
 	tokens[0] = token;
 
 	for (i = 1; token != NULL; i++)
@@ -29,14 +29,14 @@ char **spltln(char *inp)
 		if (i == bsize)
 		{
 			bsize += TOK_BUFSIZE;
-			tokens = _reallcdp(tokens, i, sizeof(char *) * bsize);
+			tokens = _reallocdp(tokens, i, sizeof(char *) * bsize);
 			if (tokens == NULL)
 			{
 				write(STDERR_FILENO, ": allocation error\n", 18);
 				exit(EXIT_FAILURE);
 			}
 		}
-		token = _strtiktok(NULL, TOK_DELIM);
+		token = _strtok(NULL, TOK_DELIM);
 		tokens[i] = token;
 	}
 
@@ -44,14 +44,14 @@ char **spltln(char *inp)
 }
 
 /**
- * splitcmd - Splits command lines according to the separators ;, |, and &,
+ * split_cmds - Splits command lines according to the separators ;, |, and &,
  *	      and executes them.
  * @datashell: Data structure.
  * @inp: Input string.
  *
  * Return: 0 to exit, 1 to continue.
  */
-int splitcmd(shll_comm *datashell, char *inp)
+int split_cmds(shll_comm *datashell, char *inp)
 {
 
 	sep_list *hd_s, *ls_s;
@@ -61,7 +61,7 @@ int splitcmd(shll_comm *datashell, char *inp)
 	hd_s = NULL;
 	head_l = NULL;
 
-	addnd(&hd_s, &head_l, inp);
+	add_nd(&hd_s, &head_l, inp);
 
 	ls_s = hd_s;
 	list_l = head_l;
@@ -69,21 +69,21 @@ int splitcmd(shll_comm *datashell, char *inp)
 	while (list_l != NULL)
 	{
 		datashell->input = list_l->line;
-		datashell->args = spltln(datashell->input);
-		looping = excut_ln(datashell);
+		datashell->args = splt_ln(datashell->input);
+		looping = execute_line(datashell);
 		free(datashell->args);
 
 		if (looping == 0)
 			break;
 
-		mv_next(&ls_s, &list_l, datashell);
+		move_nxt(&ls_s, &list_l, datashell);
 
 		if (list_l != NULL)
 			list_l = list_l->next;
 	}
 
-	free_spls(&hd_s);
-	free_lnls(&head_l);
+	free_sp_ls(&hd_s);
+	free_line_ls(&head_l);
 
 	if (looping == 0)
 		return (0);
@@ -91,12 +91,12 @@ int splitcmd(shll_comm *datashell, char *inp)
 }
 
 /**
- * withotcmt - Deletes comments from the input.
+ * without_cmt - Deletes comments from the input.
  *
  * @input: Input string.
  * Return: Input without comments.
  */
-char *withotcmt(char *input)
+char *without_cmt(char *input)
 {
 	int i, up_to;
 
@@ -118,7 +118,7 @@ char *withotcmt(char *input)
 
 	if (up_to != 0)
 	{
-		input = _realmaloc(input, i, up_to + 1);
+		input = _realloc(input, i, up_to + 1);
 		input[up_to] = '\0';
 	}
 
@@ -126,12 +126,12 @@ char *withotcmt(char *input)
 }
 
 /**
- * loopshll - Main loop of the shell
+ * looping_shll - Main loop of the shell
  * @data_shell: Data relevant to the shell (av, input, args)
  *
  * Return: No return.
  */
-void loopshll(shll_comm *data_shell)
+void looping_shll(shll_comm *data_shell)
 {
 	int looping, int_eof;
 	char *inp;
@@ -140,21 +140,21 @@ void loopshll(shll_comm *data_shell)
 	while (looping == 1)
 	{
 		write(STDIN_FILENO, "^-^ ", 4);
-		inp = read_ln(&int_eof);
+		inp = read_line(&int_eof);
 		if (int_eof != -1)
 		{
-			inp = withotcmt(inp);
+			inp = without_cmt(inp);
 			if (inp == NULL)
 				continue;
 
-			if (chsynerr(data_shell, inp) == 1)
+			if (ch_syn_err(data_shell, inp) == 1)
 			{
 				data_shell->stat = 2;
 				free(inp);
 				continue;
 			}
-			inp = replc_str(inp, data_shell);
-			looping = splitcmd(data_shell, inp);
+			inp = replace_str(inp, data_shell);
+			looping = split_cmds(data_shell, inp);
 			data_shell->counter += 1;
 			free(inp);
 		}
@@ -167,7 +167,7 @@ void loopshll(shll_comm *data_shell)
 }
 
 /**
- * add_varnd - Adds a variable at the end of a r_var list.
+ * add_var_nd - Adds a variable at the end of a r_var list.
  * @hd: Head of the linked list.
  * @lenvar: Length of the variable.
  * @value: Value of the variable.
@@ -175,7 +175,7 @@ void loopshll(shll_comm *data_shell)
  *
  * Return: Address of the head.
  */
-r_var *add_varnd(r_var **hd, int lenvar, char *value, int lenval)
+r_var *add_var_nd(r_var **hd, int lenvar, char *value, int lenval)
 {
 	r_var *newnd, *tmp;
 
