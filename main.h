@@ -106,113 +106,113 @@ typedef struct builtin_s
 } builtin_t;
 
 /* Linked lists functions */
-sep_list *add_node_en(sep_list **head, char sep);
-void free_sp_ls(sep_list **head);
-line_list *add_ln_nd_end(line_list **head, char *line);
-void free_line_ls(line_list **head);
-r_var *add_var_nd(r_var **head, int lvar, char *var, int lval);
-void free_value_ls(r_var **head);
+sep_list *add_noden(sep_list **head, char sep);
+void free_spls(sep_list **head);
+line_list *add_lnndend(line_list **head, char *line);
+void free_lnls(line_list **head);
+r_var *add_varnd(r_var **head, int lvar, char *var, int lval);
+void free_valls(r_var **head);
 
 /* String functions protytypes */
-char *_strcat(char *dest, const char *src);
-char *_strcpy(char *dest, char *src);
+char *_strccaat(char *dest, const char *src);
+char *_strcopy(char *dest, char *src);
 void _memcpy(void *newptr, const void *ptr, unsigned int size);
-void *_realloc(void *ptr, unsigned int old_size, unsigned int new_size);
-int _strspn(char *s, char *accept);
-char *_strdup(const char *s);
-int _strlen(const char *s);
-int compare_chars(char str[], const char *delim);
-char *_strtok(char str[], const char *delim);
-int _isdigit(const char *s);
-void rev_string(char *s);
-int get_length(int n);
-char *conv_itoa(int n);
-int _atoi(char *s);
-char **_reallocdp(char **ptr, unsigned int old_size, unsigned int new_size);
-int _strcmp(char *s1, char *s2);
-char *_strchr(char *s, char c);
+void *_realmaloc(void *ptr, unsigned int old_size, unsigned int new_size);
+int _strsppn(char *s, char *accept);
+char *_strdupp(const char *s);
+int _strlength(const char *s);
+int cmpr_envnm(char str[], const char *delim);
+char *_strtiktok(char str[], const char *delim);
+int _isdigital(const char *s);
+void rv_strng(char *s);
+int getlngth(int n);
+char *convitoa(int n);
+int _ati(char *s);
+char **_reallcdp(char **ptr, unsigned int old_size, unsigned int new_size);
+int _strccmmpp(char *s1, char *s2);
+char *_strchar(char *s, char c);
 
 /* Error handling functions prototypes */
-int dupl_chars(char *input, int i);
-int sep_oper_error(char *input, int i, char last);
-int first_character(char *input, int *i);
-void disp_syn_err(shll_comm *data_sh, char *input, int i, int bool);
-int ch_syn_err(shll_comm *data_sh, char *input);
-char *without_cmt(char *in);
-void looping_shll(shll_comm *datash);
+int duplchrs(char *input, int i);
+int sepopererr(char *input, int i, char last);
+int frstchrctr(char *input, int *i);
+void dspsynerr(shll_comm *data_sh, char *input, int i, int bool);
+int chsynerr(shll_comm *data_sh, char *input);
+char withotcmt(char *in);
+void loopshll(shll_comm *datash);
 
 /* read_line function protytype */
-char *read_line(int *i_eof);
+char *read_ln(int *i_eof);
 
 /* Environmant variables function protytypes */
-int verify_vars(r_var **h, char *in, char *st, shll_comm *data);
-char *rpl_inp(r_var **head, char *input, char *new_input, int nlen);
-char *get_environ(const char *name, char **_env);
-int display_env(shll_comm *datash);
-char *cp_info(char *name, char *value);
-void set_env(char *name, char *value, shll_comm *datash);
-int _setenv(shll_comm *datash);
-int _unsetenv(shll_comm *datash);
-int compare_envname(const char *name_env, const char *name_ptr);
-void verify_env(r_var **h, char *in, shll_comm *data);
-char *replace_str(char *input, shll_comm *datash);
+int verfyvrs(r_var **h, char *in, char *st, shll_comm *data);
+char *rplinp(r_var **head, char *input, char *new_input, int nlen);
+char *getenvrn(const char *name, char **_env);
+int dsplyenv(shll_comm *datash);
+char *cpinf(char *name, char *value);
+void stenv(char *name, char *value, shll_comm *datash);
+int _stnv(shll_comm *datash);
+int _unstnv(shll_comm *datash);
+int cmpr_envnm(const char *name_env, const char *name_ptr);
+void vrifyenv(r_var **h, char *in, shll_comm *data);
+char *replc_str(char *input, shll_comm *datash);
 
 /* Split functions protytypes */
-char *swp_character(char *input, int bool);
-void move_nxt(sep_list **list_s, line_list **list_l, shll_comm *datash);
-int split_cmds(shll_comm *datash, char *input);
-void add_nd(sep_list **head_s, line_list **head_l, char *input);
-char **splt_ln(char *input);
+char *swp_chrct(char *input, int bool);
+void mv_next(sep_list **list_s, line_list **list_l, shll_comm *datash);
+int splitcmd(shll_comm *datash, char *input);
+void addnd(sep_list **head_s, line_list **head_l, char *input);
+char **spltln(char *input);
 
 /* get_line functions protytypes */
-ssize_t _getline(char **lineptr, size_t *n, FILE *stream);
-void get_ln(char **lineptr, size_t *n, char *buffer, size_t j);
+ssize_t _getln(char **lineptr, size_t *n, FILE *stream);
+void getln(char **lineptr, size_t *n, char *buffer, size_t j);
 
 /* Execute functions protytypes */
-int execute_line(shll_comm *datash);
-int check_error_command(char *dir, shll_comm *datash);
-int command_exec(shll_comm *datash);
-int check_cdir(char *path, int *i);
-char *_whch(char *cmd, char **_env);
-int is_exec(shll_comm *datash);
+int excut_ln(shll_comm *datash);
+int chck_errcommnd(char *dir, shll_comm *datash);
+int cmmnd_ex(shll_comm *datash);
+int chckcdir(char *path, int *i);
+char *_wch(char *cmd, char **_env);
+int isexc(shll_comm *datash);
 
 /* cd functions protypes */
-void chandir_dor(shll_comm *datash);
-void cd_to_dist(shll_comm *datash);
-void changedir_prev(shll_comm *datash);
-void changedir_to_home(shll_comm *datash);
-int changedir_shell(shll_comm *datash);
+void chndirdor(shll_comm *datash);
+void cdtdist(shll_comm *datash);
+void chngeirprev(shll_comm *datash);
+void chngdirthome(shll_comm *datash);
+int chngdirshell(shll_comm *datash);
 
 /* main functions protytypes*/
-void empty_data(shll_comm *datash);
-void set_datashell(shll_comm *datash, char **av);
+void empty_dt(shll_comm *datash);
+void set_dtshll(shll_comm *datash, char **av);
 
 /* built-in functions prototypes */
-int (*get_bltn(char *cmd))(shll_comm *datash);
-int exit_sh(shll_comm *datash);
+int (*getbltn(char *cmd))(shll_comm *datash);
+int ext_sh(shll_comm *datash);
 
 /* Error handling functions prototypes */
-int get_err(shll_comm *datash, int eval);
-void get_sigint(int sig);
+int geterr(shll_comm *datash, int eval);
+void get_sgnt(int sig);
 char *error_get_alias(char **args);
-char *err_environ(shll_comm *datash);
+char *err_envrn(shll_comm *datash);
 char *error_syntax(char **args);
 char *error_permission(char **args);
-char *err_path126(shll_comm *datash);
-char *conc_err_msg(shll_comm *, char *, char *, char *);
-char *err_gcd(shll_comm *datash);
-char *error_404(shll_comm *datash);
-char *err_shell_exit(shll_comm *datash);
+char *errpth126(shll_comm *datash);
+char *concermsg(shll_comm *, char *, char *, char *);
+char *errgcd(shll_comm *datash);
+char *err404(shll_comm *datash);
+char *errshellex(shll_comm *datash);
 
 /* Help functions prototypes */
-void disp_help_env(void);
-void disp_help_setenv(void);
-void display_unsetenv(void);
-void disp_help_general(void);
-void disp_help_exit(void);
-void disp_help(void);
-void disp_help_alias(void);
-void disp_help_cd(void);
-int get_hlp(shll_comm *datash);
+void dsp_hlpenv(void);
+void dsp_helpstnv(void);
+void dsp_unstnv(void);
+void dsp_helpgnrl(void);
+void dsp_helpex(void);
+void disp_hlp(void);
+void dsp_helpals(void);
+void disp_hlpcd(void);
+int gethlp(shll_comm *datash);
 
 #endif
