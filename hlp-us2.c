@@ -1,9 +1,9 @@
 #include "main.h"
 
 /**
- * disp_help_general - Entry point for help information for the help builtin
+ * disp_help_general - display help builtin
  *
- * Return: Void
+ * Return: nothing
  */
 void disp_help_general(void)
 {
@@ -24,9 +24,9 @@ void disp_help_general(void)
 	write(STDOUT_FILENO, hlp, _strlen(hlp));
 }
 /**
- * disp_help_exit - Help information fot the builint exit
+ * disp_help_exit - display help builtin
  *
- * Return: Void
+ * Return: nothing
  */
 void disp_help_exit(void)
 {
@@ -40,9 +40,9 @@ void disp_help_exit(void)
 }
 
 /**
- * display_unsetenv - Help information for the builtin unsetenv
+ * display_unsetenv - display help builtin for the builtin unsetenv
  *
- * Return: Void
+ * Return: nothing
  */
 void display_unsetenv(void)
 {
@@ -54,8 +54,8 @@ void display_unsetenv(void)
 }
 
 /**
- * get_sigint - Handle the crtl + c call in prompt
- * @sig: Signal handler
+ * get_sigint - getukgu
+ * @sig: iygiyki
  */
 void get_sigint(int sig)
 {
@@ -64,13 +64,13 @@ void get_sigint(int sig)
 }
 
 /**
- * get_ln - assigns the line var for get_line
- * @lnptr: Pointer to the line variable
- * @num: Pointer to the size of line variable
- * @buf: String that is being assigned to line
- * @size_b: Size of the buffer
+ * get_ln - ewtet
+ * @lnptr: erggvdsg
+ * @num: ertgetee
+ * @buf: 5yyyyy4
+ * @size_b: 4yyheddd
  *
- * Return: void
+ * Return: nothing
  */
 void get_ln(char **lnptr, size_t *num, char *buf, size_t size_b)
 {
