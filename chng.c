@@ -178,22 +178,22 @@ void changedir_prev(shll_comm *data_sh)
  */
 void changedir_to_home(shll_comm *data_sh)
 {
-	char *p_pwd, *h;
+	char *p_pwd, *home;
 	char path[PATH_MAX];
 
 	getcwd(path, sizeof(path));
 	p_pwd = _strdup(path);
 
-	h = get_environ("H", data_sh->_env);
+	home = get_environ("HOME", data_sh->_env);
 
-	if (h)
+	if (home)
 	{
 		set_env("OLDPWD", p_pwd, data_sh);
 		free(p_pwd);
 		return;
 	}
 
-	if (chdir(h) == -1)
+	if (chdir(home) == -1)
 	{
 		get_err(data_sh, 2);
 		free(p_pwd);
@@ -201,7 +201,7 @@ void changedir_to_home(shll_comm *data_sh)
 	}
 
 	set_env("OLDPWD", p_pwd, data_sh);
-	set_env("PATH", h, data_sh);
+	set_env("PATH", home, data_sh);
 	free(p_pwd);
 	data_sh->stat = 0;
 }
