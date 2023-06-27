@@ -138,7 +138,7 @@ int sepopererr(char *input, int i, char last);
 int frstchrctr(char *input, int *i);
 void dspsynerr(shll_comm *data_sh, char *input, int i, int bool);
 int chsynerr(shll_comm *data_sh, char *input);
-char withotcmt(char *in);
+char *withotcmt(char *input);
 void loopshll(shll_comm *datash);
 
 /* read_line function protytype */
