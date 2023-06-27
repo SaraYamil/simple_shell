@@ -1,7 +1,7 @@
 #include "main.h"
 
 /**
- * _memcpy - Copies a block of memory from the source
+ * _mmcpy - Copies a block of memory from the source
  *           pointer to the destination pointer.
  * @new_pointer: The destination pointer.
  * @pointer: The source pointer.
@@ -9,7 +9,7 @@
  *
  * Return: None.
  */
-void _memcpy(void *new_pointer, const void *pointer, unsigned int s)
+void _mmcpy(void *new_pointer, const void *pointer, unsigned int s)
 {
 	char *char_ptr = (char *)pointer;
 	char *char_newptr = (char *)new_pointer;
@@ -20,14 +20,14 @@ void _memcpy(void *new_pointer, const void *pointer, unsigned int s)
 }
 
 /**
- * _realloc - Reallocates a memory block with a new size.
+ * _realmaloc - Reallocates a memory block with a new size.
  * @pointer: Pointer to the memory previously allocated.
  * @old_s: Size, in bytes, of the allocated space for ptr.
  * @new_s: New size, in bytes, of the reallocated memory block.
  *
  * Return: Pointer to the reallocated memory block (ptr).
  */
-void *_realloc(void *pointer, unsigned int old_s, unsigned int new_s)
+void *_realmaloc(void *pointer, unsigned int old_s, unsigned int new_s)
 {
 	void *newptr;
 
@@ -57,14 +57,14 @@ void *_realloc(void *pointer, unsigned int old_s, unsigned int new_s)
 }
 
 /**
- * _reallocdp - Reallocates a memory block of a double pointer.
+ * _reallcdp - Reallocates a memory block of a double pointer.
  * @pointer: Double pointer to the memory previously allocated.
  * @old_s: Size, in bytes, of the allocated space for pointer.
  * @new_s: New size, in bytes, of the reallocated memory block.
  *
  * Return: Pointer to the reallocated memory block (pointer).
  */
-char **_reallocdp(char **pointer, unsigned int old_s, unsigned int new_s)
+char **_reallcdp(char **pointer, unsigned int old_s, unsigned int new_s)
 {
 	char **newptr;
 	unsigned int i;
