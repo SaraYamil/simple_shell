@@ -9,7 +9,7 @@
 char *convitoa(int number)
 {
 	unsigned int n1;
-	int len = get_length(number);
+	int len = getlngth(number);
 	char *buff;
 
 	buff = malloc(sizeof(char) * (len + 1));
