@@ -121,7 +121,7 @@ void *_realmaloc(void *ptr, unsigned int old_size, unsigned int new_size);
 int _strsppn(char *s, char *accept);
 char *_strdupp(const char *s);
 int _strlength(const char *s);
-int cmpr_envnm(char str[], const char *delim);
+int compr_chrs(char str[], const char *delim);
 char *_strtiktok(char str[], const char *delim);
 int _isdigital(const char *s);
 void rv_strng(char *s);
