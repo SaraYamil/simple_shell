@@ -11,9 +11,9 @@ char *err404(shll_comm *data_sh)
 	char *err, *vstr;
 	int length;
 
-	vstr = conv_itoa(data_sh->counter);
-	length = _strlen(data_sh->argv[0]) + _strlen(vstr);
-	length += _strlen(data_sh->args[0]) + 16;
+	vstr = convitoa(data_sh->counter);
+	length = _strlength(data_sh->argv[0]) + _strlength(vstr);
+	length += _strlength(data_sh->args[0]) + 16;
 	err = malloc(sizeof(char) * (length + 1));
 	if (err == 0)
 	{
@@ -21,13 +21,13 @@ char *err404(shll_comm *data_sh)
 		free(vstr);
 		return (NULL);
 	}
-	_strcpy(err, data_sh->argv[0]);
-	_strcat(err, ": ");
-	_strcat(err, vstr);
-	_strcat(err, ": ");
-	_strcat(err, data_sh->args[0]);
-	_strcat(err, ": not found\n");
-	_strcat(err, "\0");
+	_strcopy(err, data_sh->argv[0]);
+	_strccaat(err, ": ");
+	_strccaat(err, vstr);
+	_strccaat(err, ": ");
+	_strccaat(err, data_sh->args[0]);
+	_strccaat(err, ": not found\n");
+	_strccaat(err, "\0");
 	free(vstr);
 
 	return (err);
@@ -45,23 +45,23 @@ char *errshellex(shll_comm *data_sh)
 	char *err, *vstr;
 	int length;
 
-	vstr = conv_itoa(data_sh->counter);
-	length = _strlen(data_sh->argv[0]) + _strlen(vstr);
-	length += _strlen(data_sh->args[0]) + _strlen(data_sh->args[1]) + 23;
+	vstr = convitoa(data_sh->counter);
+	length = _strlength(data_sh->argv[0]) + _strlength(vstr);
+	length += _strlength(data_sh->args[0]) + _strlength(data_sh->args[1]) + 23;
 	err = malloc(sizeof(char) * (length + 1));
 	if (err == 0)
 	{
 		free(vstr);
 		return (NULL);
 	}
-	_strcpy(err, data_sh->argv[0]);
-	_strcat(err, ": ");
-	_strcat(err, vstr);
-	_strcat(err, ": ");
-	_strcat(err, data_sh->args[0]);
-	_strcat(err, ": Illegal number: ");
-	_strcat(err, data_sh->args[1]);
-	_strcat(err, "\n\0");
+	_strcopy(err, data_sh->argv[0]);
+	_strccaat(err, ": ");
+	_strccaat(err, vstr);
+	_strccaat(err, ": ");
+	_strccaat(err, data_sh->args[0]);
+	_strccaat(err, ": Illegal number: ");
+	_strccaat(err, data_sh->args[1]);
+	_strccaat(err, "\n\0");
 	free(vstr);
 
 	return (err);
@@ -78,7 +78,7 @@ char *errgcd(shll_comm *data_sh)
 	char *err, *vstr, *errmsg;
 	int len, lenid;
 
-	vstr = conv_itoa(data_sh->counter);
+	vstr = convitoa(data_sh->counter);
 	if (data_sh->args[1][0] == '-')
 	{
 		errmsg = ": Illegal option ";
@@ -87,11 +87,11 @@ char *errgcd(shll_comm *data_sh)
 	else
 	{
 		errmsg = ": can't cd to ";
-		lenid = _strlen(data_sh->args[1]);
+		lenid = _strlength(data_sh->args[1]);
 	}
 
-	len = _strlen(data_sh->argv[0]) + _strlen(data_sh->args[0]);
-	len += _strlen(vstr) + _strlen(errmsg) + lenid + 5;
+	len = _strlength(data_sh->argv[0]) + _strlength(data_sh->args[0]);
+	len += _strlength(vstr) + _strlength(errmsg) + lenid + 5;
 	err = malloc(sizeof(char) * (len + 1));
 
 	if (err == 0)
@@ -100,7 +100,7 @@ char *errgcd(shll_comm *data_sh)
 		return (NULL);
 	}
 
-	err = conc_err_msg(data_sh, errmsg, err, vstr);
+	err = concermsg(data_sh, errmsg, err, vstr);
 
 	free(vstr);
 
