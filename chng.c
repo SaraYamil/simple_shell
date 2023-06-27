@@ -51,13 +51,13 @@ int changedir_shell(shll_comm *data_sh)
 void chandir_dor(shll_comm *data_sh)
 {
 	char pwd[PATH_MAX];
-	char *diry, *chd_printwd, *chd_str_pwd;
+	char *directory, *chd_printwd, *chd_str_pwd;
 
 	getcwd(pwd, sizeof(pwd));
 	chd_printwd = _strdup(pwd);
 	set_env("OLDPWD", chd_printwd, data_sh);
-	diry = data_sh->args[1];
-	if (_strcmp(".", diry) == 0)
+	directory = data_sh->args[1];
+	if (_strcmp(".", directory) == 0)
 	{
 		set_env("PWD", chd_printwd, data_sh);
 		free(chd_printwd);
@@ -102,12 +102,12 @@ void chandir_dor(shll_comm *data_sh)
 void cd_to_dist(shll_comm *data_sh)
 {
 	char path[PATH_MAX];
-	char *director, *chd_pwd, *chd_dir;
+	char *directory, *chd_pwd, *chd_dir;
 
 	getcwd(path, sizeof(path));
 
-	director = data_sh->args[1];
-	if (chdir(director) == -1)
+	directory = data_sh->args[1];
+	if (chdir(directory) == -1)
 	{
 		get_err(data_sh, 2);
 		return;
@@ -116,7 +116,7 @@ void cd_to_dist(shll_comm *data_sh)
 	chd_pwd = _strdup(path);
 	set_env("OLDPWD", chd_pwd, data_sh);
 
-	chd_dir = _strdup(director);
+	chd_dir = _strdup(directory);
 	set_env("PWD", chd_dir, data_sh);
 
 	free(chd_pwd);
@@ -124,7 +124,7 @@ void cd_to_dist(shll_comm *data_sh)
 
 	data_sh->stat = 0;
 
-	chdir(director);
+	chdir(directory);
 }
 
 /**
