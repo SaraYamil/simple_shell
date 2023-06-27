@@ -1,44 +1,44 @@
 #include "main.h"
 
 /**
- * verify_env - Checks if the typed variable is an environment variable.
- * @hd: Head of the linked list.
- * @inp: Input string.
- * @shell_data: Data structure.
+ * verify_env - verify if the variable is envir var.
+ * @hd: the head.
+ * @inp: Inp str feww.
+ * @shell_data: Data shell.
  *
- * Return: No return.
+ * Return: void value.
  */
 void verify_env(r_var **hd, char *inp, shll_comm *shell_data)
 {
-	int line, charc, i, left_value;
+	int l, cha, y, l_value;
 	char **_env;
 
 	_env = shell_data->_env;
-	for (line = 0; _env[line]; line++)
+	for (l = 0; _env[l]; l++)
 	{
-		for (i = 1, charc = 0; _env[line][charc]; charc++)
+		for (y = 1, cha = 0; _env[l][cha]; cha++)
 		{
-			if (_env[line][charc] == '=')
+			if (_env[l][cha] == '=')
 			{
-				left_value = _strlen(_env[line] + charc + 1);
-				add_var_nd(hd, i, _env[line] + charc + 1, left_value);
+				l_value = _strlen(_env[l] + cha + 1);
+				add_var_nd(hd, y, _env[l] + cha + 1, l_value);
 				return;
 			}
 
-			if (inp[i] == _env[line][charc])
-				i++;
+			if (inp[y] == _env[l][cha])
+				y++;
 			else
 				break;
 		}
 	}
 
-	for (i = 0; inp[i]; i++)
+	for (y = 0; inp[y]; y++)
 	{
-		if (inp[i] == ' ' || inp[i] == '\t' || inp[i] == ';' || inp[i] == '\n')
+		if (inp[y] == ' ' || inp[y] == '\t' || inp[y] == ';' || inp[y] == '\n')
 			break;
 	}
 
-	add_var_nd(hd, i, NULL, 0);
+	add_var_nd(hd, y, NULL, 0);
 }
 
 /**
