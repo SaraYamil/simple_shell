@@ -40,48 +40,46 @@ int changedir_shell(shll_comm *data_sh)
 
 	return (1);
 }
-
 /**
- * chandir_dor - Changes to the parent directory.
- * @data_sh: Pointer to the data structure containing the
- *           environment variables.
+ * chandir_dor - switch to the parent dir.
+ * @data_sh: Point data structure
  *
- * Return: No return value.
+ * Return: void value.
  */
 void chandir_dor(shll_comm *data_sh)
 {
 	char pwd[PATH_MAX];
-	char *directory, *cp_printwd, *cp_strtok_pwd;
+	char *directory, *chp_printwd, *chp_strtok_pwd;
 
 	getcwd(pwd, sizeof(pwd));
-	cp_printwd = _strdup(pwd);
-	set_env("OLDPWD", cp_printwd, data_sh);
+	chp_printwd = _strdup(pwd);
+	set_env("OLDPWD", chp_printwd, data_sh);
 	directory = data_sh->args[1];
 	if (_strcmp(".", directory) == 0)
 	{
-		set_env("PWD", cp_printwd, data_sh);
-		free(cp_printwd);
+		set_env("PWD", chp_printwd, data_sh);
+		free(chp_printwd);
 		return;
 	}
-	if (_strcmp("/", cp_printwd) == 0)
+	if (_strcmp("/", chp_printwd) == 0)
 	{
-		free(cp_printwd);
+		free(chp_printwd);
 		return;
 	}
-	cp_strtok_pwd = cp_printwd;
-	rev_string(cp_strtok_pwd);
-	cp_strtok_pwd = _strtok(cp_strtok_pwd, "/");
-	if (cp_strtok_pwd != NULL)
+	chp_strtok_pwd = chp_printwd;
+	rev_string(chp_strtok_pwd);
+	chp_strtok_pwd = _strtok(chp_strtok_pwd, "/");
+	if (chp_strtok_pwd != NULL)
 	{
-		cp_strtok_pwd = _strtok(NULL, "\0");
+		chp_strtok_pwd = _strtok(NULL, "\0");
 
-		if (cp_strtok_pwd != NULL)
-			rev_string(cp_strtok_pwd);
+		if (chp_strtok_pwd != NULL)
+			rev_string(chp_strtok_pwd);
 	}
-	if (cp_strtok_pwd != NULL)
+	if (chp_strtok_pwd != NULL)
 	{
-		chdir(cp_strtok_pwd);
-		set_env("PWD", cp_strtok_pwd, data_sh);
+		chdir(chp_strtok_pwd);
+		set_env("PWD", chp_strtok_pwd, data_sh);
 	}
 	else
 	{
@@ -89,7 +87,7 @@ void chandir_dor(shll_comm *data_sh)
 		set_env("PWD", "/", data_sh);
 	}
 	data_sh->stat = 0;
-	free(cp_printwd);
+	free(chp_printwd);
 }
 
 /**
