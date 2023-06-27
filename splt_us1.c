@@ -99,25 +99,25 @@ void addnd(sep_list **hd_s, line_list **hd_l, char *inp)
 	int i;
 	char *command_line;
 
-	inp = swp_character(inp, 0);
+	inp = swp_chrct(inp, 0);
 
 	for (i = 0; inp[i]; i++)
 	{
 		if (inp[i] == ';')
-			add_node_en(hd_s, inp[i]);
+			addnd(hd_s, inp[i]);
 
 		if (inp[i] == '|' || inp[i] == '&')
 		{
-			add_node_en(hd_s, inp[i]);
+			addnd(hd_s, inp[i]);
 			i++;
 		}
 	}
 
-	command_line = _strtok(inp, ";|&");
+	command_line = _strtiktok(inp, ";|&");
 	do {
-		command_line = swp_character(command_line, 1);
-		add_ln_nd_end(hd_l, command_line);
-		command_line = _strtok(NULL, ";|&");
+		command_line = swp_chrct(command_line, 1);
+		add_lnndend(hd_l, command_line);
+		command_line = _strtiktok(NULL, ";|&");
 	} while (command_line != NULL);
 }
 
@@ -132,7 +132,7 @@ char *read_ln(int *int_eof)
 	char *inp = NULL;
 	size_t buffersize = 0;
 
-	*int_eof = getline(&inp, &buffersize, stdin);
+	*int_eof = getln(&inp, &buffersize, stdin);
 
 	return (inp);
 }
