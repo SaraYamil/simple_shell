@@ -1,98 +1,205 @@
 #include "main.h"
 
 /**
- * conv_itoa - Converts an integer to a string.
- * @number: The integer number to convert.
+ * splt_ln - Tokenizes the input string.
+ * @inp: Input string.
  *
- * Return: The string representation of the integer.
+ * Return: String splitted.
  */
-char *conv_itoa(int number)
+char **splt_ln(char *inp)
 {
-	unsigned int n1;
-	int len = get_length(number);
-	char *buff;
+	size_t bsize;
+	size_t i;
+	char **tokens;
+	char *token;
 
-	buff = malloc(sizeof(char) * (len + 1));
-	if (buff == 0)
-		return (NULL);
-
-	*(buff + len) = '\0';
-
-	if (number < 0)
+	bsize = TOK_BUFSIZE;
+	tokens = malloc(sizeof(char *) * (bsize));
+	if (tokens == NULL)
 	{
-		n1 = number * -1;
-		buff[0] = '-';
+		write(STDERR_FILENO, ": allocation error\n", 18);
+		exit(EXIT_FAILURE);
 	}
-	else
-		n1 = number;
 
-	len--;
-	do {
-		*(buff + len) = (n1 % 10) + '0';
-		n1 = n1 / 10;
-		len--;
-	} while (n1 > 0);
-	return (buff);
+	token = _strtok(inp, TOK_DELIM);
+	tokens[0] = token;
+
+	for (i = 1; token != NULL; i++)
+	{
+		if (i == bsize)
+		{
+			bsize += TOK_BUFSIZE;
+			tokens = _reallocdp(tokens, i, sizeof(char *) * bsize);
+			if (tokens == NULL)
+			{
+				write(STDERR_FILENO, ": allocation error\n", 18);
+				exit(EXIT_FAILURE);
+			}
+		}
+		token = _strtok(NULL, TOK_DELIM);
+		tokens[i] = token;
+	}
+
+	return (tokens);
 }
 
 /**
- * get_length - Get the length of a number.
- * @number: The number for which to calculate the length.
+ * split_cmds - Splits command lines according to the separators ;, |, and &,
+ *	      and executes them.
+ * @datashell: Data structure.
+ * @inp: Input string.
  *
- * Return: The length of the number.
+ * Return: 0 to exit, 1 to continue.
  */
-int get_length(int number)
+int split_cmds(shll_comm *datashell, char *inp)
 {
-	unsigned int n1;
-	int lenght = 1;
 
-	if (number < 0)
+	sep_list *hd_s, *ls_s;
+	line_list *head_l, *list_l;
+	int looping;
+
+	hd_s = NULL;
+	head_l = NULL;
+
+	add_nd(&hd_s, &head_l, inp);
+
+	ls_s = hd_s;
+	list_l = head_l;
+
+	while (list_l != NULL)
 	{
-		lenght++;
-		n1 = number * -1;
-	}
-	else
-		n1 = number;
-	while (n1 > 9)
-	{
-		lenght++;
-		n1 = n1 / 10;
-	}
+		datashell->input = list_l->line;
+		datashell->args = splt_ln(datashell->input);
+		looping = execute_line(datashell);
+		free(datashell->args);
 
-	return (lenght);
-}
-
-/**
- * _atoi - Converts a string to an integer.
- * @str: Input string.
- *
- * Return: The converted integer.
- */
-int _atoi(char *str)
-{
-	unsigned int counter = 0, size = 0, oi = 0, pn = 1, m = 1, i;
-
-	while (*(str + counter) != '\0')
-	{
-		if (size > 0 && (*(str + counter) < '0' || *(str + counter) > '9'))
+		if (looping == 0)
 			break;
 
-		if (*(str + counter) == '-')
-			pn *= -1;
+		move_nxt(&ls_s, &list_l, datashell);
 
-		if ((*(str + counter) >= '0') && (*(str + counter) <= '9'))
-		{
-			if (size > 0)
-				m *= 10;
-			size++;
-		}
-		counter++;
+		if (list_l != NULL)
+			list_l = list_l->next;
 	}
 
-	for (i = counter - size; i < counter; i++)
+	free_sp_ls(&hd_s);
+	free_line_ls(&head_l);
+
+	if (looping == 0)
+		return (0);
+	return (1);
+}
+
+/**
+ * without_cmt - Deletes comments from the input.
+ *
+ * @input: Input string.
+ * Return: Input without comments.
+ */
+char *without_cmt(char *input)
+{
+	int i, up_to;
+
+	up_to = 0;
+	for (i = 0; input[i]; i++)
 	{
-		oi = oi + ((*(str + i) - 48) * m);
-		m /= 10;
+		if (input[i] == '#')
+		{
+			if (i == 0)
+			{
+				free(input);
+				return (NULL);
+			}
+
+			if (input[i - 1] == ' ' || input[i - 1] == '\t' || input[i - 1] == ';')
+				up_to = i;
+		}
 	}
-	return (oi * pn);
+
+	if (up_to != 0)
+	{
+		input = _realloc(input, i, up_to + 1);
+		input[up_to] = '\0';
+	}
+
+	return (input);
+}
+
+/**
+ * looping_shll - Main loop of the shell
+ * @data_shell: Data relevant to the shell (av, input, args)
+ *
+ * Return: No return.
+ */
+void looping_shll(shll_comm *data_shell)
+{
+	int looping, int_eof;
+	char *inp;
+
+	looping = 1;
+	while (looping == 1)
+	{
+		write(STDIN_FILENO, "^-^ ", 4);
+		inp = read_line(&int_eof);
+		if (int_eof != -1)
+		{
+			inp = without_cmt(inp);
+			if (inp == NULL)
+				continue;
+
+			if (ch_syn_err(data_shell, inp) == 1)
+			{
+				data_shell->stat = 2;
+				free(inp);
+				continue;
+			}
+			inp = replace_str(inp, data_shell);
+			looping = split_cmds(data_shell, inp);
+			data_shell->counter += 1;
+			free(inp);
+		}
+		else
+		{
+			looping = 0;
+			free(inp);
+		}
+	}
+}
+
+/**
+ * add_var_nd - Adds a variable at the end of a r_var list.
+ * @hd: Head of the linked list.
+ * @lenvar: Length of the variable.
+ * @value: Value of the variable.
+ * @lenval: Length of the value.
+ *
+ * Return: Address of the head.
+ */
+r_var *add_var_nd(r_var **hd, int lenvar, char *value, int lenval)
+{
+	r_var *newnd, *tmp;
+
+	newnd = malloc(sizeof(r_var));
+	if (newnd == NULL)
+		return (NULL);
+
+	newnd->len_var = lenvar;
+	newnd->val = value;
+	newnd->len_val = lenval;
+
+	newnd->next = NULL;
+	tmp = *hd;
+
+	if (tmp == NULL)
+	{
+		*hd = newnd;
+	}
+	else
+	{
+		while (tmp->next != NULL)
+			tmp = tmp->next;
+		tmp->next = newnd;
+	}
+
+	return (*hd);
 }
