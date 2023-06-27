@@ -129,7 +129,7 @@ int cmmnd_ex(shll_comm *datashell)
 		return (1);
 	if (exc == 0)
 	{
-		dir = _whch(datashell->args[0], datashell->_env);
+		dir = _wch(datashell->args[0], datashell->_env);
 		if (chck_errcommnd(dir, datashell) == 1)
 			return (1);
 	}

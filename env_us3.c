@@ -22,7 +22,7 @@ char *getenvrn(const char *envname, char **_env)
 	for (i = 0; _env[i]; i++)
 	{
 		/* If name and env are equal */
-	i	mov = cmpr_envnm(_env[i], envname);
+		mov = cmpr_envnm(_env[i], envname);
 		if (mov)
 		{
 			ptr_env = _env[i];
