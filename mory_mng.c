@@ -1,113 +1,111 @@
 #include "main.h"
 
 /**
- * add_ln_nd_end - Adds a command line at the end of a line_list.
- * @hd: Head of the linked list.
- * @cmd_line: Command line.
- *
- * Return: Address of the head.
+ * add_ln_nd_end -Adds a command line at the end of a line
+ * @hd: the header of the linked list.
+ * @cmd_line: Cmd line.
+ * Return: Address of the header.
  */
 line_list *add_ln_nd_end(line_list **hd, char *cmd_line)
 {
-	line_list *nw, *tmp;
+	line_list *new, *tp;
 
-	nw = malloc(sizeof(line_list));
-	if (nw == NULL)
+	new = malloc(sizeof(line_list));
+	if (new == NULL)
 		return (NULL);
 
-	nw->line = cmd_line;
-	nw->next = NULL;
-	tmp = *hd;
+	new->line = cmd_line;
+	new->next = NULL;
+	tp = *hd;
 
-	if (tmp == NULL)
+	if (tp == NULL)
 	{
-		*hd = nw;
+		*hd = new;
 	}
 	else
 	{
-		while (tmp->next != NULL)
-			tmp = tmp->next;
-		tmp->next = nw;
+		while (tp->next != NULL)
+			tp = tp->next;
+		tp->next = new;
 	}
 
 	return (*hd);
 }
 
 /**
- * free_line_ls - Frees a line_list.
- * @hd: Head of the linked list.
+ * free_line_ls - line list.
+ * @hd: header.
  *
- * Return: No return.
+ * Return: void.
  */
 void free_line_ls(line_list **hd)
 {
-	line_list *tmp;
-	line_list *current;
+	line_list *tp;
+	line_list *curt;
 
 	if (hd != NULL)
 	{
-		current = *hd;
-		while ((tmp = current) != NULL)
+		curt = *hd;
+		while ((tp = curt) != NULL)
 		{
-			current = current->next;
-			free(tmp);
+			curt = curt->next;
+			free(tp);
 		}
 		*hd = NULL;
 	}
 }
 
 /**
- * add_node_en - Adds a separator found at the end
- * of a sep_list.
- * @hd: Head of the linked list.
- * @sp: Separator found (; | &).
+ * add_node_en - gggggggrvvvvv
+ * @hd: Header gggggg.
+ * @sp: Sep (; | &).
  *
- * Return: Address of the head.
+ * Return: addr.
  */
 sep_list *add_node_en(sep_list **hd, char sp)
 {
-	sep_list *new_n, *tmp;
+	sep_list *new_sp, *tp;
 
-	new_n = malloc(sizeof(sep_list));
-	if (new_n == NULL)
+	new_sp = malloc(sizeof(sep_list));
+	if (new_sp == NULL)
 		return (NULL);
 
-	new_n->sep = sp;
-	new_n->next = NULL;
-	tmp = *hd;
+	new_sp->sep = sp;
+	new_sp->next = NULL;
+	tp = *hd;
 
-	if (tmp == NULL)
+	if (tp == NULL)
 	{
-		*hd = new_n;
+		*hd = new_sp;
 	}
 	else
 	{
-		while (tmp->next != NULL)
-			tmp = tmp->next;
-		tmp->next = new_n;
+		while (tp->next != NULL)
+			tp = tp->next;
+		tp->next = new_sp;
 	}
 
 	return (*hd);
 }
 
 /**
- * free_sp_ls - Frees a sep_list.
- * @hd: Head of the linked list.
+ * free_sp_ls - pffffffff.
+ * @hd: erheadr list.
  *
- * Return: No return.
+ * Return: void.
  */
 void free_sp_ls(sep_list **hd)
 {
-	sep_list *tmp;
-	sep_list *current;
+	sep_list *tp;
+	sep_list *curt;
 
 	if (hd != NULL)
 	{
-		current = *hd;
-		while ((tmp = current) != NULL)
+		curt = *hd;
+		while ((tp = curt) != NULL)
 		{
-			current = current->next;
-			free(tmp);
+			curt = curt->next;
+			free(tp);
 		}
 		*hd = NULL;
 	}
