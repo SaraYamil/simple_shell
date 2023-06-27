@@ -166,7 +166,7 @@ char *cp_info(char *alias_name, char *val)
 	len = len_name + len_value + 2;
 	new = malloc(sizeof(char) * (len));
 	_strcopy(new, alias_name);
-	_strcat(new, "=");
+	_strccaat(new, "=");
 	_strccaat(new, val);
 	_strccaat(new, "\0");
 
