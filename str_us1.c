@@ -48,9 +48,9 @@ void *_realmaloc(void *pointer, unsigned int old_s, unsigned int new_s)
 		return (NULL);
 
 	if (new_s < old_s)
-		_memcpy(newptr, pointer, new_s);
+		_mmcpy(newptr, pointer, new_s);
 	else
-		_memcpy(newptr, pointer, old_s);
+		_mmcpy(newptr, pointer, old_s);
 
 	free(pointer);
 	return (newptr);
