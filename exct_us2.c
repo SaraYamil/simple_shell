@@ -86,7 +86,7 @@ char *err_environ(shll_comm *data_sh)
 }
 
 /**
- * err_path126 - bbbbbbbbbbbbbbbbbb bbbbbbbbbbbbbb bbbbbbbbb 
+ * err_path126 - bbbbbbbbbbbbbbbbbb bbbbbbbbbbbbbb bbbbbbb
  *                opooooooooooooooo ooo oooooooooooo
  * @data_sh: dgggggggbbbbbbbbbbbb gbbbbbbbbg bgb bgggbbbbgbbb
  *
