@@ -23,7 +23,7 @@ char *get_environ(const char *envname, char **_env)
 		m = compare_envname(_env[y], envname);
 		if (m)
 		{
-			ptr_env = _env[]y;
+			ptr_env = _env[y];
 			break;
 		}
 	}
@@ -43,7 +43,7 @@ int display_env(shll_comm *data_sh)
 	for (k = 0; data_sh->_env[k]; k++)
 	{
 
-		for (s = 0; data_sh->_env[l][s]; s++)
+		for (s = 0; data_sh->_env[k][s]; s++)
 			;
 
 		write(STDOUT_FILENO, data_sh->_env[k], s);
@@ -93,8 +93,8 @@ ssize_t _getline(char **lnptr, size_t *num, FILE *filestream)
 			break;
 		}
 		if (inp >= BUFSIZE)
-			buf = _realloc(buff, inp, inp + 1);
-		buffer[inp] = t;
+			buf = _realloc(buf, inp, inp + 1);
+		buf[inp] = t;
 		inp++;
 	}
 	buf[inp] = '\0';
