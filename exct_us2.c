@@ -42,7 +42,7 @@ int excut_ln(shll_comm *datash)
 	if (datash->args[0] == NULL)
 		return (1);
 
-	builtin = get_bltn(datash->args[0]);
+	builtin = getbltn(datash->args[0]);
 
 	if (builtin != NULL)
 		return (getbltn(datash));
@@ -148,7 +148,7 @@ char *concermsg(shll_comm *data_sh, char *disp_msg, char *err, char *vstr)
 	}
 	else
 	{
-		_strcat(err, data_sh->args[1]);
+		_strccaat(err, data_sh->args[1]);
 	}
 
 	_strccaat(err, "\n");
