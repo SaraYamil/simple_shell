@@ -135,25 +135,23 @@ int verify_vars(r_var **header, char *inp, char *str, shll_comm *datashell)
 	return (y);
 }
 /**
- * compare_envname - Compares the name of an environment
- *                   variable with a given name.
- * @name_env: Name of the environment variable.
- * @name_ptr: Name to compare against.
+ * compare_envname - Comp the envi
+ * @name_env: dd Name of the env.
+ * @name_ptr: efdName to comp.
  *
- * Return: 0 if the names are not equal. A value
- *         greater than 0 if they are equal.
+ * Return: 0 or bigger than 0.
  */
 int compare_envname(const char *name_env, const char *name_ptr)
 {
-	int index;
+	int ind;
 
-	for (index = 0; name_env[index] != '='; index++)
+	for (ind = 0; name_env[ind] != '='; ind++)
 	{
-		if (name_env[index] != name_ptr[index])
+		if (name_env[ind] != name_ptr[ind])
 		{
 			return (0);
 		}
 	}
 
-	return (index + 1);
+	return (ind + 1);
 }
