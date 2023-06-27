@@ -42,57 +42,56 @@ void verify_env(r_var **hd, char *inp, shll_comm *shell_data)
 }
 
 /**
- * rpl_inp - Replaces variables in the input string.
- * @hd: Head of the linked list.
- * @inp: Input string.
- * @new_inp: New input string (replaced).
- * @numlen: New length.
+ * rpl_inp - lsjhuiosh.
+ * @hd: jhygfdf.
+ * @inp: Inp str.
+ * @new_inp: New input.
+ * @numlen: New length uohod.
  *
- * Return: Replaced string.
+ * Return: sdfd Replaced string.
  */
 char *rpl_inp(r_var **hd, char *inp, char *new_inp, int numlen)
 {
 	r_var *index;
-	int i, l, m;
+	int y, k, n;
 
 	index = *hd;
-	for (l = i = 0; i < numlen; i++)
+	for (k = y = 0; y < numlen; y++)
 	{
-		if (inp[l] == '$')
+		if (inp[k] == '$')
 		{
 			if (!(index->len_var) && !(index->len_val))
 			{
-				new_inp[i] = inp[l];
-				l++;
+				new_inp[y] = inp[k];
+				k++;
 			}
 			else if (index->len_var && !(index->len_val))
 			{
-				for (m = 0; m < index->len_var; m++)
-					l++;
-				i--;
+				for (n = 0; n < index->len_var; n++)
+					k++;
+				y--;
 			}
 			else
 			{
-				for (m = 0; m < index->len_val; m++)
+				for (n = 0; n < index->len_val; n++)
 				{
-					new_inp[i] = index->val[m];
-					i++;
+					new_inp[y] = index->val[n];
+					y++;
 				}
-				l += (index->len_var);
-				i--;
+				k += (index->len_var);
+				y--;
 			}
 			index = index->next;
 		}
 		else
 		{
-			new_inp[i] = inp[l];
-			l++;
+			new_inp[y] = inp[k];
+			k++;
 		}
 	}
 
 	return (new_inp);
 }
-
 /**
  * verify_vars - Check if the typed variable is $$ or $?
  * @header: Head of the linked list.
