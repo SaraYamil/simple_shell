@@ -1,12 +1,12 @@
 #include "main.h"
 
 /**
- * _strlength - Returns the length of a string.
+ * _strlen - Returns the length of a string.
  * @str: The input string.
  *
  * Return: The length of the string.
  */
-int _strlength(const char *str)
+int _strlen(const char *str)
 {
 	int len;
 
@@ -17,12 +17,12 @@ int _strlength(const char *str)
 }
 
 /**
- * _isdigital - Determines if a string consists only of numeric digits.
+ * _isdigit - Determines if a string consists only of numeric digits.
  * @str: The input string to be checked.
  *
  * Return: 1 if the string consists only of numeric digits, 0 otherwise.
  */
-int _isdigital(const char *str)
+int _isdigit(const char *str)
 {
 	unsigned int i;
 
@@ -33,33 +33,33 @@ int _isdigital(const char *str)
 }
 
 /**
- * _strdupp - Duplicates a string in the heap memory.
+ * _strdup - Duplicates a string in the heap memory.
  * @str: Type char pointer representing the string to duplicate.
  *
  * Return: Pointer to the duplicated string.
  */
-char *_strdupp(const char *str)
+char *_strdup(const char *str)
 {
 	char *new;
 	size_t length;
 
-	length = _strlength(str);
+	length = _strlen(str);
 	new = malloc(sizeof(char) * (length + 1));
 	if (new == NULL)
 		return (NULL);
-	_mmcpy(new, str, length + 1);
+	_memcpy(new, str, length + 1);
 
 	return (new);
 }
 
 /**
- * compr_chrs - Compares characters of strings.
+ * compare_chars - Compares characters of strings.
  * @str: Input string to compare.
  * @delimiter: Delimiter string for comparison.
  *
  * Return: 1 if the characters are equal, 0 otherwise.
  */
-int compr_chrs(char str[], const char *delimiter)
+int compare_chars(char str[], const char *delimiter)
 {
 	unsigned int i, l, m;
 
@@ -80,14 +80,14 @@ int compr_chrs(char str[], const char *delimiter)
 }
 
 /**
- * _strtiktok - Splits a string by a specified delimiter.
+ * _strtok - Splits a string by a specified delimiter.
  * @str: Input string to be split.
  * @delimiter: Delimiter string.
  *
  * Return: Pointer to the next token in the string,
  *         or NULL if no more tokens are found.
  */
-char *_strtiktok(char str[], const char *delimiter)
+char *_strtok(char str[], const char *delimiter)
 {
 	static char *splitted, *str_end;
 	char *str_start;
@@ -95,10 +95,10 @@ char *_strtiktok(char str[], const char *delimiter)
 
 	if (str != NULL)
 	{
-		if (compr_chrs(str, delimiter))
+		if (compare_chars(str, delimiter))
 			return (NULL);
 		splitted = str; /*Store first address*/
-		i = _strlength(str);
+		i = _strlen(str);
 		str_end = &str[i]; /*Store last address*/
 	}
 	str_start = splitted;
