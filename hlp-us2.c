@@ -99,7 +99,7 @@ void get_sigint(int sig)
  * get_ln - ewtet
  * @lnptr: erggvdsg
  * @num: ertgetee
- * @buf: 5yyyyy4
+ * @buf: 5yyyyyyy4
  * @size_b: 4yyheddd
  *
  * Return: nothing
