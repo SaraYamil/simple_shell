@@ -1,39 +1,39 @@
 #include "main.h"
 
 /**
- * exit_sh - Exits the shell
- * @datashell: Data structure containing relevant data
- *             (status and args)
+ * exit_sh - BBBBB BBBBBBNNN
+ * @datashell: DBBb bbbbbbbbjjjjjjjjj jjjjjjjjj hhhhha
+ *             mmmm hhhhhhhhh bb
  *
- * Return: 0 on success.
+ * Return: zzz z  z zzzz
  */
 int exit_sh(shll_comm *datashell)
 {
-	unsigned int ustat;
-	int is_dgt, strlen, big_n;
+	unsigned int ustt;
+	int isdgt, strln, bign;
 
 	if (datashell->args[1] != NULL)
 	{
-		ustat = _atoi(datashell->args[1]);
-		is_dgt = _isdigit(datashell->args[1]);
-		strlen = _strlen(datashell->args[1]);
-		big_n = ustat > (unsigned int)INT_MAX;
-		if (!is_dgt || strlen > 10 || big_n)
+		ustt = _atoi(datashell->args[1]);
+		isdgt = _isdigit(datashell->args[1]);
+		strln = _strlen(datashell->args[1]);
+		bign = ustt > (unsigned int)INT_MAX;
+		if (!isdgt || strln > 10 || bign)
 		{
 			get_err(datashell, 2);
 			datashell->stat = 2;
 			return (1);
 		}
-		datashell->stat = (ustat % 256);
+		datashell->stat = (ustt % 256);
 	}
 	return (0);
 }
 
 /**
- * execute_line - Finds built-ins and commands.
- * @datash: Data relevant (args).
+ * execute_line - cccccnnn nnnnnnnnnnn nnnnnnnn
+ * @datash: zzzzzz zzzzzz zzzzzzz
  *
- * Return: 1 on success.
+ * Return: zzzzzzzzz zzz
  */
 int execute_line(shll_comm *datash)
 {
@@ -51,85 +51,85 @@ int execute_line(shll_comm *datash)
 }
 
 /**
- * err_environ - generates an error message for env-related operations.
- * @data_sh: data relevant to the shell (counter, arguments).
+ * err_environ - gggggggggg ggggggggg ggggggggggg gggggggggg gggggg ggg
+ * @data_sh: ddddddddddddd   dddddddddddddddd d ddddddddddddd
  *
- * Return: Error message string.
+ * Return: eeeeeeeeee eeee eeeee
  */
 char *err_environ(shll_comm *data_sh)
 {
-	int length;
-	char *err, *txt, *vstr;
+	int leng;
+	char *er, *txt, *vst;
 
-	vstr = conv_itoa(data_sh->counter);
+	vst = conv_itoa(data_sh->counter);
 	txt = ": Unable to add/remove from environment\n";
-	length = _strlen(data_sh->argv[0]) + _strlen(vstr);
-	length += _strlen(data_sh->args[0]) + _strlen(txt) + 4;
-	err = malloc(sizeof(char) * (length + 1));
-	if (err == 0)
+	leng = _strlen(data_sh->argv[0]) + _strlen(vst);
+	leng += _strlen(data_sh->args[0]) + _strlen(txt) + 4;
+	er = malloc(sizeof(char) * (leng + 1));
+	if (er == 0)
 	{
-		free(err);
-		free(vstr);
+		free(er);
+		free(vst);
 		return (NULL);
 	}
 
-	_strcpy(err, data_sh->argv[0]);
-	_strcat(err, ": ");
-	_strcat(err, vstr);
-	_strcat(err, ": ");
-	_strcat(err, data_sh->args[0]);
-	_strcat(err, txt);
-	_strcat(err, "\0");
-	free(vstr);
+	_strcpy(er, data_sh->argv[0]);
+	_strcat(er, ": ");
+	_strcat(er, vst);
+	_strcat(er, ": ");
+	_strcat(er, data_sh->args[0]);
+	_strcat(er, txt);
+	_strcat(er, "\0");
+	free(vst);
 
-	return (err);
+	return (er);
 }
 
 /**
- * err_path126 - generates an error message for path-related
- *                operations with permission denied.
- * @data_sh: data relevant to the shell (counter, arguments).
+ * err_path126 - bbbbbbbbbbbbbbbbbb bbbbbbbbbbbbbb bbbbbbbbb 
+ *                opooooooooooooooo ooo oooooooooooo
+ * @data_sh: dgggggggbbbbbbbbbbbb gbbbbbbbbg bgb bgggbbbbgbbb
  *
- * Return: The error message string.
+ * Return: Tdddddd dddddddd dddddddd
  */
 char *err_path126(shll_comm *data_sh)
 {
-	int length;
-	char *vstr, *err;
+	int leng;
+	char *vst, *er;
 
-	vstr = conv_itoa(data_sh->counter);
-	length = _strlen(data_sh->argv[0]) + _strlen(vstr);
-	length += _strlen(data_sh->args[0]) + 24;
-	err = malloc(sizeof(char) * (length + 1));
-	if (err == 0)
+	vst = conv_itoa(data_sh->counter);
+	leng = _strlen(data_sh->argv[0]) + _strlen(vst);
+	leng += _strlen(data_sh->args[0]) + 24;
+	er = malloc(sizeof(char) * (leng + 1));
+	if (er == 0)
 	{
-		free(err);
-		free(vstr);
+		free(er);
+		free(vst);
 		return (NULL);
 	}
-	_strcpy(err, data_sh->argv[0]);
-	_strcat(err, ": ");
-	_strcat(err, vstr);
-	_strcat(err, ": ");
-	_strcat(err, data_sh->args[0]);
-	_strcat(err, ": Permission denied\n");
-	_strcat(err, "\0");
-	free(vstr);
-	return (err);
+	_strcpy(er, data_sh->argv[0]);
+	_strcat(er, ": ");
+	_strcat(er, vst);
+	_strcat(er, ": ");
+	_strcat(er, data_sh->args[0]);
+	_strcat(er, ": Permission denied\n");
+	_strcat(er, "\0");
+	free(vst);
+	return (er);
 }
 
 /**
- * conc_err_msg - concatenates an error message for the 'cd' command.
- * @data_sh: data relevant to the shell (directory, arguments).
- * @disp_msg: message to be displayed.
- * @err: output message buffer.
- * @vstr: counter lines.
+ * conc_err_msg - cccccccccccc c ccccccccccccccccccccccccccccccc cccc
+ * @data_sh: vvvvvvv bbbbbbbbbbbb bbbbbbbbbbbb bbbbbbbbb bbbbbj
+ * @disp_msg: mmmmmmmmmm dkkkkkkkkkd k
+ * @err: zzzzzzz zzzzzzz zzzzzz
+ * @vstr: cccc cccccnes.
  *
- * Return: The concatenated error message.
+ * Return: lllllll llll llll lllll llll ll
  */
 char *conc_err_msg(shll_comm *data_sh, char *disp_msg, char *err, char *vstr)
 {
-	char *illegal_flag;
+	char *ilegal_flg;
 
 	_strcpy(err, data_sh->argv[0]);
 	_strcat(err, ": ");
@@ -139,12 +139,12 @@ char *conc_err_msg(shll_comm *data_sh, char *disp_msg, char *err, char *vstr)
 	_strcat(err, disp_msg);
 	if (data_sh->args[1][0] == '-')
 	{
-		illegal_flag = malloc(3);
-		illegal_flag[0] = '-';
-		illegal_flag[1] = data_sh->args[1][1];
-		illegal_flag[2] = '\0';
-		_strcat(err, illegal_flag);
-		free(illegal_flag);
+		ilegal_flg = malloc(3);
+		ilegal_flg[0] = '-';
+		ilegal_flg[1] = data_sh->args[1][1];
+		ilegal_flg[2] = '\0';
+		_strcat(err, ilegal_flg);
+		free(ilegal_flg);
 	}
 	else
 	{
