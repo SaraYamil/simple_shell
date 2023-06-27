@@ -21,7 +21,7 @@ char **spltln(char *inp)
 		exit(EXIT_FAILURE);
 	}
 
-	token = _strtok(inp, TOK_DELIM);
+	token = _strtiktok(inp, TOK_DELIM);
 	tokens[0] = token;
 
 	for (i = 1; token != NULL; i++)
@@ -29,14 +29,14 @@ char **spltln(char *inp)
 		if (i == bsize)
 		{
 			bsize += TOK_BUFSIZE;
-			tokens = _reallocdp(tokens, i, sizeof(char *) * bsize);
+			tokens = _reallcdp(tokens, i, sizeof(char *) * bsize);
 			if (tokens == NULL)
 			{
 				write(STDERR_FILENO, ": allocation error\n", 18);
 				exit(EXIT_FAILURE);
 			}
 		}
-		token = _strtok(NULL, TOK_DELIM);
+		token = _strtiktok(NULL, TOK_DELIM);
 		tokens[i] = token;
 	}
 
@@ -61,7 +61,7 @@ int splitcmd(shll_comm *datashell, char *inp)
 	hd_s = NULL;
 	head_l = NULL;
 
-	add_nd(&hd_s, &head_l, inp);
+	addnd(&hd_s, &head_l, inp);
 
 	ls_s = hd_s;
 	list_l = head_l;
@@ -69,21 +69,21 @@ int splitcmd(shll_comm *datashell, char *inp)
 	while (list_l != NULL)
 	{
 		datashell->input = list_l->line;
-		datashell->args = splt_ln(datashell->input);
-		looping = execute_line(datashell);
+		datashell->args = spltln(datashell->input);
+		looping = excut_ln(datashell);
 		free(datashell->args);
 
 		if (looping == 0)
 			break;
 
-		move_nxt(&ls_s, &list_l, datashell);
+		mv_next(&ls_s, &list_l, datashell);
 
 		if (list_l != NULL)
 			list_l = list_l->next;
 	}
 
-	free_sp_ls(&hd_s);
-	free_line_ls(&head_l);
+	free_spls(&hd_s);
+	free_lnls(&head_l);
 
 	if (looping == 0)
 		return (0);
@@ -118,7 +118,7 @@ char *withotcmt(char *input)
 
 	if (up_to != 0)
 	{
-		input = _realloc(input, i, up_to + 1);
+		input = _realmaloc(input, i, up_to + 1);
 		input[up_to] = '\0';
 	}
 
@@ -140,21 +140,21 @@ void loopshll(shll_comm *data_shell)
 	while (looping == 1)
 	{
 		write(STDIN_FILENO, "^-^ ", 4);
-		inp = read_line(&int_eof);
+		inp = read_ln(&int_eof);
 		if (int_eof != -1)
 		{
 			inp = without_cmt(inp);
 			if (inp == NULL)
 				continue;
 
-			if (ch_syn_err(data_shell, inp) == 1)
+			if (chsynerr(data_shell, inp) == 1)
 			{
 				data_shell->stat = 2;
 				free(inp);
 				continue;
 			}
-			inp = replace_str(inp, data_shell);
-			looping = split_cmds(data_shell, inp);
+			inp = replc_str(inp, data_shell);
+			looping = splitcmd(data_shell, inp);
 			data_shell->counter += 1;
 			free(inp);
 		}
