@@ -9,9 +9,9 @@ void disp_hlpcd(void)
 {
 	char *hlp = "cd: cd [-L|[-P [-e]] [-@]] [dir]\n";
 
-	write(STDOUT_FILENO, hlp, _strlen(hlp));
+	write(STDOUT_FILENO, hlp, _strlength(hlp));
 	hlp = "\tChange the shell working directory.\n ";
-	write(STDOUT_FILENO, hlp, _strlen(hlp));
+	write(STDOUT_FILENO, hlp, _strlength(hlp));
 }
 
 /**
@@ -23,9 +23,9 @@ void dsp_helpals(void)
 {
 	char *hlp = "alias: alias [-p] [name[=value]...]\n";
 
-	write(STDOUT_FILENO, hlp, _strlen(hlp));
+	write(STDOUT_FILENO, hlp, _strlength(hlp));
 	hlp = "\tDefine or display aliases.\n ";
-	write(STDOUT_FILENO, hlp, _strlen(hlp));
+	write(STDOUT_FILENO, hlp, _strlength(hlp));
 }
 
 /**
@@ -37,11 +37,11 @@ void dsp_hlp(void)
 {
 	char *hlp = "help: help [-dms] [pattern ...]\n";
 
-	write(STDOUT_FILENO, hlp, _strlen(hlp));
+	write(STDOUT_FILENO, hlp, _strlength(hlp));
 	hlp = "\tDisplay information about builtin commands.\n ";
-	write(STDOUT_FILENO, hlp, _strlen(hlp));
+	write(STDOUT_FILENO, hlp, _strlength(hlp));
 	hlp = "Displays brief summaries of builtin commands.\n";
-	write(STDOUT_FILENO, hlp, _strlen(hlp));
+	write(STDOUT_FILENO, hlp, _strlength(hlp));
 }
 
 /**
@@ -53,9 +53,9 @@ void dsp_hlpenv(void)
 {
 	char *hlp = "env: env [option] [name=value] [command [args]]\n\t";
 
-	write(STDOUT_FILENO, hlp, _strlen(hlp));
+	write(STDOUT_FILENO, hlp, _strlength(hlp));
 	hlp = "Print the enviroment of the shell.\n";
-	write(STDOUT_FILENO, hlp, _strlen(hlp));
+	write(STDOUT_FILENO, hlp, _strlength(hlp));
 }
 
 /**
@@ -68,9 +68,9 @@ void dsp_helpstnv(void)
 
 	char *help = "setenv: setenv (const char *name, const char *value,";
 
-	write(STDOUT_FILENO, help, _strlen(help));
+	write(STDOUT_FILENO, help, _strlength(help));
 	help = "int replace)\n\t";
-	write(STDOUT_FILENO, help, _strlen(help));
+	write(STDOUT_FILENO, help, _strlength(help));
 	help = "Add a new definition to the environment\n";
-	write(STDOUT_FILENO, help, _strlen(help));
+	write(STDOUT_FILENO, help, _strlength(help));
 }
