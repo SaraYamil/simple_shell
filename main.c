@@ -13,9 +13,9 @@ int main(int argc, char **argv)
 	(void)argc;
 
 	signal(SIGINT, get_sigint);
-	set_datashell(&datash, argv);
-	looping_shll(&datash);
-	empty_data(&datash);
+	set_dtshll(&datash, argv);
+	loopshll(&datash);
+	empty_dt(&datash);
 	if (datash.stat < 0)
 		return (255);
 	return (datash.stat);
