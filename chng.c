@@ -54,12 +54,12 @@ void chndirdor(shll_comm *data_sh)
 	char *directory, *chd_printwd, *chd_str_pwd;
 
 	getcwd(pwd, sizeof(pwd));
-	chd_printwd = _strdup(pwd);
+	chd_printwd = _strdupp(pwd);
 	stenv("OLDPWD", chd_printwd, data_sh);
 	directory = data_sh->args[1];
 	if (_strccmmpp(".", directory) == 0)
 	{
-		set_env("PWD", chd_printwd, data_sh);
+		setenv("PWD", chd_printwd, data_sh);
 		free(chd_printwd);
 		return;
 	}
