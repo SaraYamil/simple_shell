@@ -1,38 +1,38 @@
 #include "main.h"
 
 /**
- * geterr - Calls the error message according to the
+ * get_err - Calls the error message according to the
  *	   builtin, syntax, or permission
  * @datashell: Data structure that contains arguments
  * @error_val: Error value
  *
  * Return: Error value
  */
-int geterr(shll_comm *datashell, int error_val)
+int get_err(shll_comm *datashell, int error_val)
 {
 	char *error;
 
 	switch (error_val)
 	{
 	case -1:
-		error = err_envrn(datashell);
+		error = err_environ(datashell);
 		break;
 	case 126:
-		error = errpth126(datashell);
+		error = err_path126(datashell);
 		break;
 	case 127:
-		error = err404(datashell);
+		error = error_404(datashell);
 		break;
 	case 2:
-		if (_strccmmpp("exit", datashell->args[0]) == 0)
-			error = errshellex(datashell);
-		else if (_strccmmpp("cd", datashell->args[0]) == 0)
-			error = errgcd(datashell);
+		if (_strcmp("exit", datashell->args[0]) == 0)
+			error = err_shell_exit(datashell);
+		else if (_strcmp("cd", datashell->args[0]) == 0)
+			error = err_gcd(datashell);
 		break;
 	}
 	if (error)
 	{
-		write(STDERR_FILENO, error, _strlength(error));
+		write(STDERR_FILENO, error, _strlen(error));
 		free(error);
 	}
 	datashell->stat = error_val;
@@ -40,12 +40,12 @@ int geterr(shll_comm *datashell, int error_val)
 }
 
 /**
- * empty_dt - frees data structure.
+ * empty_data - frees data structure.
  * @data_shell: data structure.
  *
  * Return: no return.
  */
-void empty_dt(shll_comm *data_shell)
+void empty_data(shll_comm *data_shell)
 {
 	unsigned int index;
 
@@ -57,13 +57,13 @@ void empty_dt(shll_comm *data_shell)
 }
 
 /**
- * set_dtshll - Initialize data structure
+ * set_datashell - Initialize data structure
  * @data_shell: data structure
  * @argv: argument vector
  *
  * Return: no return
  */
-void set_dtshll(shll_comm *data_shell, char **argv)
+void set_datashell(shll_comm *data_shell, char **argv)
 {
 	unsigned int i;
 
@@ -77,52 +77,52 @@ void set_dtshll(shll_comm *data_shell, char **argv)
 	data_shell->_env = malloc(sizeof(char *) * (i + 1));
 	for (i = 0; environ[i]; i++)
 	{
-		data_shell->_env[i] = _strdupp(environ[i]);
+		data_shell->_env[i] = _strdup(environ[i]);
 	}
 	data_shell->_env[i] = NULL;
-	data_shell->pid = convitoa(getpid());
+	data_shell->pid = conv_itoa(getpid());
 }
 
 /**
- * gethelp - Function that retrieves help messages
+ * get_hlp - Function that retrieves help messages
  *	   according to built-in command
  * @data_shll: Data structure (args and input)
  *
  * Return: 1
  */
-int gethelp(shll_comm *data_shll)
+int get_hlp(shll_comm *data_shll)
 {
 
 	if (data_shll->args[1] == 0)
-		dsp_helpgnrl();
-	else if (_strccmmpp(data_shll->args[1], "setenv") == 0)
-		dsp_helpstnv();
-	else if (_strccmmpp(data_shll->args[1], "env") == 0)
-		dsp_hlpenv();
-	else if (_strccmmpp(data_shll->args[1], "unsetenv") == 0)
-		dsp_unstnv();
-	else if (_strccmmpp(data_shll->args[1], "help") == 0)
-		dsp_hlp();
-	else if (_strccmmpp(data_shll->args[1], "exit") == 0)
-		dsp_helpex();
-	else if (_strccmmpp(data_shll->args[1], "cd") == 0)
+		disp_help_general();
+	else if (_strcmp(data_shll->args[1], "setenv") == 0)
+		disp_help_setenv();
+	else if (_strcmp(data_shll->args[1], "env") == 0)
+		disp_help_env();
+	else if (_strcmp(data_shll->args[1], "unsetenv") == 0)
+		display_unsetenv();
+	else if (_strcmp(data_shll->args[1], "help") == 0)
+		disp_help();
+	else if (_strcmp(data_shll->args[1], "exit") == 0)
+		disp_help_exit();
+	else if (_strcmp(data_shll->args[1], "cd") == 0)
 		disp_help_cd();
-	else if (_strccmmpp(data_shll->args[1], "alias") == 0)
-		dsp_helpals();
+	else if (_strcmp(data_shll->args[1], "alias") == 0)
+		disp_help_alias();
 	else
 		write(STDERR_FILENO, data_shll->args[0],
-		      _strlength(data_shll->args[0]));
+		      _strlen(data_shll->args[0]));
 	data_shll->stat = 0;
 	return (1);
 }
 
 /**
- * getbltn - Retrieves the function pointer of the builtin command
+ * get_bltn - Retrieves the function pointer of the builtin command
  * @command: Command line
  *
  * Return: Function pointer of the builtin command
  */
-int (*getbltn(char *command))(shll_comm *)
+int (*get_bltn(char *command))(shll_comm *)
 {
 	builtin_t bltn[] = {
 	    {"env", display_env},
@@ -136,7 +136,7 @@ int (*getbltn(char *command))(shll_comm *)
 
 	for (index = 0; bltn[index].commname; index++)
 	{
-		if (_strccmmpp(bltn[index].commname, command) == 0)
+		if (_strcmp(bltn[index].commname, command) == 0)
 			break;
 	}
 	return (bltn[index].f);
