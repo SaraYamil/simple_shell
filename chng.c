@@ -134,7 +134,7 @@ void cdtdist(shll_comm *data_sh)
  *
  * Return: void value.
  */
-void chngeirprev(shll_comm *data_sh)
+void chngdirprev(shll_comm *data_sh)
 {
 	char pwd[PATH_MAX];
 	char *w_pwd, *w_oldpwd, *chd_pwd, *chd_oldpwd;

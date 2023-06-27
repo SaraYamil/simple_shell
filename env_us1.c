@@ -94,7 +94,7 @@ char *rplinp(r_var **hd, char *inp, char *new_inp, int numlen)
 }
 
 /**
- * vrfyvrs - Check if the typed variable is $$ or $?
+ * verfyvrs - Check if the typed variable is $$ or $?
  * @header: Head of the linked list.
  * @inp: Input string.
  * @str: Last status of the shell.
