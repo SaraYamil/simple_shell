@@ -1,14 +1,14 @@
 #include "main.h"
 
 /**
- * verify_env - Checks if the typed variable is an environment variable.
+ * vrifyenv - Checks if the typed variable is an environment variable.
  * @hd: Head of the linked list.
  * @inp: Input string.
  * @shell_data: Data structure.
  *
  * Return: No return.
  */
-void verify_env(r_var **hd, char *inp, shll_comm *shell_data)
+void vrifyenv(r_var **hd, char *inp, shll_comm *shell_data)
 {
 	int line, charc, i, left_value;
 	char **_env;
@@ -42,7 +42,7 @@ void verify_env(r_var **hd, char *inp, shll_comm *shell_data)
 }
 
 /**
- * rpl_inp - Replaces variables in the input string.
+ * rplinp - Replaces variables in the input string.
  * @hd: Head of the linked list.
  * @inp: Input string.
  * @new_inp: New input string (replaced).
@@ -50,7 +50,7 @@ void verify_env(r_var **hd, char *inp, shll_comm *shell_data)
  *
  * Return: Replaced string.
  */
-char *rpl_inp(r_var **hd, char *inp, char *new_inp, int numlen)
+char *rplinp(r_var **hd, char *inp, char *new_inp, int numlen)
 {
 	r_var *index;
 	int i, l, m;
@@ -94,7 +94,7 @@ char *rpl_inp(r_var **hd, char *inp, char *new_inp, int numlen)
 }
 
 /**
- * verify_vars - Check if the typed variable is $$ or $?
+ * vrfyvrs - Check if the typed variable is $$ or $?
  * @header: Head of the linked list.
  * @inp: Input string.
  * @str: Last status of the shell.
@@ -102,7 +102,7 @@ char *rpl_inp(r_var **hd, char *inp, char *new_inp, int numlen)
  *
  * Return: Number of characters processed.
  */
-int verify_vars(r_var **header, char *inp, char *str, shll_comm *datashell)
+int verfyvrs(r_var **header, char *inp, char *str, shll_comm *datashell)
 {
 	int i, leftst, leftpd;
 
@@ -136,7 +136,7 @@ int verify_vars(r_var **header, char *inp, char *str, shll_comm *datashell)
 }
 
 /**
- * compare_envname - Compares the name of an environment
+ * cmpr_envnm - Compares the name of an environment
  *                   variable with a given name.
  * @name_env: Name of the environment variable.
  * @name_ptr: Name to compare against.
@@ -144,7 +144,7 @@ int verify_vars(r_var **header, char *inp, char *str, shll_comm *datashell)
  * Return: 0 if the names are not equal. A value
  *         greater than 0 if they are equal.
  */
-int compare_envname(const char *name_env, const char *name_ptr)
+int cmpr_envnm(const char *name_env, const char *name_ptr)
 {
 	int index;
 

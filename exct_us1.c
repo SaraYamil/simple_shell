@@ -1,13 +1,13 @@
 #include "main.h"
 
 /**
- * _whch - Locates a command.
+ * _wch - Locates a command.
  * @command: Command name.
  * @_env: Environment variable.
  *
  * Return: Location of the command.
  */
-char *_whch(char *command, char **_env)
+char *_wch(char *command, char **_env)
 {
 	char *path_name, *ptrpath, *tkn_path, *directory;
 	int length_dir, length_cmd, index;
@@ -51,13 +51,13 @@ char *_whch(char *command, char **_env)
 }
 
 /**
- * check_cdir - Checks if ":" is present in the current directory.
+ * chckcdir - Checks if ":" is present in the current directory.
  * @filepath: Pointer to a character string representing the filepath.
  * @index: Pointer to an integer representing the index.
  *
  * Return: 1 if the path is searchable in the current directory, 0 otherwise.
  */
-int check_cdir(char *filepath, int *index)
+int chckcdir(char *filepath, int *index)
 {
 	if (filepath[*index] == ':')
 		return (1);
@@ -74,14 +74,14 @@ int check_cdir(char *filepath, int *index)
 }
 
 /**
- * check_error_command - Verifies if the user has permissions
+ * chck_errcommnd - Verifies if the user has permissions
  *                      to access a command or directory.
  * @dir_dest: Destination directory.
  * @datashell: Data structure.
  *
  * Return: 1 if there is an error, 0 if not.
  */
-int check_error_command(char *dir_dest, shll_comm *datashell)
+int chck_errcommnd(char *dir_dest, shll_comm *datashell)
 {
 	if (dir_dest == NULL)
 	{
@@ -112,12 +112,12 @@ int check_error_command(char *dir_dest, shll_comm *datashell)
 }
 
 /**
- * command_exec - Executes command lines.
+ * cmmnd_ex - Executes command lines.
  * @datashell: Data relevant (args and input).
  *
  * Return: 1 on success.
  */
-int command_exec(shll_comm *datashell)
+int cmmnd_ex(shll_comm *datashell)
 {
 	pid_t pidm, wpid;
 	int stte, exc;
@@ -161,12 +161,12 @@ int command_exec(shll_comm *datashell)
 }
 
 /**
- * is_exec - Determines if a command is an executable.
+ * isexc - Determines if a command is an executable.
  * @datashell: Data structure.
  *
  * Return: 0 if it's not an executable, otherwise a positive number.
  */
-int is_exec(shll_comm *datashell)
+int isexc(shll_comm *datashell)
 {
 	struct stat status;
 	int index;

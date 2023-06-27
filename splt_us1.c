@@ -1,14 +1,14 @@
 #include "main.h"
 
 /**
- * move_nxt - Moves to the next command line stored.
+ * mv_next - Moves to the next command line stored.
  * @lis_s: Separator list.
  * @lis_l: Command line list.
  * @data_shell: Data structure.
  *
  * Return: No return value.
  */
-void move_nxt(sep_list **lis_s, line_list **lis_l, shll_comm *data_shell)
+void mv_next(sep_list **lis_s, line_list **lis_l, shll_comm *data_shell)
 {
 	int loop_sep;
 	sep_list *ls_s;
@@ -42,7 +42,7 @@ void move_nxt(sep_list **lis_s, line_list **lis_l, shll_comm *data_shell)
 }
 
 /**
- * swp_character - Swaps '|' and '&' for non-printed characters
+ * swp_chrct - Swaps '|' and '&' for non-printed characters
  *                 in a string.
  * @inp: Input string.
  * @boolean: Type of swap. If boolean is 0, swaps '|' and '&'
@@ -50,7 +50,7 @@ void move_nxt(sep_list **lis_s, line_list **lis_l, shll_comm *data_shell)
  *
  * Return: Swapped string.
  */
-char *swp_character(char *inp, int boolean)
+char *swp_chrct(char *inp, int boolean)
 {
 	int i;
 
@@ -87,14 +87,14 @@ char *swp_character(char *inp, int boolean)
 }
 
 /**
- * add_nd - Adds separators and command lines to the lists.
+ * addnd - Adds separators and command lines to the lists.
  * @hd_s: Head of the separator list.
  * @hd_l: Head of the command lines list.
  * @inp: Input string.
  *
  * Return: No return value.
  */
-void add_nd(sep_list **hd_s, line_list **hd_l, char *inp)
+void addnd(sep_list **hd_s, line_list **hd_l, char *inp)
 {
 	int i;
 	char *command_line;
@@ -122,12 +122,12 @@ void add_nd(sep_list **hd_s, line_list **hd_l, char *inp)
 }
 
 /**
- * read_line - Reads the input string.
+ * read_ln - Reads the input string.
  * @int_eof: Return value of the getline function.
  *
  * Return: Input string.
  */
-char *read_line(int *int_eof)
+char *read_ln(int *int_eof)
 {
 	char *inp = NULL;
 	size_t buffersize = 0;
@@ -138,11 +138,11 @@ char *read_line(int *int_eof)
 }
 
 /**
- * free_value_ls - Frees a r_var list.
+ * free_valls - Frees a r_var list.
  * @hd: Head of the linked list.
  * Return: No return.
  */
-void free_value_ls(r_var **hd)
+void free_valls(r_var **hd)
 {
 	r_var *tmp;
 	r_var *current;

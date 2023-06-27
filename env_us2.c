@@ -1,13 +1,13 @@
 #include "main.h"
 
 /**
- * replace_str - Calls functions to replace string into vars.
+ * *replc_str - Calls functions to replace string into vars.
  * @inp: Input string.
  * @data_shell: Data structure.
  *
  * Return: Replaced string.
  */
-char *replace_str(char *inp, shll_comm *data_shell)
+char *replc_str(char *inp, shll_comm *data_shell)
 {
 	int olen, nlen;
 	r_var *hd, *index;
@@ -48,12 +48,12 @@ char *replace_str(char *inp, shll_comm *data_shell)
 }
 
 /**
- * _unsetenv - Deletes an environment variable with the specified name.
+ * _unstnv - Deletes an environment variable with the specified name.
  * @datash: Data structure containing the environment variable name.
  *
  * Return: 1 on success.
  */
-int _unsetenv(shll_comm *datash)
+int _unstnv(shll_comm *datash)
 {
 	int i, j, k;
 	char **real_env;
@@ -97,14 +97,14 @@ int _unsetenv(shll_comm *datash)
 }
 
 /**
- * set_env - Sets an environment variable.
+ * stenv - Sets an environment variable.
  * @environ_name: Name of the environment variable.
  * @val: Value of the environment variable.
  * @data_sh: Data structure containing the environment variables.
  *
  * Return: No return.
  */
-void set_env(char *environ_name, char *val, shll_comm *data_sh)
+void stenv(char *environ_name, char *val, shll_comm *data_sh)
 {
 	int i;
 	char *varenv, *nmenv;
@@ -129,13 +129,13 @@ void set_env(char *environ_name, char *val, shll_comm *data_sh)
 }
 
 /**
- * _setenv - compares env variables names
+ * _stnv - compares env variables names
  *           with the name passed.
  * @data_sh: data relevant (env name and env value)
  *
  * Return: 1 on success.
  */
-int _setenv(shll_comm *data_sh)
+int _stnv(shll_comm *data_sh)
 {
 
 	if (data_sh->args[1] == NULL || data_sh->args[2] == NULL)

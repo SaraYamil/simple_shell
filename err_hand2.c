@@ -1,12 +1,12 @@
 #include "main.h"
 
 /**
- * error_404 - generates a generic error message for "command not found".
+ * err404 - generates a generic error message for "command not found".
  * @data_sh: data relevant to the shell (counter, arguments).
  *
  * Return: The error message.
  */
-char *error_404(shll_comm *data_sh)
+char *err404(shll_comm *data_sh)
 {
 	char *err, *vstr;
 	int length;
@@ -34,13 +34,13 @@ char *error_404(shll_comm *data_sh)
 }
 
 /**
- * err_shell_exit - generates a generic error message for
+ * errshellex - generates a generic error message for
  *                  "exit" command in get_exit.
  * @data_sh: data relevant to the shell (counter, arguments).
  *
  * Return: The error message.
  */
-char *err_shell_exit(shll_comm *data_sh)
+char *errshellex(shll_comm *data_sh)
 {
 	char *err, *vstr;
 	int length;
@@ -68,12 +68,12 @@ char *err_shell_exit(shll_comm *data_sh)
 }
 
 /**
- * err_gcd - generates an error message for the 'cd' command in get_cd.
+ * errgcd - generates an error message for the 'cd' command in get_cd.
  * @data_sh: data relevant to the shell (directory).
  *
  * Return: The error message.
  */
-char *err_gcd(shll_comm *data_sh)
+char *errgcd(shll_comm *data_sh)
 {
 	char *err, *vstr, *errmsg;
 	int len, lenid;

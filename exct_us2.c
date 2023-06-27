@@ -1,13 +1,13 @@
 #include "main.h"
 
 /**
- * exit_sh - Exits the shell
+ * ext_sh - Exits the shell
  * @datashell: Data structure containing relevant data
  *             (status and args)
  *
  * Return: 0 on success.
  */
-int exit_sh(shll_comm *datashell)
+int ext_sh(shll_comm *datashell)
 {
 	unsigned int ustat;
 	int is_dgt, strlen, big_n;
@@ -30,12 +30,12 @@ int exit_sh(shll_comm *datashell)
 }
 
 /**
- * execute_line - Finds built-ins and commands.
+ * excut_ln - Finds built-ins and commands.
  * @datash: Data relevant (args).
  *
  * Return: 1 on success.
  */
-int execute_line(shll_comm *datash)
+int excut_ln(shll_comm *datash)
 {
 	int (*builtin)(shll_comm *datash);
 
@@ -51,12 +51,12 @@ int execute_line(shll_comm *datash)
 }
 
 /**
- * err_environ - generates an error message for env-related operations.
+ * err_envrn - generates an error message for env-related operations.
  * @data_sh: data relevant to the shell (counter, arguments).
  *
  * Return: Error message string.
  */
-char *err_environ(shll_comm *data_sh)
+char *err_envrn(shll_comm *data_sh)
 {
 	int length;
 	char *err, *txt, *vstr;
@@ -86,13 +86,13 @@ char *err_environ(shll_comm *data_sh)
 }
 
 /**
- * err_path126 - generates an error message for path-related
+ * errpth126 - generates an error message for path-related
  *                operations with permission denied.
  * @data_sh: data relevant to the shell (counter, arguments).
  *
  * Return: The error message string.
  */
-char *err_path126(shll_comm *data_sh)
+char *errpth126(shll_comm *data_sh)
 {
 	int length;
 	char *vstr, *err;
@@ -119,7 +119,7 @@ char *err_path126(shll_comm *data_sh)
 }
 
 /**
- * conc_err_msg - concatenates an error message for the 'cd' command.
+ * concermsg - concatenates an error message for the 'cd' command.
  * @data_sh: data relevant to the shell (directory, arguments).
  * @disp_msg: message to be displayed.
  * @err: output message buffer.
@@ -127,7 +127,7 @@ char *err_path126(shll_comm *data_sh)
  *
  * Return: The concatenated error message.
  */
-char *conc_err_msg(shll_comm *data_sh, char *disp_msg, char *err, char *vstr)
+char *concermsg(shll_comm *data_sh, char *disp_msg, char *err, char *vstr)
 {
 	char *illegal_flag;
 

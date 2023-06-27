@@ -1,12 +1,12 @@
 #include "main.h"
 
 /**
- * changedir_shell - Changes the current directory.
+ * chngdirshell - Changes the current directory.
  * @data_sh: Pointer to the data
  *
  * Return: 1 on success.
  */
-int changedir_shell(shll_comm *data_sh)
+int chngdirshell(shll_comm *data_sh)
 {
 	int inhome, inhome2, isdashboard;
 	char *directory = data_sh->args[1];
@@ -42,13 +42,13 @@ int changedir_shell(shll_comm *data_sh)
 }
 
 /**
- * chandir_dor - Changes to the parent directory.
+ * chndirdor - Changes to the parent directory.
  * @data_sh: Pointer to the data structure containing the
  *           environment variables.
  *
  * Return: No return value.
  */
-void chandir_dor(shll_comm *data_sh)
+void chndirdor(shll_comm *data_sh)
 {
 	char pwd[PATH_MAX];
 	char *directory, *cp_printwd, *cp_strtok_pwd;
@@ -93,13 +93,13 @@ void chandir_dor(shll_comm *data_sh)
 }
 
 /**
- * cd_to_dist - Changes to a directory specified by the user.
+ * cdtdist - Changes to a directory specified by the user.
  * @data_sh: Pointer to the data structure containing
  *           the directories.
  *
  * Return: No return value.
  */
-void cd_to_dist(shll_comm *data_sh)
+void cdtdist(shll_comm *data_sh)
 {
 	char printwd[PATH_MAX];
 	char *directory, *cp_pwd, *cp_dir;
@@ -128,13 +128,13 @@ void cd_to_dist(shll_comm *data_sh)
 }
 
 /**
- * changedir_prev - Changes to the previous directory.
+ * chngdirprev - Changes to the previous directory.
  * @data_sh: Data relevant to the environment and
  *           directories.
  *
  * Return: No return value.
  */
-void changedir_prev(shll_comm *data_sh)
+void chngeirprev(shll_comm *data_sh)
 {
 	char pwd[PATH_MAX];
 	char *p_pwd, *p_oldpwd, *cp_pwd, *cp_oldpwd;
@@ -171,12 +171,12 @@ void changedir_prev(shll_comm *data_sh)
 }
 
 /**
- * changedir_to_home - Changes to the home directory.
+ * chngdirthome - Changes to the home directory.
  * @data_sh: Data relevant to the environment.
  *
  * Return: No return value.
  */
-void changedir_to_home(shll_comm *data_sh)
+void chngdirthome(shll_comm *data_sh)
 {
 	char *print_pwd, *home;
 	char pwd[PATH_MAX];

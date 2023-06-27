@@ -1,11 +1,11 @@
 #include "main.h"
 
 /**
- * disp_help_general - Entry point for help information for the help builtin
+ * dsp_helpgnrl - Entry point for help information for the help builtin
  *
  * Return: Void
  */
-void disp_help_general(void)
+void dsp_helpgnrl(void)
 {
 	char *hlp = "^-^ bash, version 1.0(1)-release\n";
 
@@ -24,11 +24,11 @@ void disp_help_general(void)
 	write(STDOUT_FILENO, hlp, _strlen(hlp));
 }
 /**
- * disp_help_exit - Help information fot the builint exit
+ * dsp_helpex - Help information fot the builint exit
  *
  * Return: Void
  */
-void disp_help_exit(void)
+void dsp_helpex(void)
 {
 	char *hlp = "exit: exit [n]\n Exit shell.\n";
 
@@ -40,11 +40,11 @@ void disp_help_exit(void)
 }
 
 /**
- * display_unsetenv - Help information for the builtin unsetenv
+ * dsp_unstnv - Help information for the builtin unsetenv
  *
  * Return: Void
  */
-void display_unsetenv(void)
+void dsp_unstnv(void)
 {
 	char *hlp = "unsetenv: unsetenv (const char *name)\n\t";
 
@@ -54,17 +54,17 @@ void display_unsetenv(void)
 }
 
 /**
- * get_sigint - Handle the crtl + c call in prompt
+ * get_sgnt - Handle the crtl + c call in prompt
  * @sig: Signal handler
  */
-void get_sigint(int sig)
+void get_sgnt(int sig)
 {
 	(void)sig;
 	write(STDOUT_FILENO, "\n^-^ ", 5);
 }
 
 /**
- * get_ln - assigns the line var for get_line
+ * getln - assigns the line var for get_line
  * @lnptr: Pointer to the line variable
  * @num: Pointer to the size of line variable
  * @buf: String that is being assigned to line
@@ -72,7 +72,7 @@ void get_sigint(int sig)
  *
  * Return: void
  */
-void get_ln(char **lnptr, size_t *num, char *buf, size_t size_b)
+void getln(char **lnptr, size_t *num, char *buf, size_t size_b)
 {
 
 	if (*lnptr == NULL)

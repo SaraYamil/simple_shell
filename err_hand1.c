@@ -1,13 +1,13 @@
 #include "main.h"
 
 /**
- * first_character - finds the index of the first non-whitespace character.
+ * frstchrctr - finds the index of the first non-whitespace character.
  * @inp: intptr_t string.
  * @index: pointer to the index variable.
  *
  * Return: 1 if there is an error, 0 otherwise.
  */
-int first_character(char *inp, int *index)
+int frstchrctr(char *inp, int *index)
 {
 
 	for (*index = 0; inp[*index]; *index += 1)
@@ -25,7 +25,7 @@ int first_character(char *inp, int *index)
 }
 
 /**
- * disp_syn_err - displays a syntax error message.
+ * dspsynerr - displays a syntax error message.
  * @data_sh: data structure.
  * @inp: intptr_t string.
  * @index: index of the error.
@@ -33,7 +33,7 @@ int first_character(char *inp, int *index)
  *
  * Return: No return value.
  */
-void disp_syn_err(shll_comm *data_sh, char *inp, int index, int boolean)
+void dspsynerr(shll_comm *data_sh, char *inp, int index, int boolean)
 {
 	char *msg, *msg2, *msg3, *error, *counter;
 	int length;
@@ -78,13 +78,13 @@ void disp_syn_err(shll_comm *data_sh, char *inp, int index, int boolean)
 }
 
 /**
- * ch_syn_err - intermediate function to find and print a syntax error.
+ * chsynerr - intermediate function to find and print a syntax error.
  * @data_sh: data structure.
  * @inptrt: intptr_t string.
  *
  * Return: 1 if there is an error, 0 otherwise.
  */
-int ch_syn_err(shll_comm *data_sh, char *inptrt)
+int chsynerr(shll_comm *data_sh, char *inptrt)
 {
 	int start = 0, fcharac = 0, index = 0;
 
@@ -106,13 +106,13 @@ int ch_syn_err(shll_comm *data_sh, char *inptrt)
 }
 
 /**
- * dupl_chars - counts the repetitions of a character in a string.
+ * duplchrs - counts the repetitions of a character in a string.
  * @inp: intptr_t string.
  * @index: index.
  *
  * Return: The number of repetitions.
  */
-int dupl_chars(char *inp, int index)
+int duplchrs(char *inp, int index)
 {
 	if (*(inp - 1) == *inp)
 		return (dupl_chars(inp - 1, index + 1));
@@ -121,14 +121,14 @@ int dupl_chars(char *inp, int index)
 }
 
 /**
- * sep_oper_error - finds syntax errors in the intptr_t string.
+ * sepopererr - finds syntax errors in the intptr_t string.
  * @inp: intptr_t string.
  * @index: index.
  * @lastchar: last character read.
  *
  * Return: The index of the error. Returns 0 when there are no errors.
  */
-int sep_oper_error(char *inp, int index, char lastchar)
+int sepopererr(char *inp, int index, char lastchar)
 {
 	int counter = 0;
 

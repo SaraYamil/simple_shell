@@ -1,12 +1,12 @@
 #include "main.h"
 
 /**
- * splt_ln - Tokenizes the input string.
+ * spltln - Tokenizes the input string.
  * @inp: Input string.
  *
  * Return: String splitted.
  */
-char **splt_ln(char *inp)
+char **spltln(char *inp)
 {
 	size_t bsize;
 	size_t i;
@@ -44,14 +44,14 @@ char **splt_ln(char *inp)
 }
 
 /**
- * split_cmds - Splits command lines according to the separators ;, |, and &,
+ * splitcmd - Splits command lines according to the separators ;, |, and &,
  *	      and executes them.
  * @datashell: Data structure.
  * @inp: Input string.
  *
  * Return: 0 to exit, 1 to continue.
  */
-int split_cmds(shll_comm *datashell, char *inp)
+int splitcmd(shll_comm *datashell, char *inp)
 {
 
 	sep_list *hd_s, *ls_s;
@@ -91,12 +91,12 @@ int split_cmds(shll_comm *datashell, char *inp)
 }
 
 /**
- * without_cmt - Deletes comments from the input.
+ * withotcmt - Deletes comments from the input.
  *
  * @input: Input string.
  * Return: Input without comments.
  */
-char *without_cmt(char *input)
+char *withotcmt(char *input)
 {
 	int i, up_to;
 
@@ -126,12 +126,12 @@ char *without_cmt(char *input)
 }
 
 /**
- * looping_shll - Main loop of the shell
+ * loopshll - Main loop of the shell
  * @data_shell: Data relevant to the shell (av, input, args)
  *
  * Return: No return.
  */
-void looping_shll(shll_comm *data_shell)
+void loopshll(shll_comm *data_shell)
 {
 	int looping, int_eof;
 	char *inp;
@@ -167,7 +167,7 @@ void looping_shll(shll_comm *data_shell)
 }
 
 /**
- * add_var_nd - Adds a variable at the end of a r_var list.
+ * add_varnd - Adds a variable at the end of a r_var list.
  * @hd: Head of the linked list.
  * @lenvar: Length of the variable.
  * @value: Value of the variable.
@@ -175,7 +175,7 @@ void looping_shll(shll_comm *data_shell)
  *
  * Return: Address of the head.
  */
-r_var *add_var_nd(r_var **hd, int lenvar, char *value, int lenval)
+r_var *add_varnd(r_var **hd, int lenvar, char *value, int lenval)
 {
 	r_var *newnd, *tmp;
 
