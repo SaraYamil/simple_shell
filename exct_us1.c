@@ -13,31 +13,31 @@ char *_wch(char *command, char **_env)
 	int length_dir, length_cmd, index;
 	struct stat st;
 
-	path_name = get_environ("PATH", _env);
+	path_name = getenvrn("PATH", _env);
 	if (path_name)
 	{
-		ptrpath = _strdup(path_name);
-		length_cmd = _strlen(command);
-		tkn_path = _strtok(ptrpath, ":");
+		ptrpath = _strdupp(path_name);
+		length_cmd = _strlength(command);
+		tkn_path = _strtiktok(ptrpath, ":");
 		index = 0;
 		while (tkn_path != NULL)
 		{
-			if (check_cdir(path_name, &index))
+			if (chckcdir(path_name, &index))
 				if (stat(command, &st) == 0)
 					return (command);
-			length_dir = _strlen(tkn_path);
+			length_dir = _strlength(tkn_path);
 			directory = malloc(length_dir + length_cmd + 2);
-			_strcpy(directory, tkn_path);
-			_strcat(directory, "/");
-			_strcat(directory, command);
-			_strcat(directory, "\0");
+			_strcopy(directory, tkn_path);
+			_strccaat(directory, "/");
+			_strccaat(directory, command);
+			_strccaat(directory, "\0");
 			if (stat(directory, &st) == 0)
 			{
 				free(ptrpath);
 				return (directory);
 			}
 			free(directory);
-			tkn_path = _strtok(NULL, ":");
+			tkn_path = _strtiktok(NULL, ":");
 		}
 		free(ptrpath);
 		if (stat(command, &st) == 0)
@@ -85,15 +85,15 @@ int chck_errcommnd(char *dir_dest, shll_comm *datashell)
 {
 	if (dir_dest == NULL)
 	{
-		get_err(datashell, 127);
+		geterr(datashell, 127);
 		return (1);
 	}
 
-	if (_strcmp(datashell->args[0], dir_dest) != 0)
+	if (_strccmmpp(datashell->args[0], dir_dest) != 0)
 	{
 		if (access(dir_dest, X_OK) == -1)
 		{
-			get_err(datashell, 126);
+			geterr(datashell, 126);
 			free(dir_dest);
 			return (1);
 		}
@@ -103,7 +103,7 @@ int chck_errcommnd(char *dir_dest, shll_comm *datashell)
 	{
 		if (access(datashell->args[0], X_OK) == -1)
 		{
-			get_err(datashell, 126);
+			geterr(datashell, 126);
 			return (1);
 		}
 	}
@@ -124,13 +124,13 @@ int cmmnd_ex(shll_comm *datashell)
 	char *dir;
 	(void)wpid;
 
-	exc = is_exec(datashell);
+	exc = isexc(datashell);
 	if (exc == -1)
 		return (1);
 	if (exc == 0)
 	{
 		dir = _whch(datashell->args[0], datashell->_env);
-		if (check_error_command(dir, datashell) == 1)
+		if (chck_errcommnd(dir, datashell) == 1)
 			return (1);
 	}
 
@@ -138,7 +138,7 @@ int cmmnd_ex(shll_comm *datashell)
 	if (pidm == 0)
 	{
 		if (exc == 0)
-			dir = _whch(datashell->args[0], datashell->_env);
+			dir = _wch(datashell->args[0], datashell->_env);
 		else
 			dir = datashell->args[0];
 		execve(dir + exc, datashell->args, datashell->_env);
@@ -199,7 +199,7 @@ int isexc(shll_comm *datashell)
 
 	if (stat(inp + index, &status) == 0)
 		return (index);
-	get_err(datashell, 127);
+	geterr(datashell, 127);
 
 	return (-1);
 }
