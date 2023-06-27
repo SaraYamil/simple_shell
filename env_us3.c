@@ -1,7 +1,7 @@
 #include "main.h"
 
 /**
- * getenvrn - Get the value of an environment variable.
+ * get_environ - Get the value of an environment variable.
  * @envname: Name of the environment variable.
  * @_env: Array of environment variables.
  *
@@ -9,7 +9,7 @@
  *         if it is found.
  *         NULL if the environment variable is not found.
  */
-char *getenvrn(const char *envname, char **_env)
+char *get_environ(const char *envname, char **_env)
 {
 	char *ptr_env;
 	int i, mov;
@@ -22,7 +22,7 @@ char *getenvrn(const char *envname, char **_env)
 	for (i = 0; _env[i]; i++)
 	{
 		/* If name and env are equal */
-		mov = cmpr_envnm(_env[i], envname);
+		mov = compare_envname(_env[i], envname);
 		if (mov)
 		{
 			ptr_env = _env[i];
@@ -34,13 +34,13 @@ char *getenvrn(const char *envname, char **_env)
 }
 
 /**
- * dsplyenv - Print the environment variables.
+ * display_env - Print the environment variables.
  * @data_sh: Pointer to the data structure containing the
  *           environment variables.
  *
  * Return: 1 on success.
  */
-int dsplyenv(shll_comm *data_sh)
+int display_env(shll_comm *data_sh)
 {
 	int l, m;
 
@@ -59,14 +59,14 @@ int dsplyenv(shll_comm *data_sh)
 }
 
 /**
- * _getln - Read input from stream
+ * _getline - Read input from stream
  * @lnptr: Pointer to the buffer that stores the input
  * @num: Pointer to the size of lnptr
  * @filestream: Stream to read from
  *
  * Return: The number of bytes
  */
-ssize_t _getln(char **lnptr, size_t *num, FILE *filestream)
+ssize_t _getline(char **lnptr, size_t *num, FILE *filestream)
 {
 	int index;
 	static ssize_t inp;
@@ -97,12 +97,12 @@ ssize_t _getln(char **lnptr, size_t *num, FILE *filestream)
 			break;
 		}
 		if (inp >= BUFSIZE)
-			buffer = _realmaloc(buffer, inp, inp + 1);
+			buffer = _realloc(buffer, inp, inp + 1);
 		buffer[inp] = t;
 		inp++;
 	}
 	buffer[inp] = '\0';
-	getln(lnptr, num, buffer, inp);
+	get_ln(lnptr, num, buffer, inp);
 	retval = inp;
 	if (index != 0)
 		inp = 0;
