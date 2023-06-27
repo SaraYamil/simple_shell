@@ -175,31 +175,31 @@ void changedir_prev(shll_comm *data_sh)
  */
 void changedir_to_home(shll_comm *data_sh)
 {
-	char *pr_pwd, *home;
+	char *print_pwd, *home;
 	char pwd[PATH_MAX];
 
 	getcwd(pwd, sizeof(pwd));
-	pr_pwd = _strdup(pwd);
+	print_pwd = _strdup(pwd);
 
 	home = get_environ("HOME", data_sh->_env);
 
 	if (home == NULL)
 	{
-		set_env("OLDPWD", pr_pwd, data_sh);
-		free(pr_pwd);
+		set_env("OLDPWD", print_pwd, data_sh);
+		free(print_pwd);
 		return;
 	}
 
 	if (chdir(home) == -1)
 	{
 		get_err(data_sh, 2);
-		free(pr_pwd);
+		free(print_pwd);
 		return;
 	}
 
-	set_env("OLDPWD", pr_pwd, data_sh);
+	set_env("OLDPWD", print_pwd, data_sh);
 	set_env("PWD", home, data_sh);
-	free(pr_pwd);
+	free(print_pwd);
 	data_sh->stat = 0;
 }
 }
