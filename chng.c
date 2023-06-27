@@ -20,7 +20,7 @@ int chngdirshell(shll_comm *data_sh)
 
 	if (directory == NULL || !in1 || !in2 || !isd)
 	{
-		changedir_to_home(data_sh);
+		chngdirthome(data_sh);
 		return (1);
 	}
 
