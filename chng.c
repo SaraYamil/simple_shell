@@ -1,24 +1,24 @@
 #include "main.h"
 
 /**
- * changedir_shell - Changes the current directory.
- * @data_sh: Pointer to the data
+ * changedir_shell - switch the curr directory.
+ * @data_sh: data shell
  *
- * Return: 1 on success.
+ * Return: 1 or 0.
  */
 int changedir_shell(shll_comm *data_sh)
 {
-	int inhome, inhome2, isdashboard;
+	int inh1, inh2, isd;
 	char *directory = data_sh->args[1];
 
 	if (directory != NULL)
 	{
-		inhome = _strcmp("$HOME", directory);
-		inhome2 = _strcmp("~", directory);
-		isdashboard = _strcmp("--", directory);
+		inh1 = _strcmp("$HOME", directory);
+		inh2 = _strcmp("~", directory);
+		isd = _strcmp("--", directory);
 	}
 
-	if (directory == NULL || !inhome || !inhome2 || !isdashboard)
+	if (directory == NULL || !inh1 || !inh2 || !isd)
 	{
 		changedir_to_home(data_sh);
 		return (1);
