@@ -1,13 +1,8 @@
 #include "main.h"
 
 /**
-<<<<<<< HEAD
  * chngdirshell - Changes the current directory.
  * @data_sh: Pointer to the data
-=======
- * changedir_shell - switch the current dir.
- * @data_sh: data pointer
->>>>>>> 6aa4f2cfc9573993d976d0c9741337f802ae9651
  *
  * Return: 1 or 0.
  */
