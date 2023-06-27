@@ -92,30 +92,21 @@ char *rpl_inp(r_var **hd, char *inp, char *new_inp, int numlen)
 
 	return (new_inp);
 }
-/**
- * verify_vars - verify if typvariable is $$ or $?
- * @header: hhhhhsd.
- * @inp: Inp str.
- * @str: string.
- * @datashell: Data shell.
- *
- * Return: nym of chractere.
- */
 int verify_vars(r_var **header, char *inp, char *str, shll_comm *datashell)
 {
-	int y, left, leftpwd;
+	int y, leftst, leftpd;
 
-	left = _strlen(str);
-	leftpwd = _strlen(datashell->pid);
+	leftst = _strlen(str);
+	leftpd = _strlen(datashell->pid);
 
 	for (y = 0; inp[y]; y++)
 	{
 		if (inp[y] == '$')
 		{
 			if (inp[y + 1] == '?')
-				add_var_nd(header, 2, str, left), y++;
+				add_var_nd(header, 2, str, leftst), y++;
 			else if (inp[y + 1] == '$')
-				add_var_nd(header, 2, datashell->pid, leftpwd), i++;
+				add_var_nd(header, 2, datashell->pid, leftpd), i++;
 			else if (inp[y + 1] == '\n')
 				add_var_nd(header, 0, NULL, 0);
 			else if (inp[y + 1] == '\0')
@@ -133,7 +124,6 @@ int verify_vars(r_var **header, char *inp, char *str, shll_comm *datashell)
 
 	return (y);
 }
-
 /**
  * compare_envname - Compares the name of an environment
  *                   variable with a given name.
