@@ -1,98 +1,99 @@
 #include "main.h"
 
 /**
- * conv_itoa - Converts an integer to a string.
- * @number: The integer number to convert.
+ * conv_itoa - con int to str.
+ * @number: num to con.
  *
- * Return: The string representation of the integer.
+ * Return: str.
  */
 char *conv_itoa(int number)
 {
-	unsigned int n1;
-	int len = get_length(number);
-	char *buff;
+	unsigned int m;
+	int ln = get_length(number);
+	char *bufer;
 
-	buff = malloc(sizeof(char) * (len + 1));
-	if (buff == 0)
+	bufer = malloc(sizeof(char) * (ln + 1));
+	if (bufer == 0)
 		return (NULL);
 
-	*(buff + len) = '\0';
+	*(bufer + ln) = '\0';
 
 	if (number < 0)
 	{
-		n1 = number * -1;
-		buff[0] = '-';
+		m = number * -1;
+		bufer[0] = '-';
 	}
 	else
-		n1 = number;
+		m = number;
 
-	len--;
+	ln--;
 	do {
-		*(buff + len) = (n1 % 10) + '0';
-		n1 = n1 / 10;
-		len--;
-	} while (n1 > 0);
-	return (buff);
+		*(bufer + ln) = (m % 10) + '0';
+		m = m / 10;
+		ln--;
+	} while (m > 0);
+	return (bufer);
 }
 
 /**
- * get_length - Get the length of a number.
- * @number: The number for which to calculate the length.
+ * get_length - lentgh
+ * @number: num
  *
- * Return: The length of the number.
+ * Return: len.
  */
 int get_length(int number)
 {
-	unsigned int n1;
-	int lenght = 1;
+	unsigned int m;
+	int ln = 1;
 
 	if (number < 0)
 	{
-		lenght++;
-		n1 = number * -1;
+		ln++;
+		m = number * -1;
 	}
 	else
-		n1 = number;
-	while (n1 > 9)
+		m = number;
+	while (m > 9)
 	{
-		lenght++;
-		n1 = n1 / 10;
+		ln++;
+		m = m / 10;
 	}
 
-	return (lenght);
+	return (ln);
 }
 
 /**
- * _atoi - Converts a string to an integer.
- * @str: Input string.
+ * _atoi - wee rgg.
+ * @str: wefe eee.
  *
- * Return: The converted integer.
+ * Return: ewgf sgwrg.
  */
 int _atoi(char *str)
 {
-	unsigned int counter = 0, size = 0, oi = 0, pn = 1, m = 1, i;
+	unsigned int cnt = 0, sz = 0, in = 0, pl = 1, n = 1, y;
 
-	while (*(str + counter) != '\0')
+
+	while (*(str + cnt) != '\0')
 	{
-		if (size > 0 && (*(str + counter) < '0' || *(str + counter) > '9'))
+		if (sz > 0 && (*(str + cnt) < '0' || *(str + cnt) > '9'))
 			break;
 
-		if (*(str + counter) == '-')
-			pn *= -1;
+		if (*(str + cnt) == '-')
+			pl *= -1;
 
-		if ((*(str + counter) >= '0') && (*(str + counter) <= '9'))
+		if ((*(str + cnt) >= '0') && (*(str + cnt) <= '9'))
 		{
-			if (size > 0)
-				m *= 10;
-			size++;
+			if (sz > 0)
+				n *= 10;
+			sz++;
 		}
-		counter++;
+		cnt++;
 	}
 
-	for (i = counter - size; i < counter; i++)
+	for (y = cnt - sz; y < cnt; y++)
 	{
-		oi = oi + ((*(str + i) - 48) * m);
-		m /= 10;
+		in = in + ((*(str + y) - 48) * n);
+		n /= 10;
 	}
-	return (oi * pn);
+	return (in * pl);
 }
