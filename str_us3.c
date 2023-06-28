@@ -1,120 +1,112 @@
 #include "main.h"
 
 /**
- * _strspn - Calculates the length of the initial segment of a
- *           string that consists of only accepted bytes.
- * @str: Pointer to the string to search.
- * @acc: Pointer to the accepted bytes.
- *
- * Return: The length of the prefix substring that consists
- *         of only accepted bytes.
+ * _strspn - str ikkn
+ * @str: Pointer str
+ * @acc: Pointeraccepted
+ * Return: len.
  */
 int _strspn(char *str, char *acc)
 {
-	int i, j, boolean;
+	int y, k, bool;
 
-	for (i = 0; *(str + i) != '\0'; i++)
+	for (y = 0; *(str + y) != '\0'; y++)
 	{
-		boolean = 1;
-		for (j = 0; *(acc + j) != '\0'; j++)
+		bool = 1;
+		for (k = 0; *(acc + k) != '\0'; k++)
 		{
-			if (*(str + i) == *(acc + j))
+			if (*(str + y) == *(acc + k))
 			{
-				boolean = 0;
+				bool = 0;
 				break;
 			}
 		}
-		if (boolean == 1)
+		if (bool == 1)
 			break;
 	}
 
-	return (i);
+	return (y);
 }
 
 /**
- * _strcat - Concatenates two strings.
- * @dest: Pointer to the destination string
- * @src: Pointer to the source string
+ * _strcat - conca str.
+ * @dest: dest
+ * @src: src
  *
- * Return: Pointer to the destination string after concatenation.
+ * Return: to des.
  */
 char *_strcat(char *dest, const char *src)
 {
-	int i, j;
+	int y, k;
 
-	for (i = 0; dest[i] != '\0'; i++)
+	for (y = 0; dest[y] != '\0'; y++)
 		;
 
-	for (j = 0; src[j] != '\0'; j++)
+	for (k = 0; src[k] != '\0'; k++)
 	{
-		dest[i] = src[j];
-		i++;
+		dest[y] = src[y];
+		y++;
 	}
 
-	dest[i] = '\0';
+	dest[y] = '\0';
 
 	return (dest);
 }
 
 /**
- * _strcmp - Compares two strings.
- * @str1: Pointer to the first string to compare.
- * @str2: Pointer to the second string to compare.
- *
- * Return: 0 if the strings are equal, a positive value if str1 is greater,
- *         a negative value if str2 is greater.
- */
-int _strcmp(char *str1, char *str2)
+ * _strcmp - Contrast two strs.
+ * @str1: the first str to contrast.
+ * @str2: the second str to contrast.
+ * Return: 0 or bigger than 0
+*/
 {
-	int i;
+	int y;
 
-	for (i = 0; str1[i] == str2[i] && str1[i]; i++)
+	for (y = 0; str1[y] == str2[y] && str1[y]; y++)
 		;
 
-	if (str1[i] > str2[i])
+	if (str1[y] > str2[y])
 		return (1);
-	if (str1[i] < str2[i])
+	if (str1[y] < str2[y])
 		return (-1);
 
 	return (0);
 }
 
 /**
- * _strchr - Locates a character in a string.
- * @str: Pointer to the string to search.
- * @c: Character to locate.
+ * _strchr - serch ddd.
+ * @str: string to search.
+ * @c: Chara to find.
  *
- * Return: Pointer to the first occurrence of the character 'c' in 'str',
- *         or NULL if the character is not found.
+ * Return: o or 1
  */
 char *_strchr(char *str, char c)
 {
-	unsigned int i = 0;
+	unsigned int y = 0;
 
-	for (; *(str + i) != '\0'; i++)
-		if (*(str + i) == c)
-			return (str + i);
-	if (*(str + i) == c)
-		return (str + i);
+	for (; *(str + y) != '\0'; y++)
+		if (*(str + y) == c)
+			return (str + y);
+	if (*(str + y) == c)
+		return (str + y);
 	return ('\0');
 }
 
 /**
- * _strcpy - Copies the string pointed to by src to dest.
- * @dest: Pointer to the destination string.
- * @src: Pointer to the source string.
- *
- * Return: Pointer to the destination string.
+ * _strcpy -Copies the string pointed to dest.
+ * @dest: dest str.
+ * @src: src str.
+ * Return: dest string.
  */
 char *_strcpy(char *dest, char *src)
 {
 
-	size_t a;
+	size_t sz;
 
-	for (a = 0; src[a] != '\0'; a++)
-		dest[a] = src[a];
+	for (sz = 0; src[sz] != '\0'; sz++)
+		dest[sz] = src[sz];
 
-	dest[a] = '\0';
+	dest[sz] = '\0';
 
 	return (dest);
 }
