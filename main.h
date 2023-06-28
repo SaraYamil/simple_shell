@@ -94,9 +94,9 @@ typedef struct rvar_ls
  * struct builtin_s - ssssssssss ssssss sss sss
  * @commname: dddddddddd ddddddddddd ddddddddddddd dddddddddd ddd d
  * @f: ppppppp pppppppppp pp pp  nnn nnnn nnn nn nnn nnn nn
- *
- * Description: ddddddd dkkkk kkk kkkk kkkkkk kkkkk kkkkk kkkk kkk kkk kk 
- * dddddddd dddddddddd ddddddd ddddddddddddd ddddddddddd dddd dddddd that
+ * Description: HHHHHHHHH HHHHHHHHHHHH HHHHHHHHHHH HHHH H HHHHHHHHHHHHHHH
+ * ZZZZZZZZZZZZZZ  name of thHNNNNNNNNNNNNNNNNNNNNNNNNN BBBBBBBBBBhhhh hh
+ * mmmmmmmmmmmmmmmmmmmmmmmmm mmmmmmmmmmm
  */
 typedef struct builtin_s
 {
