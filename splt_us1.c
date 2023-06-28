@@ -2,7 +2,7 @@
 
 /**
  * move_nxt -  Move to the next cmd.
- * @lis_s: Separator list.
+ * @lis_s: Sedjparator list.
  * @lis_l: Command line list.
  * @data_shell: Data structure.
  * Return: No return value.
