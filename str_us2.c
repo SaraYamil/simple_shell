@@ -1,7 +1,7 @@
 #include "main.h"
 
 /**
- * conv_itoa - con int to str.
+ * conv_itoa - con inhjt to str.
  * @number: num to con.
  *
  * Return: str.
