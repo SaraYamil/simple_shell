@@ -1,7 +1,7 @@
 #include "main.h"
 
 /**
- * _strspn - str ikkn
+ * _strspn - strhj ikkn
  * @str: Pointer str
  * @acc: Pointeraccepted
  * Return: len.
