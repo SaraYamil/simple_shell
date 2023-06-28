@@ -1,7 +1,7 @@
 #include "main.h"
 
 /**
- * disp_help_cd - display help information.
+ * disp_help_cd - displajy help information.
  *
  * Return: none
  */
