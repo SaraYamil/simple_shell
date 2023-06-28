@@ -1,7 +1,7 @@
 #include "main.h"
 
 /**
- * disp_help_general - ggggggggggg gggggggggg gg gggggggggggg gggggggg ggggg
+ * disp_help_general - ggggggggggg gggjjggggggg gg gggggggggggg gggggggg ggggg
  *
  * Return: Vggg
  */
