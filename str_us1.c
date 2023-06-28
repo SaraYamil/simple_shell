@@ -1,7 +1,7 @@
 #include "main.h"
 
 /**
- * _memcpy - vopy
+ * _memcpy - vophy
  * @new_pointer: yyydestinahhtion pointer.
  * @pointer: yyysource pointer.
  * @s: trtsize of the new pointer.
