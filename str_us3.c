@@ -1,10 +1,10 @@
 #include "main.h"
 
 /**
- * _strspn - strhj ikkn
- * @str: Pointer str
- * @acc: Pointeraccepted
- * Return: len.
+ * _strspn - Calculates the length of the initial segment
+ * @str: Point to the string to check.
+ * @acc: accepted bytes.
+ * Return: The length of the prefix substring
  */
 int _strspn(char *str, char *acc)
 {
@@ -29,11 +29,10 @@ int _strspn(char *str, char *acc)
 }
 
 /**
- * _strcat - conca str.
- * @dest: dest
- * @src: src
- *
- * Return: to des.
+ * _strcat - integrate two strings.
+ * @dest: Point to the dest str
+ * @src: Point to the src str
+ * Return: Pointer to the destination string after integration .
  */
 char *_strcat(char *dest, const char *src)
 {
@@ -44,7 +43,7 @@ char *_strcat(char *dest, const char *src)
 
 	for (k = 0; src[k] != '\0'; k++)
 	{
-		dest[y] = src[y];
+		dest[y] = src[k];
 		y++;
 	}
 
@@ -57,11 +56,10 @@ char *_strcat(char *dest, const char *src)
  * _strcmp - Contrast two strs.
  * @str1: the first str to contrast.
  * @str2: the second str to contrast.
- * Return: 0 or bigger than 0
-*/
+ * Return: hhhhh
+ */
 int _strcmp(char *str1, char *str2)
 {
-
 	int y;
 
 	for (y = 0; str1[y] == str2[y] && str1[y]; y++)
@@ -76,11 +74,11 @@ int _strcmp(char *str1, char *str2)
 }
 
 /**
- * _strchr - serch ddd.
+ * _strchr - search cha.
  * @str: string to search.
- * @c: Chara to find.
+ * @c: Chara.
  *
- * Return: o or 1
+ * Return: o or bigger
  */
 char *_strchr(char *str, char c)
 {
@@ -95,7 +93,7 @@ char *_strchr(char *str, char c)
 }
 
 /**
- * _strcpy -Copies the string pointed to dest.
+ * _strcpy -  Copies the string pointed to dest.
  * @dest: dest str.
  * @src: src str.
  * Return: dest string.
@@ -103,12 +101,12 @@ char *_strchr(char *str, char c)
 char *_strcpy(char *dest, char *src)
 {
 
-	size_t sz;
+	size_t b;
 
-	for (sz = 0; src[sz] != '\0'; sz++)
-		dest[sz] = src[sz];
+	for (b = 0; src[b] != '\0'; b++)
+		dest[b] = src[b];
 
-	dest[sz] = '\0';
+	dest[b] = '\0';
 
 	return (dest);
 }
