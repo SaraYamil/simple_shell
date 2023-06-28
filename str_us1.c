@@ -2,7 +2,7 @@
 
 /**
  * _memcpy - vopy
- * @new_pointer: yyydestination pointer.
+ * @new_pointer: yyydestinahhtion pointer.
  * @pointer: yyysource pointer.
  * @s: trtsize of the new pointer.
  *
