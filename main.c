@@ -1,11 +1,11 @@
 #include "main.h"
 
 /**
- * main - Entry point.
- * @argc: Argument count.
- * @argv: Argument vector.
+ * main - hello boys
+ * @argc: hhhhhhhhh babay.
+ * @argv: hhhhhhh saraha.
  *
- * Return: 0 on success.
+ * Return: maso9akchs.
  */
 int main(int argc, char **argv)
 {
