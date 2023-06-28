@@ -1,204 +1,201 @@
 #include "main.h"
 
 /**
- * splt_ln - Tokenizes the input string.
+ * splt_ln - split string.
  * @inp: Input string.
- *
  * Return: String splitted.
  */
 char **splt_ln(char *inp)
 {
 	size_t bsize;
-	size_t i;
-	char **tokens;
-	char *token;
+	size_t y;
+	char **toks;
+	char *tok;
 
 	bsize = TOK_BUFSIZE;
-	tokens = malloc(sizeof(char *) * (bsize));
-	if (tokens == NULL)
+	toks = malloc(sizeof(char *) * (bsize));
+	if (toks == NULL)
 	{
 		write(STDERR_FILENO, ": allocation error\n", 18);
 		exit(EXIT_FAILURE);
 	}
 
-	token = _strtok(inp, TOK_DELIM);
-	tokens[0] = token;
+	tok = _strtok(inp, TOK_DELIM);
+	toks[0] = tok;
 
-	for (i = 1; token != NULL; i++)
+	for (y = 1; tok != NULL; y++)
 	{
-		if (i == bsize)
+		if (y == bsize)
 		{
 			bsize += TOK_BUFSIZE;
-			tokens = _reallocdp(tokens, i, sizeof(char *) * bsize);
-			if (tokens == NULL)
+			toks = _reallocdp(toks, y, sizeof(char *) * bsize);
+			if (toks == NULL)
 			{
 				write(STDERR_FILENO, ": allocation error\n", 18);
 				exit(EXIT_FAILURE);
 			}
 		}
-		token = _strtok(NULL, TOK_DELIM);
-		tokens[i] = token;
+		tok = _strtok(NULL, TOK_DELIM);
+		toks[y] = tok;
 	}
 
-	return (tokens);
+	return (toks);
 }
 
 /**
- * split_cmds - Splits command lines according to the separators ;, |, and &,
- *	      and executes them.
- * @datashell: Data structure.
- * @inp: Input string.
+ * split_cmds - command lines
+ * @datashell: shell Data shell.
+ * @inp: ggggggg.
  *
- * Return: 0 to exit, 1 to continue.
+ * Return: 0 or 1.
  */
 int split_cmds(shll_comm *datashell, char *inp)
 {
 
-	sep_list *hd_s, *ls_s;
-	line_list *head_l, *list_l;
-	int looping;
+	sep_list *hd_sp, *ls_sp;
+	line_list *head_li, *list_li;
+	int loop;
 
-	hd_s = NULL;
-	head_l = NULL;
+	hd_sp = NULL;
+	head_li = NULL;
 
-	add_nd(&hd_s, &head_l, inp);
+	add_nd(&hd_sp, &head_li, inp);
 
-	ls_s = hd_s;
-	list_l = head_l;
+	ls_sp = hd_sp;
+	list_li = head_li;
 
-	while (list_l != NULL)
+	while (list_li != NULL)
 	{
-		datashell->input = list_l->line;
+		datashell->input = list_li->line;
 		datashell->args = splt_ln(datashell->input);
-		looping = execute_line(datashell);
+		loop = execute_line(datashell);
 		free(datashell->args);
 
-		if (looping == 0)
+		if (loop == 0)
 			break;
 
-		move_nxt(&ls_s, &list_l, datashell);
+		move_nxt(&ls_sp, &list_li, datashell);
 
-		if (list_l != NULL)
-			list_l = list_l->next;
+		if (list_li != NULL)
+			list_li = list_li->next;
 	}
 
-	free_sp_ls(&hd_s);
-	free_line_ls(&head_l);
+	free_sp_ls(&hd_sp);
+	free_line_ls(&head_li);
 
-	if (looping == 0)
+	if (loop == 0)
 		return (0);
 	return (1);
 }
 
 /**
- * without_cmt - Deletes comments from the input.
- *
- * @input: Input string.
- * Return: Input without comments.
+ * without_cmt - dgsgfDeletes comments.
+ * @input: ttutu
+ * Return: uuulu,b.
  */
 char *without_cmt(char *input)
 {
-	int i, up_to;
+	int y, p_to;
 
-	up_to = 0;
-	for (i = 0; input[i]; i++)
+	p_to = 0;
+	for (y = 0; input[y]; y++)
 	{
-		if (input[i] == '#')
+		if (input[y] == '#')
 		{
-			if (i == 0)
+			if (y == 0)
 			{
 				free(input);
 				return (NULL);
 			}
 
-			if (input[i - 1] == ' ' || input[i - 1] == '\t' || input[i - 1] == ';')
-				up_to = i;
+			if (input[y - 1] == ' ' || input[y - 1] == '\t' || input[y - 1] == ';')
+				p_to = y;
 		}
 	}
 
-	if (up_to != 0)
+	if (p_to != 0)
 	{
-		input = _realloc(input, i, up_to + 1);
-		input[up_to] = '\0';
+		input = _realloc(input, y, p_to + 1);
+		input[p_to] = '\0';
 	}
 
 	return (input);
 }
 
 /**
- * looping_shll - Main loop of the shell
- * @data_shell: Data relevant to the shell (av, input, args)
+ * looping_shll - uljjjlknknknhhh hhhhh
+ * @data_shell: Dhhhhhhhhhhh hhhhhhh
  *
- * Return: No return.
+ * Return: hhhhhhhh hhhhh.
  */
 void looping_shll(shll_comm *data_shell)
 {
-	int looping, int_eof;
-	char *inp;
+	int loop, int_f;
+	char *ip;
 
-	looping = 1;
-	while (looping == 1)
+	loop = 1;
+	while (loop == 1)
 	{
 		write(STDIN_FILENO, "^-^ ", 4);
-		inp = read_line(&int_eof);
-		if (int_eof != -1)
+		ip = read_line(&int_f);
+		if (int_f != -1)
 		{
-			inp = without_cmt(inp);
-			if (inp == NULL)
+			ip = without_cmt(ip);
+			if (ip == NULL)
 				continue;
 
-			if (ch_syn_err(data_shell, inp) == 1)
+			if (ch_syn_err(data_shell, ip) == 1)
 			{
 				data_shell->stat = 2;
-				free(inp);
+				free(ip);
 				continue;
 			}
-			inp = replace_str(inp, data_shell);
-			looping = split_cmds(data_shell, inp);
+			ip = replace_str(ip, data_shell);
+			loop = split_cmds(data_shell, ip);
 			data_shell->counter += 1;
-			free(inp);
+			free(ip);
 		}
 		else
 		{
-			looping = 0;
-			free(inp);
+			loop = 0;
+			free(ip);
 		}
 	}
 }
 
 /**
- * add_var_nd - Adds a variable at the end of a r_var list.
- * @hd: Head of the linked list.
- * @lenvar: Length of the variable.
- * @value: Value of the variable.
- * @lenval: Length of the value.
+ * add_var_nd - hhhh hhh
+ * @hd: kkk kkk
+ * @lenvar: ss ssssss
+ * @value: qqqq lllll
+ * @lenval: ikn j;j
  *
- * Return: Address of the head.
+ * Return: add.
  */
 r_var *add_var_nd(r_var **hd, int lenvar, char *value, int lenval)
 {
-	r_var *newnd, *tmp;
+	r_var *newend, *tp;
 
-	newnd = malloc(sizeof(r_var));
-	if (newnd == NULL)
+	newend = malloc(sizeof(r_var));
+	if (newend == NULL)
 		return (NULL);
 
-	newnd->len_var = lenvar;
-	newnd->val = value;
-	newnd->len_val = lenval;
+	newend->len_var = lenvar;
+	newend->val = value;
+	newend->len_val = lenval;
 
-	newnd->next = NULL;
-	tmp = *hd;
+	newend->next = NULL;
+	tp = *hd;
 
-	if (tmp == NULL)
+	if (tp == NULL)
 	{
-		*hd = newnd;
+		*hd = newend;
 	}
 	else
 	{
-		while (tmp->next != NULL)
-			tmp = tmp->next;
-		tmp->next = newnd;
+		while (tp->next != NULL)
+			tp = tp->next;
+		tp->next = newend;
 	}
 
 	return (*hd);
