@@ -1,159 +1,155 @@
 #include "main.h"
 
 /**
- * move_nxt - Moves to the next command line stored.
+ * move_nxt -  Move to the next cmd.
  * @lis_s: Separator list.
  * @lis_l: Command line list.
  * @data_shell: Data structure.
- *
  * Return: No return value.
  */
 void move_nxt(sep_list **lis_s, line_list **lis_l, shll_comm *data_shell)
 {
-	int loop_sep;
-	sep_list *ls_s;
-	line_list *ls_l;
+	int lop_s;
+	sep_list *lst_s;
+	line_list *lst_l;
 
-	loop_sep = 1;
-	ls_s = *lis_s;
-	ls_l = *lis_l;
+	lop_s = 1;
+	lst_s = *lis_s;
+	lst_l = *lis_l;
 
-	while (ls_s != NULL && loop_sep)
+	while (lst_s != NULL && lop_s)
 	{
 		if (data_shell->stat == 0)
 		{
-			if (ls_s->sep == '&' || ls_s->sep == ';')
-				loop_sep = 0;
-			if (ls_s->sep == '|')
-				ls_l = ls_l->next, ls_s = ls_s->next;
+			if (lst_s->sep == '&' || lst_s->sep == ';')
+				lop_s = 0;
+			if (lst_s->sep == '|')
+				lst_l = lst_l->next, lst_s = lst_s->next;
 		}
 		else
 		{
-			if (ls_s->sep == '|' || ls_s->sep == ';')
-				loop_sep = 0;
-			if (ls_s->sep == '&')
-				ls_l = ls_l->next, ls_s = ls_s->next;
+			if (lst_s->sep == '|' || lst_s->sep == ';')
+				lop_s = 0;
+			if (lst_s->sep == '&')
+				lst_l = lst_l->next, lst_s = lst_s->next;
 		}
-		if (ls_s != NULL && !loop_sep)
-			ls_s = ls_s->next;
+		if (lst_s != NULL && !lop_s)
+			lst_s = lst_s->next;
 	}
-	*lis_s = ls_s;
-	*lis_l = ls_l;
+	*lis_s = lst_s;
+	*lis_l = lst_l;
 }
 
 /**
- * swp_character - Swaps '|' and '&' for non-printed characters
- *                 in a string.
- * @inp: Input string.
- * @boolean: Type of swap. If boolean is 0, swaps '|' and '&'
- *           for non-printed characters.
- *
- * Return: Swapped string.
+ * swp_character - weSwaps characters
+ * @inp: string input.
+ * @boolean: Type of swap
+ * Return: swpstring.
  */
 char *swp_character(char *inp, int boolean)
 {
-	int i;
+	int y;
 
 	if (boolean == 0)
 	{
-		for (i = 0; inp[i]; i++)
+		for (y = 0; inp[y]; y++)
 		{
-			if (inp[i] == '|')
+			if (inp[y] == '|')
 			{
-				if (inp[i + 1] != '|')
-					inp[i] = 16;
+				if (inp[y + 1] != '|')
+					inp[y] = 16;
 				else
-					i++;
+					y++;
 			}
 
-			if (inp[i] == '&')
+			if (inp[y] == '&')
 			{
-				if (inp[i + 1] != '&')
-					inp[i] = 12;
+				if (inp[y + 1] != '&')
+					inp[y] = 12;
 				else
-					i++;
+					y++;
 			}
 		}
 	}
 	else
 	{
-		for (i = 0; inp[i]; i++)
+		for (y = 0; inp[y]; y++)
 		{
-			inp[i] = (inp[i] == 16 ? '|' : inp[i]);
-			inp[i] = (inp[i] == 12 ? '&' : inp[i]);
+			inp[y] = (inp[y] == 16 ? '|' : inp[y]);
+			inp[y] = (inp[y] == 12 ? '&' : inp[y]);
 		}
 	}
 	return (inp);
 }
 
 /**
- * add_nd - Adds separators and command lines to the lists.
- * @hd_s: Head of the separator list.
- * @hd_l: Head of the command lines list.
- * @inp: Input string.
+ * add_nd - Adds sepa
+ * @hd_s: separator list.
+ * @hd_l: command list.
+ * @inp: string input.
  *
- * Return: No return value.
+ * Return: nothing.
  */
 void add_nd(sep_list **hd_s, line_list **hd_l, char *inp)
 {
-	int i;
-	char *command_line;
+	int y;
+	char *cmd_line;
 
 	inp = swp_character(inp, 0);
 
-	for (i = 0; inp[i]; i++)
+	for (y = 0; inp[y]; y++)
 	{
-		if (inp[i] == ';')
-			add_node_en(hd_s, inp[i]);
+		if (inp[y] == ';')
+			add_node_en(hd_s, inp[y]);
 
-		if (inp[i] == '|' || inp[i] == '&')
+		if (inp[y] == '|' || inp[y] == '&')
 		{
-			add_node_en(hd_s, inp[i]);
-			i++;
+			add_node_en(hd_s, inp[y]);
+			y++;
 		}
 	}
 
-	command_line = _strtok(inp, ";|&");
+	cmd_line = _strtok(inp, ";|&");
 	do {
-		command_line = swp_character(command_line, 1);
-		add_ln_nd_end(hd_l, command_line);
-		command_line = _strtok(NULL, ";|&");
-	} while (command_line != NULL);
+		cmd_line = swp_character(cmd_line, 1);
+		add_ln_nd_end(hd_l, cmd_line);
+		cmd_line = _strtok(NULL, ";|&");
+	} while (cmd_line != NULL);
 }
 
 /**
- * read_line - Reads the input string.
- * @int_eof: Return value of the getline function.
+ * read_line - string read.
+ * @int_eof: ykfkhfgvh.
  *
- * Return: Input string.
+ * Return: none.
  */
 char *read_line(int *int_eof)
 {
-	char *inp = NULL;
-	size_t buffersize = 0;
+	char *ip = NULL;
+	size_t buf = 0;
 
-	*int_eof = getline(&inp, &buffersize, stdin);
+	*int_eof = getline(&ip, &buf, stdin);
 
-	return (inp);
+	return (ip);
 }
 
 /**
- * free_value_ls - Frees a r_var list.
- * @hd: Head of the linked list.
- * Return: No return.
+ * free_value_ls - r_var list.
+ * @hd: list.
+ * Return: Nom.
  */
 void free_value_ls(r_var **hd)
 {
-	r_var *tmp;
-	r_var *current;
+	r_var *tp;
+	r_var *curt;
 
 	if (hd != NULL)
 	{
-		current = *hd;
-		while ((tmp = current) != NULL)
+		curt = *hd;
+		while ((tp = curt) != NULL)
 		{
-			current = current->next;
-			free(tmp);
+			curt = curt->next;
+			free(tp);
 		}
 		*hd = NULL;
 	}
