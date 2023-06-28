@@ -59,7 +59,9 @@ char *_strcat(char *dest, const char *src)
  * @str2: the second str to contrast.
  * Return: 0 or bigger than 0
 */
+int _strcmp(char *str1, char *str2)
 {
+
 	int y;
 
 	for (y = 0; str1[y] == str2[y] && str1[y]; y++)
